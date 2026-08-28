@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Science — Practice Exam 5 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#5C8A63;
+    --moss-dim:#9DBBA1;
+    --rust:#3F7A4A;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#274D2E;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Middle Grades Science · 014 / 705 · Exam 5 of 5</p>
+    <h1>Life Science — Practice Exam 5</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Life Science subarea (Objective 1: Cells, Genetics &amp; Evolution; Objective 2: Classification, Anatomy/Physiology &amp; Ecology). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--rust);">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>1.A</span><span>1.B</span><span>1.C</span><span>1.D</span><span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span><span>2.E</span><span>2.F</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "1.A", "text": "Which of the following best describes the function of ribosomes in a cell?", "options": ["Store genetic information", "Synthesize proteins", "Produce ATP", "Break down waste materials"], "correct": 1}, {"tag": "1.A", "text": "Osmosis is best defined as:", "options": ["The diffusion of water across a selectively permeable membrane", "The active transport of ions", "The bulk movement of large particles into a cell", "The breakdown of glucose for energy"], "correct": 0}, {"tag": "1.A", "text": "Which structure separates the nucleus's contents from the cytoplasm while allowing selective passage of molecules?", "options": ["Cell wall", "Nuclear envelope", "Plasma membrane", "Cytoskeleton"], "correct": 1}, {"tag": "1.B", "text": "The overall equation for photosynthesis shows that plants use carbon dioxide and water, in the presence of light energy, to produce:", "options": ["Glucose and oxygen", "ATP and nitrogen", "Amino acids and carbon dioxide", "Water and heat only"], "correct": 0}, {"tag": "1.B", "text": "Activation energy is best defined as:", "options": ["The total energy released in a reaction", "The energy required to start a chemical reaction", "The energy stored in ATP bonds", "The energy lost as heat in cellular respiration"], "correct": 1}, {"tag": "1.C", "text": "DNA replication is described as semi-conservative because:", "options": ["Only half of the DNA molecule is copied", "Each new DNA molecule consists of one original strand and one newly synthesized strand", "DNA replicates only every other cell cycle", "Half of all replicated DNA molecules contain errors"], "correct": 1}, {"tag": "1.C", "text": "A woman with sickle cell trait (heterozygous, one normal and one sickle cell allele) generally shows mild or no symptoms because sickle cell disease follows a pattern of:", "options": ["Codominance", "Complete dominance with the normal allele dominant", "Polygenic inheritance", "X-linked inheritance"], "correct": 1}, {"tag": "1.C", "text": "CRISPR gene-editing technology allows scientists to:", "options": ["Sequence an entire genome only", "Precisely cut and modify specific sequences of DNA", "Only observe chromosomes under a microscope", "Measure the concentration of proteins in a cell"], "correct": 1}, {"tag": "1.D", "text": "Artificial selection differs from natural selection in that artificial selection involves:", "options": ["No change in allele frequencies", "Humans choosing which organisms reproduce based on desired traits", "Random mutation as the primary driving force", "Only occurring in wild populations"], "correct": 1}, {"tag": "1.D", "text": "Gene flow refers to:", "options": ["The movement of alleles into or out of a population due to migration", "The random change in allele frequency in small populations", "The process of natural selection acting on a trait", "The mutation rate within a single organism"], "correct": 0}, {"tag": "1.D", "text": "Human evolution is supported by evidence including:", "options": ["A complete absence of hominid fossils", "Comparative anatomy and DNA similarities between humans and other primates", "The lack of any transitional fossils", "Identical skeletal structure between humans and reptiles"], "correct": 1}, {"tag": "2.A", "text": "The domain Eukarya includes which of the following kingdoms?", "options": ["Only Animalia", "Protista, Fungi, Plantae, and Animalia", "Only Bacteria and Archaea", "Only Plantae and Fungi"], "correct": 1}, {"tag": "2.A", "text": "Which of the following is the correct order of taxonomic ranks from broadest to most specific?", "options": ["Species, Genus, Family, Order, Class, Phylum, Kingdom, Domain", "Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species", "Kingdom, Domain, Phylum, Class, Order, Family, Genus, Species", "Phylum, Domain, Kingdom, Class, Order, Family, Genus, Species"], "correct": 1}, {"tag": "2.B", "text": "Which structure in plants is primarily responsible for absorbing water and minerals from the soil?", "options": ["Leaves", "Roots", "Stems", "Flowers"], "correct": 1}, {"tag": "2.B", "text": "Seed-producing vascular plants that produce flowers and fruit are classified as:", "options": ["Gymnosperms", "Angiosperms", "Bryophytes", "Ferns"], "correct": 1}, {"tag": "2.C", "text": "Which of the following best describes the function of the human circulatory system?", "options": ["Breaking down food", "Transporting oxygen, nutrients, and wastes throughout the body", "Filtering air before it reaches the lungs", "Producing digestive enzymes"], "correct": 1}, {"tag": "2.C", "text": "In the human nervous system, the brain and spinal cord together make up the:", "options": ["Peripheral nervous system", "Central nervous system", "Autonomic nervous system", "Somatic nervous system only"], "correct": 1}, {"tag": "2.C", "text": "Members of the phylum Chordata are unified by shared characteristics that include, at some point in development, having a:", "options": ["Exoskeleton and jointed legs", "Notochord and dorsal nerve cord", "Radial symmetry and water vascular system", "Cell wall and chloroplasts"], "correct": 1}, {"tag": "2.C", "text": "The primary function of the human respiratory system is to:", "options": ["Exchange oxygen and carbon dioxide between the body and the environment", "Produce hormones", "Digest nutrients", "Filter blood plasma"], "correct": 0}, {"tag": "2.D", "text": "If a population's birth rate exceeds its death rate and immigration exceeds emigration, the population will most likely:", "options": ["Remain stable", "Increase", "Decrease", "Go extinct"], "correct": 1}, {"tag": "2.D", "text": "Which of the following populations would most likely display a Type III survivorship curve?", "options": ["Humans", "Elephants", "Fish that produce thousands of offspring with few surviving to adulthood", "Large birds of prey"], "correct": 2}, {"tag": "2.E", "text": "Two species of birds that both feed on the same insect population in a forest, potentially limiting each other's population size, illustrate:", "options": ["Mutualism", "Interspecific competition", "Commensalism", "Parasitism"], "correct": 1}, {"tag": "2.E", "text": "In a food web, organisms that break down dead organic matter and recycle nutrients back into the ecosystem are called:", "options": ["Producers", "Primary consumers", "Decomposers", "Secondary consumers"], "correct": 2}, {"tag": "2.F", "text": "Which of the following best describes an ecosystem's energy flow in the context of the 10% rule?", "options": ["Energy increases by 10% at each trophic level", "Only about 10% of energy is transferred from one trophic level to the next", "10% of organisms in an ecosystem are decomposers", "10% of species become extinct at each trophic level"], "correct": 1}, {"tag": "2.F", "text": "A keystone species is best defined as a species that:", "options": ["Is the most numerous species in an ecosystem", "Has a disproportionately large effect on its ecosystem relative to its abundance", "Only exists in aquatic ecosystems", "Cannot be removed from the food web"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

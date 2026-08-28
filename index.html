@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE Practice Exams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --paper-raised:#E4DDC9;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#5C7A5E;
+    --moss-dim:#93A794;
+    --rust:#A6552B;
+    --gold:#C9A227;
+    --line:#C9C0A8;
+    --line-soft:#DAD3BE;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Header / Hero ---------- */
+  header.hero{
+    border-bottom:1px solid var(--line);
+    padding:56px 0 40px;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 27px, rgba(92,122,94,0.06) 28px);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-optical-sizing:auto;
+    font-size:clamp(30px,5vw,48px);
+    line-height:1.08;
+    margin:0 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .hero-sub{
+    max-width:60ch;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin:0 0 28px;
+  }
+  .hero-facts{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .hero-facts strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-size:22px;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.1;
+  }
+
+  /* ---------- Coverage ledger (signature element) ---------- */
+  .ledger{
+    margin-top:34px;
+  }
+  .ledger-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .ledger-bar{
+    display:flex;
+    height:26px;
+    border:1px solid var(--ink);
+    overflow:hidden;
+  }
+  .ledger-seg{
+    flex:1;
+    border-right:1px solid var(--paper);
+    position:relative;
+  }
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="0"]{background:transparent;}
+  .ledger-seg[data-fill="1"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="2"]{background:var(--moss);}
+  .ledger-seg[data-fill="3"]{background:#3f5c41;}
+  .ledger-seg[data-fill="4"]{background:#2c452e;}
+  .ledger-ticks{
+    display:flex;
+    margin-top:5px;
+  }
+  .ledger-ticks span{
+    flex:1;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  /* ---------- Section ---------- */
+  main{padding:48px 0 80px;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:22px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:12px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0;
+  }
+  .section-head span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Exam catalog cards ---------- */
+  .catalog{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .exam-card{
+    display:grid;
+    grid-template-columns:64px 1fr auto;
+    align-items:center;
+    gap:20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 22px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .exam-card.live:hover{
+    border-color:var(--rust);
+    transform:translateX(2px);
+  }
+  .exam-card.live:focus-visible{
+    outline:2px solid var(--rust);
+    outline-offset:3px;
+  }
+  .exam-num{
+    font-family:'Fraunces',serif;
+    font-size:34px;
+    font-weight:600;
+    color:var(--moss-dim);
+    line-height:1;
+  }
+  .exam-card.live .exam-num{color:var(--rust);}
+  .exam-body h3{
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .exam-body p{
+    margin:0 0 10px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .exam-meta{
+    display:flex;
+    gap:16px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:.03em;
+  }
+  .exam-cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    padding:9px 14px;
+    border:1px solid var(--ink);
+  }
+  .exam-card.live .exam-cta{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .exam-card.soon{
+    opacity:.55;
+    cursor:default;
+  }
+  .exam-card.soon .exam-cta{
+    border-color:var(--line);
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Footer note ---------- */
+  .foot-note{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--ink-soft);
+    max-width:65ch;
+  }
+
+  @media (max-width:560px){
+    .exam-card{grid-template-columns:40px 1fr;grid-template-areas:"num body" "num body" "cta cta";}
+    .exam-num{grid-area:num;font-size:26px;}
+    .exam-body{grid-area:body;}
+    .exam-cta{grid-area:cta;text-align:center;margin-top:10px;}
+    .hero-facts{gap:20px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .exam-card{transition:none;}
+  }
+
+  .theme-life { --rust:#3F7A4A; --moss:#5C8A63; --moss-dim:#9DBBA1; }
+  .theme-earth { --rust:#B0562A; --moss:#C97D4E; --moss-dim:#E0B18F; }
+  .theme-physsci { --rust:#2F6690; --moss:#5389B0; --moss-dim:#9EC1D9; }
+  .theme-physics { --rust:#5B4B9A; --moss:#8272C4; --moss-dim:#C1B7E6; }
+  .theme-bio1 { --rust:#1F7A72; --moss:#4EA69C; --moss-dim:#A6D6D0; }
+  .theme-bio2 { --rust:#206A87; --moss:#4C97B5; --moss-dim:#A8D1E0; }
+  .theme-chem { --rust:#8C3568; --moss:#B15F8F; --moss-dim:#DDB0CB; }
+  .theme-eled { --rust:#A87A1E; --moss:#C79A3E; --moss-dim:#E6CD8F; }
+  .theme-bfs { --rust:#A6552B; --moss:#C9805A; --moss-dim:#E6BBA0; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">GACE Practice Exams</p>
+    <h1>Practice Exams</h1>
+    <p class="hero-sub">25-question practice sets built to mirror the real GACE, one subarea at a time — covering Middle Grades Science, Biology, Chemistry, and the Elementary Education Science subarea.</p>
+    <div class="hero-facts">
+      <div><strong>26</strong>exams live</div>
+      <div><strong>25</strong>questions each</div>
+      <div><strong>9</strong>subject areas</div>
+      <div><strong>4</strong>certification tests</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="eyebrow" style="margin-top:0;">Middle Grades Science · 014 / 705</p>
+    <div class="section-head">
+      <h2>Life Science</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-life" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Objective 1 (Cells / Genetics / Evolution) &amp; Objective 2 (Classification / Anatomy / Ecology)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="4"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span><span>1.C</span><span>1.D</span>
+        <span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span><span>2.E</span><span>2.F</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-life">
+      <a class="exam-card live" href="exam-1-life-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Life Science — Practice Exam 1</h3>
+          <p>Full-spread coverage across all ten competencies, weighted toward cell/animal physiology (2.C) as on the real test.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-2-life-science.html">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Life Science — Practice Exam 2</h3>
+          <p>Fresh question set, same ten-competency spread as Exam 1.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-3-life-science.html">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Life Science — Practice Exam 3</h3>
+          <p>Fresh question set, same ten-competency spread as Exam 1.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-4-life-science.html">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Life Science — Practice Exam 4</h3>
+          <p>Fresh question set, same ten-competency spread as Exam 1.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-5-life-science.html">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Life Science — Practice Exam 5</h3>
+          <p>Fresh question set, same ten-competency spread as Exam 1.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+    </div>
+
+    <p class="foot-note">Each exam scores itself instantly: submit your answers and the page reveals your total, the correct answer for every item, and the GACE competency code (e.g. 1.C, 2.F) each question was written to test — so a missed question points straight back to the content to review.</p>
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Earth &amp; Space Science</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-earth" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Objective 1 (Geology) &amp; Objective 2 (Hydrosphere / Atmosphere / Astronomy)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span><span>1.C</span><span>1.D</span><span>1.E</span>
+        <span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span><span>2.E</span><span>2.F</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-earth">
+      <a class="exam-card live" href="exam-1-earth-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Earth &amp; Space Science — Practice Exam 1</h3>
+          <p>Covers all eleven competencies — geology through the Earth-Moon-Sun system.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Earth &amp; Space Science — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Earth &amp; Space Science — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Earth &amp; Space Science — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Earth &amp; Space Science — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Physical Science</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-physsci" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Objective 1 (Matter &amp; Energy) &amp; Objective 2 (Chemistry) — Obj. 1.B spans motion, energy, heat, electricity, and waves, so it carries the heaviest weight</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="4"></div>
+        <div class="ledger-seg" data-fill="4"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span>
+        <span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-physsci">
+      <a class="exam-card live" href="exam-1-physical-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 1</h3>
+          <p>Covers matter/atomic structure and chemistry, weighted toward motion, energy, heat, electricity &amp; waves (1.B) as on the real test.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Physics</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-physics" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage within Objective 1 (Matter &amp; Energy) — the physics-specific portion of the Physical Science subarea, isolated from the Chemistry competencies (Obj. 2)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-physics">
+      <a class="exam-card live" href="exam-1-physics.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 1</h3>
+          <p>Drills the motion, forces, energy, gravity, heat, electricity/magnetism, and waves content within Physical Science, separate from the chemistry side.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-2-physics.html">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 2</h3>
+          <p>Fresh question set, same 1.A / 1.B competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-3-physics.html">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 3</h3>
+          <p>Fresh question set, same 1.A / 1.B competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-4-physics.html">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 4</h3>
+          <p>Fresh question set, same 1.A / 1.B competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-5-physics.html">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 5</h3>
+          <p>Fresh question set, same 1.A / 1.B competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+    </div>
+
+    <p class="eyebrow" style="margin-top:64px;">Standalone certification tests</p>
+    <div class="section-head">
+      <h2>Biology — Test I (026)</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Biology tests — official listing → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-bio1" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Subarea 1 (Cell Biology &amp; Biochemistry) &amp; Subarea 2 (Genetics &amp; Evolution)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1</span><span>2</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-bio1">
+      <a class="exam-card live" href="exam-1-biology-test1.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Biology Test I — Practice Exam 1</h3>
+          <p>Cell biology, biochemistry, molecular genetics, heredity, and evolution — the two subareas of GACE Biology Test I.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Biology — Test I (026) — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Biology — Test I (026) — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Biology — Test I (026) — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Biology — Test I (026) — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Biology — Test II (027)</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Biology tests — official listing → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-bio2" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Subarea 3 (Scientific Inquiry &amp; STS), Subarea 4 (Organismal Biology) &amp; Subarea 5 (Ecology)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>3</span><span>4</span><span>5</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-bio2">
+      <a class="exam-card live" href="exam-1-biology-test2.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Biology Test II — Practice Exam 1</h3>
+          <p>Scientific inquiry and safety, classification, plant and animal physiology, and ecology — the three subareas of GACE Biology Test II.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Biology — Test II (027) — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Biology — Test II (027) — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Biology — Test II (027) — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Biology — Test II (027) — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Chemistry</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Chemistry tests — official listing → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-chem" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Sci. Inquiry/STS (I), Matter/Atomic Structure/Periodic Table (II), Reactions &amp; Energy (III), Acid-Base/Redox/Advanced Topics (IV)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="3"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>I</span><span>II</span><span>III</span><span>IV</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-chem">
+      <a class="exam-card live" href="exam-1-chemistry.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Chemistry — Practice Exam 1</h3>
+          <p>Atomic structure, bonding, stoichiometry, thermochemistry, kinetics, equilibrium, acid-base chemistry, redox, nuclear and organic chemistry.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-2-chemistry.html">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Chemistry — Practice Exam 2</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-3-chemistry.html">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Chemistry — Practice Exam 3</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-4-chemistry.html">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Chemistry — Practice Exam 4</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-5-chemistry.html">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Chemistry — Practice Exam 5</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+    </div>
+
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Elementary Education — Science (Test 002)</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/702" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Elementary Education (702) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-eled" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Characteristics of Science (Obj. 1), Earth &amp; Space Science (Obj. 2), Physical Science (Obj. 3), Life Science (Obj. 4)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span><span>1.C</span><span>2.A</span><span>2.B</span><span>2.C</span><span>3.A</span><span>3.B</span><span>4.A</span><span>4.B</span><span>4.C</span><span>4.D</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-eled">
+      <a class="exam-card live" href="exam-1-eled-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>ELED Science — Practice Exam 1</h3>
+          <p>The Science subarea of the Elementary Education (Test 002) exam — nature of science through life, earth, and physical science basics, at an elementary level.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Elementary Education — Science (Test 002) — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Elementary Education — Science (Test 002) — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Elementary Education — Science (Test 002) — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Elementary Education — Science (Test 002) — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+
+    <div class="section-head" style="margin-top:56px;">
+      <h2>Broad Field Science</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Science (6–12) (717) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-bfs" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Subarea I (Sci. Inquiry/STS), II (Physical Science), III (Life Science), IV (Earth &amp; Space Science)</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>I</span><span>II</span><span>III</span><span>IV</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-bfs">
+      <a class="exam-card live" href="exam-1-broad-field-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Broad Field Science — Practice Exam 1</h3>
+          <p>One exam sampling all four subareas of the Broad Field Science certification — inquiry/STS plus physical, life, and earth science.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <span class="exam-card soon">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Broad Field Science — Practice Exam 2</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Broad Field Science — Practice Exam 3</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Broad Field Science — Practice Exam 4</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+
+      <span class="exam-card soon">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Broad Field Science — Practice Exam 5</h3>
+          <p>In development — different question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span></span>
+        </span>
+        <span class="exam-cta">Coming soon</span>
+      </span>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

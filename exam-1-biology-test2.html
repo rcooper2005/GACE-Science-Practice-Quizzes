@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology Test II (027) — Practice Exam 1 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#4C97B5;
+    --moss-dim:#A8D1E0;
+    --rust:#206A87;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#113B4C;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Biology · Test II (027) · Exam 1 of 5</p>
+    <h1>Biology Test II (027) — Practice Exam 1</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering GACE Biology Test II (027): Scientific Inquiry, Processes, Technology &amp; Society (Subarea 3), Organismal Biology (Subarea 4), and Ecology: Organisms and Environment (Subarea 5). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--rust);">GACE Biology tests — official listing → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>3</span><span>4</span><span>5</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "3", "text": "In the scientific method, a hypothesis is best described as:", "options": ["A proven fact", "A testable, tentative explanation for an observation", "An uncontrolled variable", "A random guess with no basis in prior knowledge"], "correct": 1}, {"tag": "3", "text": "In a controlled experiment, the independent variable is:", "options": ["The variable that is measured as an outcome", "The variable that is deliberately changed by the experimenter", "Always held constant", "Never manipulated"], "correct": 1}, {"tag": "3", "text": "Which of the following is an essential safety practice in a biology laboratory involving live specimens or chemicals?", "options": ["Eating and drinking at the lab bench is acceptable if careful", "Wearing appropriate personal protective equipment such as goggles and gloves", "Disposing of biological waste in regular trash bins", "Working without adult supervision regardless of age or experience"], "correct": 1}, {"tag": "3", "text": "Advances in biotechnology, such as genetically modified crops, illustrate how science and technology can impact:", "options": ["Only laboratory research", "Society, agriculture, and public health", "Only university funding", "Nothing outside the scientific community"], "correct": 1}, {"tag": "3", "text": "A scientific theory, as opposed to a hypothesis, is best described as:", "options": ["An unproven guess", "A well-substantiated explanation supported by extensive evidence and repeated testing", "A law that can never be revised", "A personal opinion of a scientist"], "correct": 1}, {"tag": "4", "text": "The modern classification system groups organisms into three domains based primarily on:", "options": ["Physical appearance", "Cellular and molecular characteristics", "Habitat", "Diet"], "correct": 1}, {"tag": "4", "text": "Binomial nomenclature assigns each organism a scientific name consisting of its:", "options": ["Kingdom and phylum", "Genus and species", "Class and order", "Domain and kingdom"], "correct": 1}, {"tag": "4", "text": "Which taxonomic classification groups organisms based on shared evolutionary ancestry, often represented with a branching diagram?", "options": ["Alphabetical classification", "Cladistics (phylogenetic classification)", "Habitat-based classification", "Size-based classification"], "correct": 1}, {"tag": "4", "text": "Fungi are classified in their own kingdom, separate from plants, primarily because fungi:", "options": ["Are photosynthetic", "Obtain nutrients through absorption rather than photosynthesis", "Lack cell walls", "Are prokaryotic"], "correct": 1}, {"tag": "4", "text": "The vascular tissue responsible for transporting water and minerals upward from a plant's roots is:", "options": ["Phloem", "Xylem", "Cortex", "Epidermis"], "correct": 1}, {"tag": "4", "text": "The alternation of generations life cycle in plants involves alternating between:", "options": ["Two diploid stages", "A haploid gametophyte stage and a diploid sporophyte stage", "Two haploid stages", "Asexual and sexual reproduction only"], "correct": 1}, {"tag": "4", "text": "Stomata on plant leaves primarily function to:", "options": ["Absorb sunlight", "Regulate gas exchange and water loss", "Anchor the plant", "Store starch"], "correct": 1}, {"tag": "4", "text": "Which human organ system is primarily responsible for chemical digestion and nutrient absorption?", "options": ["Respiratory system", "Digestive system", "Excretory system", "Circulatory system"], "correct": 1}, {"tag": "4", "text": "The primary function of the human immune system is to:", "options": ["Transport oxygen", "Defend the body against pathogens", "Regulate hormone levels", "Filter metabolic waste"], "correct": 1}, {"tag": "4", "text": "In the human nervous system, neurons transmit signals primarily through:", "options": ["Muscle contraction", "Electrical and chemical signals", "Hormone release into the bloodstream", "Direct blood flow"], "correct": 1}, {"tag": "4", "text": "Arthropods, one of the most diverse animal phyla, are characterized by:", "options": ["A backbone and lungs", "A segmented body, exoskeleton, and jointed appendages", "Radial symmetry and a water vascular system", "Soft, unsegmented bodies with a single muscular foot"], "correct": 1}, {"tag": "5", "text": "A population exhibiting exponential growth, unconstrained by environmental limits, shows what type of growth curve?", "options": ["Logistic (S-shaped)", "Exponential (J-shaped)", "Linear", "Cyclical only"], "correct": 1}, {"tag": "5", "text": "Carrying capacity refers to:", "options": ["The total number of species in an ecosystem", "The maximum population size an environment can sustain indefinitely", "The rate of immigration into a population", "The genetic diversity of a population"], "correct": 1}, {"tag": "5", "text": "Which of the following would most directly increase a population's growth rate?", "options": ["Increased death rate", "Increased emigration", "Increased birth rate", "Decreased immigration"], "correct": 2}, {"tag": "5", "text": "A symbiotic relationship in which both species benefit is called:", "options": ["Parasitism", "Commensalism", "Mutualism", "Competition"], "correct": 2}, {"tag": "5", "text": "Interspecific competition occurs when:", "options": ["Members of the same species compete for mates", "Two different species compete for the same limited resource", "One species preys on another", "Two species cooperate for mutual benefit"], "correct": 1}, {"tag": "5", "text": "The specific role an organism plays within its ecosystem, including its habitat and resource use, is called its:", "options": ["Biome", "Niche", "Population", "Community"], "correct": 1}, {"tag": "5", "text": "According to the 10% rule, energy transfer between trophic levels is:", "options": ["Nearly 100% efficient", "Approximately 10% efficient, with most energy lost as heat", "Completely lost with no transfer", "Increased at each successive level"], "correct": 1}, {"tag": "5", "text": "Decomposers play a critical ecological role by:", "options": ["Producing their own food through photosynthesis", "Breaking down dead organic matter and recycling nutrients", "Preying on primary consumers", "Competing with producers for sunlight"], "correct": 1}, {"tag": "5", "text": "The gradual, predictable replacement of species in an ecosystem following a disturbance, starting from bare rock with no soil, is called:", "options": ["Secondary succession", "Primary succession", "Climax community formation", "Biomagnification"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

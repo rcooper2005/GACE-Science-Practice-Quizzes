@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry — Practice Exam 1 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#B15F8F;
+    --moss-dim:#DDB0CB;
+    --rust:#8C3568;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#5A1F42;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Chemistry · Exam 1 of 5</p>
+    <h1>Chemistry — Practice Exam 1</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Chemistry assessment: Scientific Inquiry/Processes/Technology &amp; Society (I), Matter/Atomic Structure/Periodic Table (II), Chemical Reactions &amp; Energy (III), and Acid-Base/Redox/Advanced Topics (IV). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--rust);">GACE Chemistry tests — official listing → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="3"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>I</span><span>II</span><span>III</span><span>IV</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "I", "text": "The number of significant figures in the measurement 0.00340 g is:", "options": ["2", "3", "5", "6"], "correct": 1}, {"tag": "I", "text": "A scientific law differs from a scientific theory in that a law:", "options": ["Explains why a phenomenon occurs", "Describes what happens under certain conditions, often mathematically, without explaining why", "Is less reliable than a theory", "Cannot be tested experimentally"], "correct": 1}, {"tag": "I", "text": "Which of the following is an essential safety practice when handling concentrated acids in the chemistry lab?", "options": ["Adding water to acid", "Adding acid slowly to water while stirring", "Storing acids next to bases", "Working without gloves for better grip"], "correct": 1}, {"tag": "I", "text": "A key difference between a renewable and nonrenewable energy resource is that renewable resources:", "options": ["Cannot be used for electricity", "Are replenished naturally on a human timescale", "Never produce pollution", "Are always more expensive"], "correct": 1}, {"tag": "I", "text": "Dalton's early atomic theory proposed that atoms were:", "options": ["Divisible into subatomic particles", "Indivisible, indestructible particles unique to each element", "Composed mostly of empty space", "Identical across all elements"], "correct": 1}, {"tag": "I", "text": "In an experiment testing how temperature affects reaction rate, the dependent variable is:", "options": ["The temperature setting chosen by the researcher", "The reaction rate measured as an outcome", "The type of glassware used", "The room's humidity"], "correct": 1}, {"tag": "II", "text": "The number of protons in an atom's nucleus determines its:", "options": ["Atomic mass", "Atomic number and identity as an element", "Number of neutrons", "Ionic charge"], "correct": 1}, {"tag": "II", "text": "Isotopes of the same element differ in their number of:", "options": ["Protons", "Neutrons", "Electrons in a neutral atom", "Atomic number"], "correct": 1}, {"tag": "II", "text": "As you move from left to right across a period on the periodic table, atomic radius generally:", "options": ["Increases", "Decreases", "Remains constant", "Varies randomly"], "correct": 1}, {"tag": "II", "text": "Elements in the same group of the periodic table share similar chemical properties primarily because they have the same number of:", "options": ["Protons", "Neutrons", "Valence electrons", "Energy levels"], "correct": 2}, {"tag": "II", "text": "A covalent bond forms when two atoms:", "options": ["Transfer electrons completely", "Share one or more pairs of electrons", "Form oppositely charged ions", "Share a \"sea\" of delocalized electrons"], "correct": 1}, {"tag": "II", "text": "According to the kinetic molecular theory, increasing the temperature of a gas causes its particles to:", "options": ["Move more slowly", "Move faster and collide more frequently", "Stop moving entirely", "Become liquid"], "correct": 1}, {"tag": "III", "text": "In a balanced chemical equation, the law of conservation of mass requires that:", "options": ["The number of moles of gas is constant", "The total mass of reactants equals the total mass of products", "Reactants and products must be the same physical state", "Only exothermic reactions can be balanced"], "correct": 1}, {"tag": "III", "text": "The coefficients in a balanced chemical equation represent the:", "options": ["Mass ratio of reactants to products", "Mole ratio of reactants and products", "Volume of each substance in liters only", "Number of atoms in each element only"], "correct": 1}, {"tag": "III", "text": "A reaction that absorbs energy from its surroundings, resulting in a temperature decrease, is called:", "options": ["Exothermic", "Endothermic", "Exergonic", "Catalytic"], "correct": 1}, {"tag": "III", "text": "Which thermodynamic quantity measures the degree of disorder or randomness in a system?", "options": ["Enthalpy", "Entropy", "Activation energy", "Molarity"], "correct": 1}, {"tag": "III", "text": "According to collision theory, increasing the temperature of a reaction generally increases the reaction rate because:", "options": ["Fewer collisions occur", "Particles collide less frequently but with more force", "Particles move faster and collide more often with sufficient energy to react", "Activation energy is eliminated"], "correct": 2}, {"tag": "III", "text": "A catalyst increases the rate of a chemical reaction by:", "options": ["Increasing the concentration of reactants", "Providing an alternative pathway with lower activation energy", "Shifting the equilibrium position permanently", "Being consumed in the reaction"], "correct": 1}, {"tag": "III", "text": "According to Le Chatelier's principle, if the concentration of a reactant is increased in a system at equilibrium, the equilibrium will shift to:", "options": ["Favor the reverse reaction", "Favor the forward reaction, producing more products", "Remain unchanged", "Stop the reaction entirely"], "correct": 1}, {"tag": "IV", "text": "A solution with a pH of 10 is considered:", "options": ["Strongly acidic", "Neutral", "Basic", "Impossible to determine"], "correct": 2}, {"tag": "IV", "text": "According to the Brønsted-Lowry definition, a base is a substance that:", "options": ["Donates a proton", "Accepts a proton", "Donates an electron", "Accepts a neutron"], "correct": 1}, {"tag": "IV", "text": "In an oxidation-reduction (redox) reaction, oxidation refers to:", "options": ["The gain of electrons", "The loss of electrons", "The gain of protons", "The loss of protons"], "correct": 1}, {"tag": "IV", "text": "In a voltaic (galvanic) cell, chemical energy is converted into:", "options": ["Nuclear energy", "Electrical energy", "Purely thermal energy with no electrical output", "Mechanical energy only"], "correct": 1}, {"tag": "IV", "text": "The half-life of a radioactive isotope is defined as the time required for:", "options": ["All of the isotope to decay completely", "Half of the original amount of the isotope to decay", "The isotope to become stable permanently", "Double the mass of the sample to decay"], "correct": 1}, {"tag": "IV", "text": "Hydrocarbons are organic compounds composed primarily of:", "options": ["Carbon and oxygen only", "Carbon and hydrogen", "Nitrogen and hydrogen", "Carbon and nitrogen only"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

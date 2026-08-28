@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics — Practice Exam 2 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#8272C4;
+    --moss-dim:#C1B7E6;
+    --rust:#5B4B9A;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#362A63;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Middle Grades Science · 014 / 705 · Physics · Exam 2 of 5</p>
+    <h1>Physics — Practice Exam 2</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the physics-specific portion of the GACE Middle Grades Science Physical Science subarea — Objective 1: Matter and Energy (1.A organization of matter; 1.B motion, forces, energy, gravity, heat, electricity/magnetism, and waves/sound/light). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--rust);">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>1.A</span><span>1.B</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "1.A", "text": "Which state of matter has a definite volume but no definite shape, taking the shape of its container?", "options": ["Solid", "Liquid", "Gas", "Plasma"], "correct": 1}, {"tag": "1.A", "text": "Baking a cake, causing irreversible chemical changes in the batter, is an example of a:", "options": ["Physical change", "Chemical change", "Phase change only", "Nuclear reaction"], "correct": 1}, {"tag": "1.A", "text": "The atomic mass of an element is most closely related to the:", "options": ["Number of protons only", "Combined number of protons and neutrons", "Number of electrons only", "Number of energy levels"], "correct": 1}, {"tag": "1.A", "text": "Elements in the same column (group) of the periodic table tend to share similar:", "options": ["Atomic mass", "Chemical properties due to similar valence electrons", "Physical state at room temperature", "Melting points exactly"], "correct": 1}, {"tag": "1.A", "text": "The lanthanide and actinide series are typically placed:", "options": ["In the main body of the periodic table", "In a separate row below the main table", "In Group 1", "In Group 18 only"], "correct": 1}, {"tag": "1.B", "text": "An object's acceleration is defined as the rate of change of its:", "options": ["Position", "Velocity", "Mass", "Force"], "correct": 1}, {"tag": "1.B", "text": "If a car travels at a constant speed in a straight line, its acceleration is:", "options": ["Increasing", "Decreasing", "Zero", "Undefined"], "correct": 2}, {"tag": "1.B", "text": "Which of the following best describes inertia?", "options": ["The force that stops motion", "An object's tendency to resist changes in its motion", "The energy an object has due to motion", "The weight of an object"], "correct": 1}, {"tag": "1.B", "text": "A rocket launching upward by expelling gas downward demonstrates primarily:", "options": ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "The law of conservation of energy"], "correct": 2}, {"tag": "1.B", "text": "Doubling an object's mass while keeping the net force constant will cause its acceleration to:", "options": ["Double", "Stay the same", "Be cut in half", "Become zero"], "correct": 2}, {"tag": "1.B", "text": "A book resting on a table remains stationary because:", "options": ["No forces act on it", "The net force on it is zero (balanced forces)", "Only gravity acts on it", "Friction is absent"], "correct": 1}, {"tag": "1.B", "text": "An inelastic collision, unlike an elastic collision, is one in which:", "options": ["Kinetic energy is conserved but momentum is not", "Objects stick together and kinetic energy is not conserved", "Momentum is not conserved", "No forces are involved"], "correct": 1}, {"tag": "1.B", "text": "A larger impulse applied to an object results in a:", "options": ["Smaller change in momentum", "Larger change in momentum", "No change in momentum", "Decrease in mass"], "correct": 1}, {"tag": "1.B", "text": "Power is best defined as the rate at which:", "options": ["Force is applied", "Work is done", "Mass changes", "Velocity increases"], "correct": 1}, {"tag": "1.B", "text": "Gravitational potential energy depends on an object's:", "options": ["Mass, height, and gravitational field strength", "Velocity and time only", "Charge and distance", "Temperature and volume"], "correct": 0}, {"tag": "1.B", "text": "The efficiency of a machine is reduced primarily by:", "options": ["Increased input force", "Energy losses such as friction", "Increased output work", "Decreased mass"], "correct": 1}, {"tag": "1.B", "text": "If the distance between two objects is tripled, the gravitational force between them becomes:", "options": ["Three times as strong", "One-third as strong", "One-ninth as strong", "Nine times as strong"], "correct": 2}, {"tag": "1.B", "text": "Escape velocity is the minimum speed needed for an object to:", "options": ["Enter a stable orbit", "Overcome a planet's gravitational pull and not fall back", "Reach maximum acceleration", "Achieve weightlessness while still on the surface"], "correct": 1}, {"tag": "1.B", "text": "Specific heat capacity refers to the amount of heat needed to:", "options": ["Melt a substance completely", "Raise the temperature of a unit mass of a substance by one degree", "Boil a substance completely", "Freeze a substance completely"], "correct": 1}, {"tag": "1.B", "text": "Which mode of heat transfer occurs through the movement of fluid (liquid or gas) currents, such as warm air rising?", "options": ["Conduction", "Convection", "Radiation", "Sublimation"], "correct": 1}, {"tag": "1.B", "text": "According to the second law of thermodynamics, in any energy transfer, some energy is always:", "options": ["Created", "Destroyed", "Converted to unusable heat / entropy increases", "Converted to mass"], "correct": 2}, {"tag": "1.B", "text": "In a series circuit, if one component fails and creates a break in the circuit:", "options": ["Current continues to flow through other components", "The entire circuit stops functioning", "Only that one component stops working while others continue normally", "Voltage increases across the circuit"], "correct": 1}, {"tag": "1.B", "text": "A material that allows electricity to flow through it easily is called a(n):", "options": ["Insulator", "Conductor", "Semiconductor only", "Superconductor exclusively"], "correct": 1}, {"tag": "1.B", "text": "The number of wave cycles that pass a given point per second is called the wave's:", "options": ["Amplitude", "Wavelength", "Frequency", "Period"], "correct": 2}, {"tag": "1.B", "text": "When light passes from air into water and bends, this phenomenon is called:", "options": ["Reflection", "Refraction", "Diffraction", "Interference"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

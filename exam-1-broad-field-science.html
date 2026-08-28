@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broad Field Science — Practice Exam 1 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#C9805A;
+    --moss-dim:#E6BBA0;
+    --rust:#A6552B;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#6B3115;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Broad Field Science · Exam 1 of 5</p>
+    <h1>Broad Field Science — Practice Exam 1</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Broad Field Science assessment's four subareas: Scientific Inquiry, Processes, Technology &amp; Society (I); Physical Science (II); Life Science (III); and Earth &amp; Space Science (IV). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" style="color:var(--rust);">GACE Science (6–12) (717) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>I</span><span>II</span><span>III</span><span>IV</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "I", "text": "In a controlled experiment, a variable that is deliberately changed by the researcher to observe its effect is called the:", "options": ["Dependent variable", "Independent variable", "Controlled variable", "Confounding variable"], "correct": 1}, {"tag": "I", "text": "Which of the following best describes how scientific knowledge is validated and revised over time?", "options": ["Through peer review, replication, and accumulating evidence", "By popular vote among the public", "Through a single experiment that is never questioned again", "By government decree"], "correct": 0}, {"tag": "I", "text": "When creating a graph to display experimental data, the independent variable is conventionally placed on the:", "options": ["Y-axis", "X-axis", "Legend", "Title"], "correct": 1}, {"tag": "I", "text": "Advances in renewable energy technology primarily address which societal concern?", "options": ["Reducing dependence on finite fossil fuel resources", "Eliminating the need for electricity", "Increasing greenhouse gas emissions", "Replacing all forms of scientific inquiry"], "correct": 0}, {"tag": "II", "text": "The organization of the periodic table places elements in order of increasing:", "options": ["Atomic mass only", "Atomic number", "Number of neutrons", "Density"], "correct": 1}, {"tag": "II", "text": "According to Newton's Second Law of Motion, acceleration is:", "options": ["Inversely proportional to net force and directly proportional to mass", "Directly proportional to net force and inversely proportional to mass", "Unrelated to force or mass", "Always equal to zero for moving objects"], "correct": 1}, {"tag": "II", "text": "A bond formed when one atom transfers electrons to another, creating oppositely charged ions, is called a(n):", "options": ["Covalent bond", "Ionic bond", "Metallic bond", "Hydrogen bond"], "correct": 1}, {"tag": "II", "text": "Elements in the same period (row) of the periodic table have the same number of:", "options": ["Valence electrons", "Occupied electron energy levels (shells)", "Protons", "Neutrons"], "correct": 1}, {"tag": "II", "text": "A chemical reaction that releases heat energy to its surroundings is described as:", "options": ["Endothermic", "Exothermic", "Equilibrium", "Catalytic"], "correct": 1}, {"tag": "II", "text": "A substance that donates a proton (H+) in a chemical reaction, according to the Brønsted-Lowry definition, is a(n):", "options": ["Base", "Acid", "Salt", "Buffer"], "correct": 1}, {"tag": "II", "text": "In an oxidation-reduction reaction, the substance that loses electrons is said to be:", "options": ["Reduced", "Oxidized", "Neutralized", "Ionized"], "correct": 1}, {"tag": "III", "text": "Which structure regulates the movement of materials into and out of a eukaryotic cell?", "options": ["Nucleus", "Cell membrane", "Ribosome", "Golgi apparatus"], "correct": 1}, {"tag": "III", "text": "Photosynthesis primarily converts light energy into chemical energy stored in:", "options": ["ATP only", "Glucose", "Carbon dioxide", "Water"], "correct": 1}, {"tag": "III", "text": "The process by which mRNA is used to synthesize a protein is called:", "options": ["Transcription", "Translation", "Replication", "Mutation"], "correct": 1}, {"tag": "III", "text": "Which of the following is required for natural selection to result in evolutionary change in a population?", "options": ["Identical genotypes among all individuals", "Heritable variation in traits", "A constant environment", "Asexual reproduction only"], "correct": 1}, {"tag": "III", "text": "Which classification system groups organisms based on shared evolutionary ancestry?", "options": ["Alphabetical classification", "Phylogenetic (cladistic) classification", "Habitat-based classification", "Size-based classification"], "correct": 1}, {"tag": "III", "text": "The human circulatory system's primary function is to:", "options": ["Break down food into nutrients", "Transport oxygen, nutrients, and wastes throughout the body", "Filter air before it reaches the lungs", "Produce hormones"], "correct": 1}, {"tag": "III", "text": "According to the 10% rule, the amount of energy transferred from one trophic level to the next in an ecosystem is approximately:", "options": ["100%", "50%", "10%", "1%"], "correct": 2}, {"tag": "IV", "text": "Rocks that form from the cooling and solidification of magma or lava are classified as:", "options": ["Sedimentary", "Igneous", "Metamorphic", "Chemical"], "correct": 1}, {"tag": "IV", "text": "Earth's lithosphere consists of the crust and:", "options": ["The outer core", "The uppermost, rigid part of the mantle", "The inner core only", "The asthenosphere"], "correct": 1}, {"tag": "IV", "text": "New oceanic crust is formed at which type of plate boundary?", "options": ["Convergent", "Divergent", "Transform", "Subduction zone only"], "correct": 1}, {"tag": "IV", "text": "The process by which water vapor from plants enters the atmosphere is:", "options": ["Evaporation", "Transpiration", "Condensation", "Precipitation"], "correct": 1}, {"tag": "IV", "text": "Most of Earth's weather occurs in which atmospheric layer?", "options": ["Stratosphere", "Troposphere", "Mesosphere", "Thermosphere"], "correct": 1}, {"tag": "IV", "text": "Earth's seasons are primarily caused by:", "options": ["Distance from the Sun", "The tilt of Earth's axis", "Solar flares", "Ocean currents"], "correct": 1}, {"tag": "IV", "text": "According to the nebular theory, the solar system formed from:", "options": ["The explosion of a star", "The gravitational collapse of a rotating cloud of gas and dust", "Colliding asteroids", "A stable, unchanging cloud of hydrogen"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

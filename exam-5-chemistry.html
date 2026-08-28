@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry — Practice Exam 5 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#B15F8F;
+    --moss-dim:#DDB0CB;
+    --rust:#8C3568;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#5A1F42;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Chemistry · Exam 5 of 5</p>
+    <h1>Chemistry — Practice Exam 5</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Chemistry assessment: Scientific Inquiry/Processes/Technology &amp; Society (I), Matter/Atomic Structure/Periodic Table (II), Chemical Reactions &amp; Energy (III), and Acid-Base/Redox/Advanced Topics (IV). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--rust);">GACE Chemistry tests — official listing → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="3"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>I</span><span>II</span><span>III</span><span>IV</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "I", "text": "A well-supported scientific theory differs from a law in that a theory:", "options": ["Explains why or how a phenomenon occurs, while a law describes what happens", "Is less reliable than a law", "Can become a law once proven", "Is identical to a law"], "correct": 0}, {"tag": "I", "text": "In an experiment, replication (repeating the experiment) is important because it:", "options": ["Wastes time", "Helps confirm that results are reliable and not due to chance", "Is only needed once", "Replaces the need for a hypothesis"], "correct": 1}, {"tag": "I", "text": "Before conducting any lab activity involving chemicals, students should first:", "options": ["Start immediately without reading instructions", "Read and understand all safety procedures and hazard information", "Skip the safety briefing to save time", "Only wear safety gear if reminded"], "correct": 1}, {"tag": "I", "text": "Burning coal for electricity primarily impacts society and the environment by:", "options": ["Producing zero emissions", "Releasing greenhouse gases and pollutants", "Being completely renewable", "Having no economic cost"], "correct": 1}, {"tag": "I", "text": "The measurement 120.0 mL has how many significant figures?", "options": ["2", "3", "4", "1"], "correct": 2}, {"tag": "I", "text": "A key characteristic of scientific knowledge is that it is:", "options": ["Permanent and unchangeable once established", "Tentative and subject to revision based on new evidence", "Based solely on authority", "Never open to question"], "correct": 1}, {"tag": "II", "text": "The number of valence electrons in an atom largely determines its:", "options": ["Atomic mass", "Chemical reactivity and bonding behavior", "Number of neutrons", "Physical state at room temperature"], "correct": 1}, {"tag": "II", "text": "Which of the following elements belongs to the halogen family?", "options": ["Neon", "Chlorine", "Sodium", "Calcium"], "correct": 1}, {"tag": "II", "text": "Electron affinity generally becomes more negative (greater attraction for electrons) as you move:", "options": ["Down a group and left across a period", "Up a group and right across a period", "Diagonally with no clear pattern", "Only within transition metals"], "correct": 1}, {"tag": "II", "text": "Hydrogen bonding is best described as:", "options": ["A true covalent bond between hydrogen atoms", "A relatively strong intermolecular attraction involving hydrogen bonded to highly electronegative atoms", "A type of ionic bond", "A nuclear force"], "correct": 1}, {"tag": "II", "text": "According to Gay-Lussac's Law, at constant volume, increasing the temperature of a gas will cause its pressure to:", "options": ["Decrease", "Increase", "Stay the same", "Become undefined"], "correct": 1}, {"tag": "II", "text": "Solubility refers to:", "options": ["The color of a solution", "The maximum amount of solute that can dissolve in a solvent at a given temperature", "The temperature of a solution", "The mass of the solvent only"], "correct": 1}, {"tag": "III", "text": "Which of the following correctly reflects the law of conservation of mass in a balanced equation?", "options": ["Atoms can be created during a reaction", "The number and type of atoms are the same on both sides of the equation", "Only the total charge must balance", "Only gases must balance"], "correct": 1}, {"tag": "III", "text": "If a reaction produces 2 moles of CO₂ for every 1 mole of a hydrocarbon burned, how many moles of CO₂ form from 5 moles of the hydrocarbon (excess oxygen)?", "options": ["5 moles", "10 moles", "2 moles", "15 moles"], "correct": 1}, {"tag": "III", "text": "Which of the following is true of an exothermic reaction?", "options": ["The products have more energy than the reactants", "The reactants have more energy than the products, releasing energy", "No energy change occurs", "Energy is absorbed from the surroundings"], "correct": 1}, {"tag": "III", "text": "A higher reactant concentration generally increases reaction rate because it leads to:", "options": ["Fewer particle collisions", "More frequent particle collisions", "Lower activation energy", "Less kinetic energy"], "correct": 1}, {"tag": "III", "text": "A large equilibrium constant (K >> 1) indicates that at equilibrium:", "options": ["Reactants are favored", "Products are favored", "Reactants and products are in equal amounts", "The reaction has stopped completely"], "correct": 1}, {"tag": "III", "text": "According to Le Chatelier's principle, adding an inert gas at constant volume to a system at equilibrium will:", "options": ["Shift the equilibrium toward more moles of gas", "Shift the equilibrium toward fewer moles of gas", "Have no effect on the equilibrium position", "Stop the reaction"], "correct": 2}, {"tag": "III", "text": "A catalyst provides an alternative reaction pathway with:", "options": ["Higher activation energy", "Lower activation energy", "No activation energy required", "The same activation energy as the uncatalyzed reaction"], "correct": 1}, {"tag": "IV", "text": "Vinegar (acetic acid) is an example of a:", "options": ["Strong acid", "Weak acid", "Strong base", "Weak base"], "correct": 1}, {"tag": "IV", "text": "The conjugate base of an acid is formed when the acid:", "options": ["Gains a proton", "Donates (loses) a proton", "Gains an electron", "Loses an electron"], "correct": 1}, {"tag": "IV", "text": "In the reaction Mg + 2HCl → MgCl₂ + H₂, magnesium is:", "options": ["Reduced", "Oxidized", "Unchanged", "Neutralized"], "correct": 1}, {"tag": "IV", "text": "A galvanic (voltaic) cell converts chemical energy into:", "options": ["Nuclear energy", "Electrical energy", "Purely mechanical energy", "Sound energy"], "correct": 1}, {"tag": "IV", "text": "Which type of radioactive decay involves the emission of a helium nucleus (2 protons, 2 neutrons)?", "options": ["Alpha decay", "Beta decay", "Gamma decay", "Positron emission"], "correct": 0}, {"tag": "IV", "text": "Alcohols are organic compounds characterized by the presence of a(n):", "options": ["Carboxyl group", "Hydroxyl (-OH) group", "Amine group", "Carbonyl group only"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>
