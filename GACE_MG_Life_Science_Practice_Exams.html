@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GACE Middle Grades Life Science – 5 Practice Exams</title>
+<style>
+  :root {
+    --bg: #0f1b2d;
+    --surface: #162236;
+    --card: #1e3050;
+    --accent: #3ecf8e;
+    --accent2: #5b9cf6;
+    --warn: #f97316;
+    --danger: #ef4444;
+    --text: #e8f0fe;
+    --muted: #8ba3c7;
+    --border: #2a4060;
+    --radius: 12px;
+    --font: 'Segoe UI', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a1628 0%, #162236 60%, #1a2e4a 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 28px 24px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; letter-spacing: -0.5px; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--muted); margin-top: 6px; font-size: .95rem; }
+  .badge-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+  .badge { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 14px; font-size: .8rem; color: var(--accent2); }
+
+  /* ── EXAM SELECTOR ── */
+  #selector { padding: 32px 20px; max-width: 860px; margin: 0 auto; }
+  #selector h2 { font-size: 1.2rem; color: var(--muted); margin-bottom: 20px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+  .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .exam-btn {
+    background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
+    padding: 22px 12px; cursor: pointer; transition: all .2s; text-align: center; color: var(--text);
+    font-family: var(--font); font-size: 1rem; font-weight: 600;
+  }
+  .exam-btn:hover { border-color: var(--accent); background: #1e3a5f; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(62,207,142,.15); }
+  .exam-btn .num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+  .exam-btn .lbl { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── EXAM AREA ── */
+  #exam-area { display: none; max-width: 860px; margin: 0 auto; padding: 20px; }
+
+  /* progress bar */
+  .progress-wrap { background: var(--surface); border-radius: 20px; height: 8px; margin-bottom: 6px; overflow: hidden; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 20px; transition: width .4s; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); margin-bottom: 18px; }
+
+  /* timer */
+  .timer-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .timer { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 1.1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .timer.warn { border-color: var(--warn); color: var(--warn); }
+  .timer.danger { border-color: var(--danger); color: var(--danger); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+  .exam-title { font-size: 1rem; font-weight: 700; color: var(--accent2); }
+
+  /* question card */
+  .q-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px; margin-bottom: 16px;
+  }
+  .q-num { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+  .q-text { font-size: 1.05rem; line-height: 1.65; margin-bottom: 18px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex; align-items: flex-start; gap: 12px; background: var(--surface);
+    border: 2px solid var(--border); border-radius: 8px; padding: 12px 14px;
+    cursor: pointer; transition: all .15s; font-size: .97rem; line-height: 1.5;
+  }
+  .opt:hover { border-color: var(--accent2); background: #1a2e4a; }
+  .opt.selected { border-color: var(--accent2); background: #1a3060; }
+  .opt.correct { border-color: var(--accent); background: rgba(62,207,142,.12); }
+  .opt.incorrect { border-color: var(--danger); background: rgba(239,68,68,.1); }
+  .opt-letter {
+    min-width: 26px; height: 26px; border-radius: 50%; background: var(--border);
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; flex-shrink: 0;
+  }
+  .opt.selected .opt-letter { background: var(--accent2); }
+  .opt.correct .opt-letter { background: var(--accent); color: #000; }
+  .opt.incorrect .opt-letter { background: var(--danger); }
+
+  /* explanation */
+  .explanation { display: none; margin-top: 14px; padding: 14px; background: rgba(62,207,142,.07); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: .92rem; line-height: 1.6; color: #b8d4c0; }
+  .explanation.show { display: block; }
+
+  /* nav buttons */
+  .nav-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .btn {
+    padding: 11px 22px; border-radius: 8px; border: none; cursor: pointer;
+    font-family: var(--font); font-size: .95rem; font-weight: 600; transition: all .15s;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #2fb87a; }
+  .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--accent2); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: #c53030; }
+
+  /* results */
+  #results { display: none; max-width: 860px; margin: 0 auto; padding: 20px; }
+  .score-card {
+    background: var(--card); border: 2px solid var(--accent); border-radius: var(--radius);
+    padding: 36px; text-align: center; margin-bottom: 24px;
+  }
+  .score-big { font-size: 4rem; font-weight: 900; color: var(--accent); line-height: 1; }
+  .score-label { color: var(--muted); margin-top: 8px; font-size: 1rem; }
+  .score-pct { font-size: 1.6rem; font-weight: 700; margin-top: 10px; }
+  .pass { color: var(--accent); } .fail { color: var(--danger); }
+  .breakdown { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .breakdown-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-align: center; }
+  .breakdown-card .val { font-size: 1.8rem; font-weight: 800; color: var(--accent2); }
+  .breakdown-card .lbl { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+  .review-list { display: flex; flex-direction: column; gap: 12px; }
+  .review-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .review-item.wrong { border-color: rgba(239,68,68,.4); }
+  .review-item.right { border-color: rgba(62,207,142,.3); }
+  .review-q { font-size: .97rem; margin-bottom: 8px; }
+  .review-ans { font-size: .88rem; color: var(--muted); }
+  .review-ans span { font-weight: 600; }
+  .review-ans .c { color: var(--accent); } .review-ans .w { color: var(--danger); }
+
+  /* section tag */
+  .section-tag { display: inline-block; font-size: .72rem; padding: 2px 8px; border-radius: 10px; background: rgba(91,156,246,.15); color: var(--accent2); border: 1px solid rgba(91,156,246,.3); margin-bottom: 6px; }
+
+  /* responsive */
+  @media(max-width:500px){ .score-big{font-size:3rem;} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>GACE Middle Grades <span>Life Science</span> Practice Exams</h1>
+  <p>Testlet 106 · 40 Questions · 60 Minutes · Aligned to Official Content Areas</p>
+  <div class="badge-row">
+    <span class="badge">Cells &amp; Genetics</span>
+    <span class="badge">Body Systems</span>
+    <span class="badge">Homeostasis</span>
+    <span class="badge">Evolution</span>
+    <span class="badge">Ecology &amp; Ecosystems</span>
+  </div>
+</header>
+
+<!-- SELECTOR -->
+<div id="selector">
+  <h2>Choose a Practice Exam</h2>
+  <div class="exam-grid">
+    <button class="exam-btn" onclick="startExam(0)"><span class="num">1</span>Practice Exam<span class="lbl">40 Questions</span></button>
+    <button class="exam-btn" onclick="startExam(1)"><span class="num">2</span>Practice Exam<span class="lbl">40 Questions</span></button>
+    <button class="exam-btn" onclick="startExam(2)"><span class="num">3</span>Practice Exam<span class="lbl">40 Questions</span></button>
+    <button class="exam-btn" onclick="startExam(3)"><span class="num">4</span>Practice Exam<span class="lbl">40 Questions</span></button>
+    <button class="exam-btn" onclick="startExam(4)"><span class="num">5</span>Practice Exam<span class="lbl">40 Questions</span></button>
+  </div>
+</div>
+
+<!-- EXAM AREA -->
+<div id="exam-area">
+  <div class="timer-row">
+    <span class="exam-title" id="exam-title"></span>
+    <span class="timer" id="timer">60:00</span>
+  </div>
+  <div class="progress-wrap"><div class="progress-bar" id="prog-bar" style="width:0%"></div></div>
+  <div class="progress-label"><span id="prog-text">Question 1 of 40</span><span id="answered-count">0 answered</span></div>
+  <div id="q-container"></div>
+  <div class="nav-row">
+    <button class="btn btn-secondary" id="prev-btn" onclick="navigate(-1)">← Previous</button>
+    <button class="btn btn-secondary" id="next-btn" onclick="navigate(1)">Next →</button>
+    <button class="btn btn-primary" id="submit-btn" onclick="submitExam()" style="display:none">Submit Exam</button>
+    <button class="btn btn-danger" onclick="goHome()" style="margin-left:auto">✕ Exit</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="score-card">
+    <div class="score-big" id="res-score"></div>
+    <div class="score-label">Questions Correct</div>
+    <div class="score-pct" id="res-pct"></div>
+    <div style="margin-top:12px;font-size:.9rem;color:var(--muted)" id="res-pass"></div>
+  </div>
+  <div class="breakdown" id="breakdown"></div>
+  <h3 style="margin-bottom:14px;color:var(--muted);font-size:.9rem;text-transform:uppercase;letter-spacing:1px">Answer Review</h3>
+  <div class="review-list" id="review-list"></div>
+  <div class="nav-row" style="margin-top:24px">
+    <button class="btn btn-primary" onclick="goHome()">← Back to Exams</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  QUESTION BANK  (5 exams × 40 questions = 200 questions)
+// ═══════════════════════════════════════════════════════════════
+const EXAMS = [
+
+// ─────────────────────────────────────────────────────────────
+// EXAM 1
+// ─────────────────────────────────────────────────────────────
+[
+{s:"Cells & Genetics",q:"Which organelle is responsible for producing ATP through cellular respiration in eukaryotic cells?",o:["Ribosome","Mitochondria","Golgi apparatus","Smooth endoplasmic reticulum"],a:1,e:"Mitochondria are the sites of aerobic cellular respiration, producing the majority of ATP used by the cell."},
+{s:"Cells & Genetics",q:"A cell with a cell wall, chloroplasts, and a large central vacuole is MOST likely a:",o:["Animal cell","Bacterial cell","Fungal cell","Plant cell"],a:3,e:"Plant cells are distinguished by cell walls (made of cellulose), chloroplasts for photosynthesis, and a large central vacuole for storage and turgor pressure."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the function of ribosomes?",o:["Synthesizing lipids","Packaging and shipping proteins","Synthesizing proteins","Producing energy"],a:2,e:"Ribosomes are the sites of protein synthesis (translation), where mRNA is read and amino acids are assembled into polypeptide chains."},
+{s:"Cells & Genetics",q:"A student observes a cell under a microscope and notes the absence of a membrane-bound nucleus. This cell is MOST likely:",o:["A plant cell","A eukaryotic cell","A prokaryotic cell","An animal cell"],a:2,e:"Prokaryotic cells (bacteria and archaea) lack a membrane-bound nucleus. Their genetic material floats freely in the cytoplasm."},
+{s:"Cells & Genetics",q:"During which phase of mitosis do chromosomes line up along the cell's equator?",o:["Prophase","Anaphase","Metaphase","Telophase"],a:2,e:"During metaphase, chromosomes align at the metaphase plate (cell equator), allowing spindle fibers to attach to each chromatid's centromere."},
+{s:"Cells & Genetics",q:"A pea plant that is homozygous dominant for seed color (YY) is crossed with a homozygous recessive plant (yy). What percentage of offspring will show the dominant phenotype?",o:["0%","25%","75%","100%"],a:3,e:"All offspring from a YY × yy cross will be Yy (heterozygous). Since Y (yellow) is dominant, 100% will display the dominant yellow phenotype."},
+{s:"Cells & Genetics",q:"Which of the following is the CORRECT base-pairing rule for DNA?",o:["Adenine pairs with Cytosine","Guanine pairs with Thymine","Adenine pairs with Thymine","Cytosine pairs with Adenine"],a:2,e:"In DNA, adenine (A) pairs with thymine (T) via two hydrogen bonds, and guanine (G) pairs with cytosine (C) via three hydrogen bonds."},
+{s:"Cells & Genetics",q:"A mutation that changes a single nucleotide in a DNA sequence is called a:",o:["Frameshift mutation","Point mutation","Chromosomal deletion","Translocation"],a:1,e:"A point mutation (also called a substitution) involves a change in a single nucleotide base pair in the DNA sequence."},
+{s:"Body Systems",q:"Which body system is PRIMARILY responsible for transporting oxygen to body cells?",o:["Digestive system","Respiratory system","Circulatory system","Nervous system"],a:2,e:"The circulatory system (heart, blood vessels, and blood) transports oxygen from the lungs to all body cells and carries carbon dioxide back to the lungs."},
+{s:"Body Systems",q:"Gas exchange in the lungs occurs in tiny air sacs called:",o:["Bronchi","Alveoli","Trachea","Bronchioles"],a:1,e:"Alveoli are the tiny, thin-walled air sacs in the lungs where oxygen diffuses into the blood and carbon dioxide diffuses out."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the small intestine?",o:["Storing bile","Absorbing most nutrients into the bloodstream","Producing digestive enzymes only","Eliminating solid waste"],a:1,e:"The small intestine is the primary site of chemical digestion and nutrient absorption. Its large surface area (due to villi and microvilli) maximizes absorption."},
+{s:"Body Systems",q:"Neurons transmit signals across synapses using chemical messengers called:",o:["Hormones","Enzymes","Neurotransmitters","Antibodies"],a:2,e:"Neurotransmitters are chemical messengers released from the axon terminal of one neuron that cross the synapse and bind to receptors on the next neuron."},
+{s:"Homeostasis",q:"When blood glucose levels rise after a meal, the pancreas releases insulin. This is an example of:",o:["Positive feedback","Negative feedback","Active transport","Osmosis"],a:1,e:"Negative feedback loops counteract changes to maintain homeostasis. Insulin lowers blood glucose back to normal levels, opposing the initial rise."},
+{s:"Homeostasis",q:"Which process allows water to move across a semi-permeable membrane from an area of low solute concentration to high solute concentration?",o:["Active transport","Diffusion","Osmosis","Endocytosis"],a:2,e:"Osmosis is the passive movement of water across a semi-permeable membrane from a region of lower solute concentration (higher water concentration) to higher solute concentration."},
+{s:"Homeostasis",q:"A person exercising in hot weather begins to sweat. This response PRIMARILY helps maintain:",o:["Blood glucose levels","Body temperature","Blood pressure","Oxygen levels"],a:1,e:"Sweating is a thermoregulatory response. As sweat evaporates, it removes heat from the body, helping maintain a stable core temperature (homeostasis)."},
+{s:"Evolution",q:"Which of the following provides the STRONGEST evidence for common ancestry among vertebrates?",o:["Similar ecological niches","Homologous structures","Analogous structures","Similar coloration"],a:1,e:"Homologous structures (e.g., the forelimbs of humans, whales, and bats) share the same underlying bone structure, indicating descent from a common ancestor."},
+{s:"Evolution",q:"According to Darwin's theory of natural selection, individuals that survive and reproduce are those that:",o:["Are the largest in the population","Have traits best suited to their environment","Reproduce the most offspring regardless of traits","Mutate most frequently"],a:1,e:"Natural selection favors individuals with heritable traits that improve survival and reproduction in a given environment. These individuals pass on their advantageous traits."},
+{s:"Evolution",q:"The fossil record shows that many species that existed in the past no longer exist today. This is BEST explained by:",o:["Spontaneous generation","Extinction","Genetic drift only","Lamarckian inheritance"],a:1,e:"Extinction occurs when a species can no longer adapt to environmental changes or competition. The fossil record documents many extinct species."},
+{s:"Evolution",q:"Antibiotic resistance in bacteria is an example of:",o:["Lamarckian evolution","Artificial selection only","Natural selection acting on existing variation","Genetic engineering"],a:2,e:"Bacteria with random mutations conferring antibiotic resistance survive and reproduce when exposed to antibiotics. This is natural selection acting on pre-existing genetic variation."},
+{s:"Evolution",q:"Two species of birds on different continents have similar beak shapes for catching fish, but are not closely related. This is an example of:",o:["Homologous structures","Convergent evolution","Divergent evolution","Coevolution"],a:1,e:"Convergent evolution occurs when unrelated species independently evolve similar traits due to similar environmental pressures or ecological roles."},
+{s:"Ecology",q:"Which of the following CORRECTLY describes a food chain?",o:["Sun → Hawk → Snake → Frog → Grasshopper → Grass","Grass → Grasshopper → Frog → Snake → Hawk","Hawk → Snake → Frog → Grasshopper → Grass","Grass → Hawk → Snake → Frog → Grasshopper"],a:1,e:"Energy flows from producers (grass) to primary consumers (grasshopper) to secondary consumers (frog) to tertiary consumers (snake) to apex predators (hawk)."},
+{s:"Ecology",q:"An organism that breaks down dead organic matter and returns nutrients to the soil is called a:",o:["Producer","Primary consumer","Decomposer","Apex predator"],a:2,e:"Decomposers (bacteria and fungi) break down dead organisms and waste, recycling nutrients back into the ecosystem for use by producers."},
+{s:"Ecology",q:"Which of the following is an ABIOTIC factor in an ecosystem?",o:["Bacteria","Fungi","Sunlight","Insects"],a:2,e:"Abiotic factors are non-living components of an ecosystem. Sunlight, temperature, water, and soil are abiotic factors. Bacteria, fungi, and insects are biotic (living) factors."},
+{s:"Ecology",q:"The relationship between a clownfish and a sea anemone, where the clownfish is protected and the anemone is unaffected, is called:",o:["Mutualism","Parasitism","Commensalism","Competition"],a:2,e:"Commensalism is a relationship where one organism benefits and the other is neither helped nor harmed. The clownfish benefits from protection; the anemone is unaffected."},
+{s:"Ecology",q:"Which of the following BEST describes the carbon cycle?",o:["The movement of water through the environment","The cycling of carbon through living organisms, the atmosphere, and the Earth","The flow of energy through a food web","The nitrogen fixation process"],a:1,e:"The carbon cycle describes how carbon moves between the atmosphere (CO₂), living organisms (photosynthesis/respiration), and the Earth (fossil fuels, soil)."},
+{s:"Ecology",q:"A population of deer in a forest grows rapidly until it reaches the maximum number the environment can support. This limit is called the:",o:["Biotic potential","Carrying capacity","Population density","Limiting factor"],a:1,e:"Carrying capacity (K) is the maximum population size that an environment can sustainably support given available resources like food, water, and space."},
+{s:"Ecology",q:"Which biome is characterized by permafrost, very low temperatures, and low biodiversity?",o:["Tropical rainforest","Temperate deciduous forest","Tundra","Taiga"],a:2,e:"The tundra biome has extremely cold temperatures, permafrost (permanently frozen subsoil), a short growing season, and low biodiversity dominated by mosses, lichens, and small shrubs."},
+{s:"Ecology",q:"The process by which nitrogen gas from the atmosphere is converted into a form usable by plants is called:",o:["Denitrification","Nitrification","Nitrogen fixation","Decomposition"],a:2,e:"Nitrogen fixation is performed by certain bacteria (e.g., Rhizobium) that convert atmospheric N₂ into ammonia (NH₃), which plants can absorb and use to build proteins."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of meiosis?",o:["Cell division producing two identical diploid cells","Cell division producing four genetically unique haploid cells","DNA replication without cell division","Protein synthesis from mRNA"],a:1,e:"Meiosis produces four genetically unique haploid (n) cells (gametes) from one diploid (2n) parent cell through two rounds of division, including crossing over."},
+{s:"Body Systems",q:"The lymphatic system PRIMARILY functions to:",o:["Produce red blood cells","Return excess tissue fluid to the bloodstream and fight infection","Regulate hormone production","Digest fats in the small intestine"],a:1,e:"The lymphatic system collects excess interstitial fluid and returns it to the bloodstream. It also plays a key role in immunity through lymphocytes and lymph nodes."},
+{s:"Cells & Genetics",q:"Which of the following is a sex-linked trait?",o:["ABO blood type","Hemophilia","Attached earlobes","Tongue rolling"],a:1,e:"Hemophilia is a sex-linked (X-linked) recessive disorder. The gene is located on the X chromosome, making males more likely to be affected since they have only one X chromosome."},
+{s:"Body Systems",q:"Which hormone, produced by the thyroid gland, regulates the body's metabolic rate?",o:["Insulin","Thyroxine","Adrenaline","Glucagon"],a:1,e:"Thyroxine (T4) is produced by the thyroid gland and regulates the body's basal metabolic rate, affecting energy use, growth, and development."},
+{s:"Ecology",q:"Deforestation MOST directly leads to which of the following environmental consequences?",o:["Increased soil fertility","Decreased atmospheric CO₂","Loss of biodiversity and habitat","Increased rainfall"],a:2,e:"Deforestation destroys habitats, leading to loss of biodiversity. It also increases atmospheric CO₂ (less carbon sequestration), causes soil erosion, and disrupts water cycles."},
+{s:"Evolution",q:"Which of the following is NOT a mechanism of evolution?",o:["Natural selection","Genetic drift","Gene flow","Mitosis"],a:3,e:"Mitosis is a form of cell division, not a mechanism of evolution. The four main mechanisms of evolution are natural selection, genetic drift, gene flow, and mutation."},
+{s:"Cells & Genetics",q:"The process by which a cell takes in large particles by engulfing them is called:",o:["Exocytosis","Osmosis","Phagocytosis","Facilitated diffusion"],a:2,e:"Phagocytosis ('cell eating') is a form of endocytosis where the cell membrane engulfs large particles or cells. White blood cells use phagocytosis to destroy pathogens."},
+{s:"Body Systems",q:"Which of the following CORRECTLY pairs a body system with its primary function?",o:["Skeletal system – hormone production","Muscular system – gas exchange","Integumentary system – protection and temperature regulation","Excretory system – nutrient absorption"],a:2,e:"The integumentary system (skin, hair, nails) provides protection against pathogens, UV radiation, and physical damage, and helps regulate body temperature through sweating and blood vessel dilation."},
+{s:"Homeostasis",q:"Which organ is PRIMARILY responsible for filtering waste products from the blood?",o:["Liver","Pancreas","Kidney","Spleen"],a:2,e:"The kidneys filter blood, removing metabolic waste products (like urea) and excess water to produce urine, maintaining blood composition and homeostasis."},
+{s:"Ecology",q:"In a stable ecosystem, what happens to the amount of energy available as you move up each trophic level?",o:["It increases by 10%","It remains the same","It decreases by approximately 90%","It doubles"],a:2,e:"The 10% rule states that only about 10% of energy is transferred from one trophic level to the next. The remaining ~90% is lost as heat through metabolic processes."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of DNA polymerase during DNA replication?",o:["Unwinding the double helix","Adding new nucleotides to the growing strand","Joining Okazaki fragments","Removing RNA primers"],a:1,e:"DNA polymerase reads the template strand and adds complementary nucleotides (5'→3') to synthesize a new DNA strand during replication."},
+{s:"Evolution",q:"The concept that evolution occurs gradually over long periods of time is called:",o:["Punctuated equilibrium","Gradualism","Genetic drift","Allopatric speciation"],a:1,e:"Gradualism proposes that evolutionary change occurs slowly and steadily over long periods. This contrasts with punctuated equilibrium, which proposes rapid change followed by long periods of stability."}
+],
+
+// ─────────────────────────────────────────────────────────────
+// EXAM 2
+// ─────────────────────────────────────────────────────────────
+[
+{s:"Cells & Genetics",q:"Which of the following organelles is responsible for modifying, sorting, and packaging proteins for secretion?",o:["Mitochondria","Lysosome","Golgi apparatus","Nucleus"],a:2,e:"The Golgi apparatus (Golgi body) receives proteins from the endoplasmic reticulum, modifies them, and packages them into vesicles for secretion or use within the cell."},
+{s:"Cells & Genetics",q:"The cell membrane is described as a 'fluid mosaic model.' Which of the following BEST explains this description?",o:["The membrane is rigid and made of a single layer of proteins","The membrane consists of a flexible phospholipid bilayer with embedded proteins","The membrane is made entirely of carbohydrates","The membrane is a solid structure that does not allow any movement"],a:1,e:"The fluid mosaic model describes the cell membrane as a flexible (fluid) phospholipid bilayer with various proteins, cholesterol, and carbohydrates embedded in or attached to it."},
+{s:"Cells & Genetics",q:"During transcription, which molecule is produced from a DNA template?",o:["tRNA","Protein","mRNA","DNA"],a:2,e:"During transcription, RNA polymerase reads the DNA template strand and synthesizes a complementary messenger RNA (mRNA) molecule."},
+{s:"Cells & Genetics",q:"A woman who is a carrier for color blindness (X^B X^b) has children with a man who has normal vision (X^B Y). What is the probability that their son will be color blind?",o:["0%","25%","50%","100%"],a:2,e:"Sons receive their X chromosome from their mother. The carrier mother has a 50% chance of passing the X^b allele to each son, so 50% of sons will be color blind."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the difference between mitosis and meiosis?",o:["Mitosis produces haploid cells; meiosis produces diploid cells","Mitosis produces 4 cells; meiosis produces 2 cells","Mitosis produces 2 genetically identical diploid cells; meiosis produces 4 genetically unique haploid cells","Mitosis involves crossing over; meiosis does not"],a:2,e:"Mitosis produces 2 identical diploid daughter cells for growth and repair. Meiosis produces 4 genetically unique haploid gametes through two divisions and crossing over."},
+{s:"Cells & Genetics",q:"Which of the following is an example of a frameshift mutation?",o:["A single nucleotide is substituted for another","A segment of DNA is inverted","A nucleotide is inserted into the DNA sequence","Two non-homologous chromosomes exchange segments"],a:2,e:"A frameshift mutation occurs when nucleotides are inserted or deleted, shifting the reading frame of the genetic code and altering all subsequent amino acids."},
+{s:"Body Systems",q:"Which of the following CORRECTLY describes the path of blood through the heart?",o:["Right atrium → Right ventricle → Lungs → Left atrium → Left ventricle → Body","Left atrium → Left ventricle → Lungs → Right atrium → Right ventricle → Body","Right ventricle → Right atrium → Lungs → Left ventricle → Left atrium → Body","Body → Left ventricle → Left atrium → Lungs → Right ventricle → Right atrium"],a:0,e:"Deoxygenated blood enters the right atrium, goes to the right ventricle, is pumped to the lungs for oxygenation, returns to the left atrium, then left ventricle, and is pumped to the body."},
+{s:"Body Systems",q:"Which of the following is the CORRECT order of the digestive system?",o:["Mouth → Esophagus → Stomach → Large intestine → Small intestine","Mouth → Stomach → Esophagus → Small intestine → Large intestine","Mouth → Esophagus → Stomach → Small intestine → Large intestine","Mouth → Esophagus → Large intestine → Stomach → Small intestine"],a:2,e:"Food travels: mouth (mechanical/chemical digestion) → esophagus → stomach (protein digestion) → small intestine (most digestion/absorption) → large intestine (water absorption) → rectum."},
+{s:"Body Systems",q:"The immune system's FIRST line of defense against pathogens includes:",o:["Antibody production","T-cell activation","Skin and mucous membranes","Inflammation response"],a:2,e:"The first line of defense consists of physical and chemical barriers: skin, mucous membranes, cilia, stomach acid, and tears that prevent pathogens from entering the body."},
+{s:"Body Systems",q:"Which of the following BEST describes the function of the endocrine system?",o:["Transmitting electrical signals throughout the body","Regulating body functions through chemical messengers (hormones)","Filtering waste from the blood","Coordinating voluntary muscle movements"],a:1,e:"The endocrine system uses hormones (chemical messengers) secreted by glands into the bloodstream to regulate growth, metabolism, reproduction, and homeostasis."},
+{s:"Homeostasis",q:"Which of the following is an example of POSITIVE feedback?",o:["Insulin lowering blood glucose","Sweating to cool the body","Uterine contractions intensifying during childbirth","Shivering to generate heat"],a:2,e:"Positive feedback amplifies a response rather than reversing it. During childbirth, contractions stimulate more oxytocin release, causing stronger contractions until birth occurs."},
+{s:"Homeostasis",q:"A cell placed in a hypertonic solution will MOST likely:",o:["Swell and burst","Remain unchanged","Shrink (crenate) as water leaves","Divide rapidly"],a:2,e:"In a hypertonic solution (higher solute concentration outside), water moves out of the cell by osmosis, causing the cell to shrink (crenation in animal cells, plasmolysis in plant cells)."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the liver in homeostasis?",o:["Producing insulin to regulate blood sugar","Detoxifying harmful substances and regulating blood glucose","Filtering waste from the blood to produce urine","Producing red blood cells"],a:1,e:"The liver performs over 500 functions including detoxification, glycogen storage/release for blood glucose regulation, bile production, and protein synthesis."},
+{s:"Evolution",q:"Which scientist is credited with developing the theory of evolution by natural selection?",o:["Gregor Mendel","Louis Pasteur","Charles Darwin","James Watson"],a:2,e:"Charles Darwin (and Alfred Russel Wallace independently) developed the theory of evolution by natural selection, published in 'On the Origin of Species' in 1859."},
+{s:"Evolution",q:"Vestigial structures, such as the human appendix or whale pelvis bones, provide evidence for evolution because they:",o:["Serve important functions in modern organisms","Are structures inherited from ancestors that no longer serve their original function","Are examples of convergent evolution","Demonstrate Lamarckian inheritance"],a:1,e:"Vestigial structures are remnants of structures that had functions in ancestral species but have reduced or no function in modern organisms, indicating common ancestry."},
+{s:"Evolution",q:"Which of the following BEST describes genetic drift?",o:["The change in allele frequencies due to natural selection","Random changes in allele frequencies in a small population","The movement of alleles between populations","Mutations caused by environmental factors"],a:1,e:"Genetic drift refers to random changes in allele frequencies in a population, especially significant in small populations where chance events can dramatically alter gene pools."},
+{s:"Evolution",q:"Speciation is MOST likely to occur when:",o:["Two populations interbreed freely","A population is geographically isolated from another","All individuals in a population have the same genotype","The environment remains stable for long periods"],a:1,e:"Allopatric speciation occurs when a population is geographically isolated, preventing gene flow. Over time, the isolated populations accumulate different mutations and adaptations, eventually becoming separate species."},
+{s:"Evolution",q:"Which of the following is NOT evidence for evolution?",o:["Fossil record","DNA sequence similarities","Homologous structures","The existence of living organisms"],a:3,e:"The mere existence of living organisms is not evidence for evolution. Evidence includes the fossil record, comparative anatomy (homologous structures), molecular biology (DNA similarities), and biogeography."},
+{s:"Ecology",q:"Which of the following BEST describes a mutualistic relationship?",o:["A tapeworm living in a host's intestine","Bees pollinating flowers while collecting nectar","A remora fish attached to a shark","A lion hunting a zebra"],a:1,e:"Mutualism benefits both species. Bees get nectar (food) while flowers get pollinated (reproduction). Both organisms benefit from the interaction."},
+{s:"Ecology",q:"Primary succession occurs in an area that:",o:["Was previously occupied by a community that was destroyed","Has never supported life before","Has rich, fertile soil","Was recently flooded"],a:1,e:"Primary succession begins in areas with no soil or previous life (e.g., bare rock after a volcanic eruption). Pioneer species like lichens begin the process of soil formation."},
+{s:"Ecology",q:"Which of the following BEST describes the water cycle?",o:["The movement of carbon through living organisms","The cycling of water through evaporation, condensation, and precipitation","The flow of energy through a food web","The conversion of nitrogen gas to usable forms"],a:1,e:"The water (hydrologic) cycle describes the continuous movement of water through evaporation (liquid to gas), condensation (gas to liquid forming clouds), and precipitation (rain/snow)."},
+{s:"Ecology",q:"An invasive species introduced to a new ecosystem MOST likely causes harm by:",o:["Increasing biodiversity","Competing with native species for resources","Improving soil quality","Providing food for native predators"],a:1,e:"Invasive species often outcompete native species for food, water, and habitat because they lack natural predators in the new environment, reducing native biodiversity."},
+{s:"Ecology",q:"Which of the following is an example of a keystone species?",o:["A common grass species in a meadow","Sea otters that control sea urchin populations","A decomposer bacterium","A migratory bird"],a:1,e:"A keystone species has a disproportionately large effect on its ecosystem relative to its abundance. Sea otters control sea urchin populations, preventing overgrazing of kelp forests."},
+{s:"Ecology",q:"The tropical rainforest biome is characterized by:",o:["Low rainfall and extreme temperature variation","High biodiversity, warm temperatures, and high annual rainfall","Cold temperatures and permafrost","Seasonal drought and grasslands"],a:1,e:"Tropical rainforests have consistently warm temperatures (25-30°C), very high annual rainfall (>200 cm), and the highest biodiversity of any terrestrial biome."},
+{s:"Ecology",q:"Which of the following BEST describes the role of producers in an ecosystem?",o:["Breaking down dead organic matter","Converting solar energy into chemical energy through photosynthesis","Consuming other organisms for energy","Recycling nutrients in the soil"],a:1,e:"Producers (plants, algae, cyanobacteria) are autotrophs that convert light energy into chemical energy (glucose) through photosynthesis, forming the base of food webs."},
+{s:"Cells & Genetics",q:"Which of the following CORRECTLY describes the structure of DNA?",o:["Single-stranded helix with ribose sugar","Double-stranded helix with deoxyribose sugar","Single-stranded with uracil bases","Double-stranded with ribose sugar and uracil"],a:1,e:"DNA is a double-stranded helix composed of nucleotides containing deoxyribose sugar, a phosphate group, and one of four nitrogenous bases (A, T, G, C)."},
+{s:"Body Systems",q:"Which of the following BEST describes the function of the skeletal system?",o:["Producing hormones","Providing structure, protection, and producing blood cells","Regulating body temperature","Coordinating muscle movements"],a:1,e:"The skeletal system provides structural support, protects internal organs, enables movement (with muscles), stores minerals (calcium), and produces blood cells in red bone marrow."},
+{s:"Homeostasis",q:"Which of the following BEST describes active transport?",o:["Movement of molecules from high to low concentration without energy","Movement of water across a semi-permeable membrane","Movement of molecules against a concentration gradient using energy (ATP)","Movement of large particles by engulfing them"],a:2,e:"Active transport moves molecules against their concentration gradient (low to high) and requires energy (ATP). Examples include the sodium-potassium pump in nerve cells."},
+{s:"Evolution",q:"The Hardy-Weinberg principle states that allele frequencies in a population remain constant when:",o:["Natural selection is occurring","The population is small","There is no mutation, migration, genetic drift, or natural selection","Individuals mate selectively"],a:2,e:"Hardy-Weinberg equilibrium requires: no mutation, random mating, no natural selection, no genetic drift (large population), and no gene flow. It describes a non-evolving population."},
+{s:"Ecology",q:"Which of the following human activities MOST directly contributes to the greenhouse effect?",o:["Planting trees","Burning fossil fuels","Recycling materials","Using solar energy"],a:1,e:"Burning fossil fuels releases CO₂ and other greenhouse gases into the atmosphere, trapping heat and contributing to global warming and climate change."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of translation?",o:["DNA is copied to make mRNA","mRNA is used to assemble a protein at a ribosome","DNA is replicated before cell division","RNA is converted back to DNA"],a:1,e:"Translation occurs at ribosomes where mRNA codons are read by tRNA anticodons, and amino acids are assembled in the correct sequence to form a protein."},
+{s:"Body Systems",q:"Which of the following is the CORRECT function of red blood cells?",o:["Fighting infection","Transporting oxygen via hemoglobin","Producing antibodies","Clotting blood"],a:1,e:"Red blood cells (erythrocytes) contain hemoglobin, an iron-containing protein that binds oxygen in the lungs and releases it to body tissues."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of ecological succession?",o:["The extinction of species over time","The gradual change in species composition of a community over time","The movement of animals between habitats","The cycling of nutrients through an ecosystem"],a:1,e:"Ecological succession is the process by which the structure of a biological community evolves over time, from pioneer species to a stable climax community."},
+{s:"Cells & Genetics",q:"A plant cell undergoing photosynthesis uses carbon dioxide and water to produce:",o:["Oxygen and ATP only","Glucose and oxygen","Carbon dioxide and water","Nitrogen and glucose"],a:1,e:"Photosynthesis: 6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ (glucose) + 6O₂. Plants produce glucose (stored energy) and release oxygen as a byproduct."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the nervous system?",o:["Transporting nutrients throughout the body","Rapidly detecting stimuli and coordinating responses","Producing hormones for long-term regulation","Filtering waste from the blood"],a:1,e:"The nervous system rapidly detects internal and external stimuli and coordinates responses through electrical signals (nerve impulses) transmitted by neurons."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of enzymes in biological systems?",o:["Providing energy for cellular reactions","Acting as biological catalysts that speed up chemical reactions","Storing genetic information","Transporting molecules across cell membranes"],a:1,e:"Enzymes are biological catalysts (proteins) that lower the activation energy of chemical reactions, speeding them up without being consumed in the process."},
+{s:"Evolution",q:"Which of the following BEST describes coevolution?",o:["Two species evolving independently in different environments","Two species evolving in response to each other over time","A single species adapting to a new environment","Random changes in allele frequencies"],a:1,e:"Coevolution occurs when two or more species reciprocally affect each other's evolution. Examples include predator-prey relationships and flowering plants with their pollinators."},
+{s:"Ecology",q:"Which of the following BEST describes the difference between a habitat and a niche?",o:["A habitat is where an organism lives; a niche is its role in the ecosystem","A niche is where an organism lives; a habitat is its role","Both terms mean the same thing","A habitat refers to aquatic environments; a niche refers to terrestrial environments"],a:0,e:"A habitat is the physical location where an organism lives. A niche is the organism's functional role in the ecosystem, including what it eats, when it's active, and how it interacts with other species."},
+{s:"Ecology",q:"Which of the following BEST describes the effect of eutrophication on aquatic ecosystems?",o:["Increased biodiversity due to nutrient enrichment","Decreased oxygen levels leading to fish kills","Improved water clarity","Increased populations of large fish"],a:1,e:"Eutrophication occurs when excess nutrients (nitrogen, phosphorus) cause algal blooms. When algae die and decompose, bacteria consume oxygen, creating hypoxic 'dead zones' that kill aquatic life."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the law of independent assortment?",o:["Alleles for the same gene always stay together","Genes on the same chromosome always assort together","Alleles for different genes are distributed to gametes independently","Dominant alleles always mask recessive alleles"],a:2,e:"Mendel's law of independent assortment states that alleles for different genes are distributed to gametes independently of one another (assuming genes are on different chromosomes)."}
+],
+
+// ─────────────────────────────────────────────────────────────
+// EXAM 3
+// ─────────────────────────────────────────────────────────────
+[
+{s:"Cells & Genetics",q:"Which of the following BEST describes the function of lysosomes?",o:["Synthesizing proteins","Producing energy through respiration","Digesting cellular waste and foreign materials","Packaging proteins for export"],a:2,e:"Lysosomes contain digestive enzymes that break down cellular waste, damaged organelles, and foreign materials (like bacteria). They are the cell's 'recycling centers.'"},
+{s:"Cells & Genetics",q:"In a dihybrid cross between two heterozygous parents (RrYy × RrYy), what is the expected phenotypic ratio?",o:["1:2:1","3:1","9:3:3:1","1:1:1:1"],a:2,e:"A dihybrid cross between two double heterozygotes (RrYy × RrYy) produces a 9:3:3:1 phenotypic ratio: 9 dominant-dominant : 3 dominant-recessive : 3 recessive-dominant : 1 recessive-recessive."},
+{s:"Cells & Genetics",q:"Which of the following CORRECTLY describes the central dogma of molecular biology?",o:["Protein → RNA → DNA","DNA → RNA → Protein","RNA → DNA → Protein","Protein → DNA → RNA"],a:1,e:"The central dogma describes the flow of genetic information: DNA is transcribed into RNA (mRNA), which is then translated into protein at ribosomes."},
+{s:"Cells & Genetics",q:"A cell in G1 phase of the cell cycle is PRIMARILY engaged in:",o:["DNA replication","Cell division","Growth and normal cellular functions","Chromosome condensation"],a:2,e:"G1 (Gap 1) is the first growth phase where the cell grows, carries out normal functions, and prepares for DNA replication. It occurs before the S phase (DNA synthesis)."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes epigenetics?",o:["Changes in DNA sequence due to mutation","Heritable changes in gene expression without changes to the DNA sequence","The study of genes in populations","The process of DNA replication"],a:1,e:"Epigenetics refers to heritable changes in gene expression that do not involve changes to the underlying DNA sequence. Examples include DNA methylation and histone modification."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the lymph nodes?",o:["Producing red blood cells","Filtering lymph and housing immune cells that fight infection","Regulating blood pressure","Producing digestive enzymes"],a:1,e:"Lymph nodes filter lymph fluid, trapping pathogens and foreign particles. They contain lymphocytes (B and T cells) that mount immune responses against infections."},
+{s:"Body Systems",q:"Which of the following CORRECTLY describes the function of the nephron?",o:["Producing bile for fat digestion","Filtering blood and producing urine","Exchanging gases in the lungs","Absorbing nutrients from food"],a:1,e:"The nephron is the functional unit of the kidney. It filters blood through the glomerulus, reabsorbs useful substances, and produces urine containing waste products."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the cerebellum?",o:["Regulating breathing and heart rate","Coordinating balance and fine motor movements","Processing visual information","Controlling conscious thought and decision-making"],a:1,e:"The cerebellum coordinates voluntary muscle movements, balance, and fine motor control. It receives input from sensory systems and adjusts motor activity for smooth, coordinated movement."},
+{s:"Body Systems",q:"Which of the following BEST describes the function of platelets?",o:["Transporting oxygen","Fighting bacterial infections","Initiating blood clotting to prevent blood loss","Producing antibodies"],a:2,e:"Platelets (thrombocytes) are cell fragments that aggregate at wound sites and initiate the clotting cascade, forming a plug to prevent excessive blood loss."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the hypothalamus in homeostasis?",o:["Filtering blood and producing urine","Acting as the body's thermostat and regulating many homeostatic functions","Producing digestive enzymes","Coordinating voluntary movements"],a:1,e:"The hypothalamus is the master regulator of homeostasis, controlling body temperature, hunger, thirst, sleep, and hormone release from the pituitary gland."},
+{s:"Homeostasis",q:"When blood CO₂ levels rise, the breathing rate increases. This is an example of:",o:["Positive feedback","Negative feedback","Active transport","Osmotic regulation"],a:1,e:"This is negative feedback: rising CO₂ (detected by chemoreceptors) triggers increased breathing to expel CO₂, returning levels to normal. The response opposes the initial change."},
+{s:"Homeostasis",q:"Which of the following BEST describes the process of thermoregulation in endotherms?",o:["Body temperature varies with the environment","Internal metabolic processes maintain a constant body temperature","Body temperature is regulated only by behavior","Thermoregulation only occurs in cold environments"],a:1,e:"Endotherms (birds and mammals) use internal metabolic heat production and physiological mechanisms (sweating, shivering, vasodilation/vasoconstriction) to maintain a constant body temperature."},
+{s:"Evolution",q:"Which of the following BEST describes the bottleneck effect?",o:["A large population gradually adapts to a new environment","A drastic reduction in population size due to a catastrophic event, reducing genetic diversity","The movement of individuals between populations","The gradual accumulation of mutations over time"],a:1,e:"The bottleneck effect is a type of genetic drift where a catastrophic event drastically reduces population size, causing a loss of genetic diversity in the surviving population."},
+{s:"Evolution",q:"Molecular evidence for evolution includes:",o:["Similar bone structures in vertebrates","Cytochrome c protein sequences being nearly identical across many species","The presence of vestigial structures","Biogeographic distribution of species"],a:1,e:"Molecular evidence (DNA and protein sequence comparisons) shows that closely related species share more similar sequences. Cytochrome c, a protein in cellular respiration, is nearly identical across many species."},
+{s:"Evolution",q:"Which of the following BEST describes sexual selection?",o:["Natural selection based on survival ability","Selection based on traits that increase mating success","Random changes in allele frequencies","Selection caused by environmental pressures"],a:1,e:"Sexual selection is a form of natural selection where traits that increase mating success are favored, even if they reduce survival (e.g., peacock tail feathers, deer antlers)."},
+{s:"Evolution",q:"The concept of 'survival of the fittest' in evolutionary biology refers to:",o:["The strongest individual surviving","The organism best adapted to its environment reproducing successfully","The fastest organism winning competition","The largest organism dominating its ecosystem"],a:1,e:"'Fitness' in evolutionary biology means reproductive success. The 'fittest' organism is the one best adapted to its environment and most successful at passing its genes to the next generation."},
+{s:"Ecology",q:"Which of the following BEST describes the difference between a food chain and a food web?",o:["A food chain shows all feeding relationships; a food web shows only one","A food web shows multiple interconnected feeding relationships; a food chain shows a single linear sequence","They are identical concepts","A food chain includes decomposers; a food web does not"],a:1,e:"A food chain shows a single linear sequence of energy transfer. A food web shows the complex, interconnected network of all feeding relationships in an ecosystem."},
+{s:"Ecology",q:"Which of the following BEST describes the role of nitrogen-fixing bacteria in the nitrogen cycle?",o:["Converting ammonia to nitrates","Converting atmospheric N₂ into ammonia usable by plants","Denitrifying nitrates back to N₂","Decomposing organic matter"],a:1,e:"Nitrogen-fixing bacteria (e.g., Rhizobium in root nodules, Azotobacter in soil) convert atmospheric nitrogen (N₂) into ammonia (NH₃), making nitrogen available to plants."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of biodiversity?",o:["The number of individuals in a population","The variety of species, genes, and ecosystems in a region","The total biomass of an ecosystem","The number of trophic levels in a food web"],a:1,e:"Biodiversity encompasses species diversity (number of species), genetic diversity (variation within species), and ecosystem diversity (variety of habitats and ecological processes)."},
+{s:"Ecology",q:"Which of the following is an example of interspecific competition?",o:["Two male deer fighting for a mate","Lions and hyenas competing for the same prey","Worker bees competing for the queen's attention","Siblings competing for parental resources"],a:1,e:"Interspecific competition occurs between individuals of different species competing for the same limited resources. Lions and hyenas competing for prey is an example."},
+{s:"Ecology",q:"The grassland biome is characterized by:",o:["Dense tree cover and high rainfall","Grasses as dominant vegetation, seasonal rainfall, and few trees","Permafrost and low temperatures","High biodiversity and year-round rainfall"],a:1,e:"Grasslands (savannas, prairies, steppes) are dominated by grasses with few trees, have seasonal rainfall (enough for grasses but not forests), and support large herbivore populations."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of an ecological niche?",o:["The physical location where an organism lives","The total role an organism plays in its ecosystem, including what it eats and how it interacts","The number of organisms in a population","The geographic range of a species"],a:1,e:"An ecological niche is the total functional role of an organism in its ecosystem: what it eats, when it's active, where it lives, how it reproduces, and how it interacts with other species."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of crossing over during meiosis?",o:["Homologous chromosomes exchange segments of DNA, increasing genetic variation","Sister chromatids separate during anaphase II","DNA is replicated before meiosis I","Chromosomes fail to separate properly"],a:0,e:"Crossing over (recombination) occurs during prophase I of meiosis when homologous chromosomes exchange corresponding segments of DNA, creating new combinations of alleles and increasing genetic diversity."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the pancreas in digestion?",o:["Producing bile to emulsify fats","Secreting digestive enzymes and bicarbonate into the small intestine","Absorbing nutrients into the bloodstream","Storing glycogen for energy"],a:1,e:"The pancreas secretes digestive enzymes (amylase, lipase, proteases) and bicarbonate into the small intestine. It also produces insulin and glucagon for blood sugar regulation."},
+{s:"Homeostasis",q:"Which of the following BEST describes the concept of a feedback loop in homeostasis?",o:["A one-way signal from the brain to body organs","A system where the output of a process influences its own input to maintain stability","A process that always amplifies changes","A mechanism that only responds to external stimuli"],a:1,e:"A feedback loop is a regulatory mechanism where the output (response) feeds back to influence the input (stimulus), either opposing it (negative feedback) or amplifying it (positive feedback)."},
+{s:"Evolution",q:"Which of the following BEST describes allopatric speciation?",o:["Speciation occurring within the same geographic area","Speciation occurring when populations are geographically separated","Speciation caused by sexual selection only","Speciation occurring due to polyploidy"],a:1,e:"Allopatric speciation occurs when a population is divided by a geographic barrier (mountain, river, ocean), preventing gene flow. The isolated populations diverge genetically until they can no longer interbreed."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of trophic cascade?",o:["The flow of energy from producers to consumers","The indirect effects that a predator has on lower trophic levels","The cycling of nutrients through an ecosystem","The process of ecological succession"],a:1,e:"A trophic cascade occurs when changes at one trophic level (usually the top predator) have indirect effects on lower trophic levels. Removing wolves from Yellowstone caused deer overpopulation and overgrazing."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of stem cells?",o:["Cells that have fully differentiated and cannot change","Undifferentiated cells capable of self-renewal and differentiating into specialized cell types","Cells that only produce antibodies","Cells found only in bone marrow"],a:1,e:"Stem cells are undifferentiated cells with the ability to self-renew and differentiate into various specialized cell types. They are crucial for development, growth, and tissue repair."},
+{s:"Body Systems",q:"Which of the following BEST describes the function of the diaphragm in breathing?",o:["Filtering air entering the lungs","Contracting to increase thoracic volume, causing inhalation","Producing mucus to trap particles","Exchanging gases between blood and air"],a:1,e:"The diaphragm is a dome-shaped muscle below the lungs. When it contracts, it flattens and increases thoracic volume, decreasing air pressure and causing air to rush in (inhalation)."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of biomagnification?",o:["The increase in population size over time","The accumulation of toxins at higher concentrations in organisms at higher trophic levels","The increase in biodiversity in a healthy ecosystem","The magnification of genetic mutations over generations"],a:1,e:"Biomagnification is the increasing concentration of toxins (like DDT, mercury) in organisms at successively higher trophic levels, as each organism accumulates toxins from all the organisms it consumes."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the difference between genotype and phenotype?",o:["Genotype is the physical appearance; phenotype is the genetic makeup","Genotype is the genetic makeup; phenotype is the observable physical characteristics","They are the same thing","Genotype refers to dominant alleles only; phenotype refers to recessive alleles"],a:1,e:"Genotype is an organism's genetic makeup (allele combinations). Phenotype is the observable physical characteristics resulting from the interaction of genotype and environment."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the spleen?",o:["Producing digestive enzymes","Filtering blood, removing old red blood cells, and housing immune cells","Regulating blood glucose levels","Producing bile for fat digestion"],a:1,e:"The spleen filters blood, removes old or damaged red blood cells, stores blood, and houses lymphocytes and macrophages that fight infection."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the skin in homeostasis?",o:["Producing hormones to regulate metabolism","Acting as a barrier, regulating temperature, and preventing water loss","Filtering waste from the blood","Producing red blood cells"],a:1,e:"The skin (integumentary system) maintains homeostasis by acting as a physical barrier against pathogens, regulating body temperature (sweating, blood vessel dilation), and preventing water loss."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of adaptive radiation?",o:["A single species going extinct due to environmental change","The rapid diversification of a single ancestral species into many new species filling different ecological niches","Two species evolving similar traits independently","The gradual change of a species over time"],a:1,e:"Adaptive radiation is the rapid diversification of a single ancestral species into many new species, each adapted to different ecological niches. Darwin's finches on the Galápagos Islands are a classic example."},
+{s:"Ecology",q:"Which of the following BEST describes the role of fire in certain ecosystems?",o:["Fire always destroys ecosystems permanently","Fire can be a natural disturbance that promotes biodiversity and nutrient cycling in some ecosystems","Fire only affects animal populations","Fire prevents all plant growth"],a:1,e:"In fire-adapted ecosystems (grasslands, chaparral, some forests), periodic fires clear dead vegetation, recycle nutrients, and create habitat diversity. Some plants (like lodgepole pines) require fire to release seeds."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of tRNA during translation?",o:["Carrying genetic information from the nucleus to the ribosome","Bringing specific amino acids to the ribosome and matching them to mRNA codons","Synthesizing the mRNA strand","Unwinding the DNA double helix"],a:1,e:"Transfer RNA (tRNA) carries specific amino acids to the ribosome. Each tRNA has an anticodon that base-pairs with the complementary mRNA codon, ensuring the correct amino acid is added to the growing protein chain."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the adrenal glands?",o:["Producing insulin and glucagon","Producing adrenaline (epinephrine) and cortisol in response to stress","Regulating calcium levels in the blood","Producing thyroid hormones"],a:1,e:"The adrenal glands (located above the kidneys) produce adrenaline (epinephrine) and norepinephrine (fight-or-flight response) and cortisol (stress hormone, anti-inflammatory)."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of limiting factors in population ecology?",o:["Factors that increase population growth indefinitely","Environmental factors that restrict population growth below its biotic potential","Factors that only affect predator populations","Genetic factors that determine maximum lifespan"],a:1,e:"Limiting factors (food, water, space, predation, disease) prevent populations from growing indefinitely. They keep populations at or below the carrying capacity of the environment."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of gene expression regulation?",o:["All genes are expressed at all times in all cells","Gene expression is regulated so that only appropriate genes are expressed in specific cells at specific times","Only dominant genes are expressed","Gene expression cannot be regulated"],a:1,e:"Gene expression is tightly regulated. Cells use transcription factors, promoters, enhancers, and epigenetic mechanisms to ensure that only appropriate genes are expressed in the right cells at the right time."}
+],
+
+// ─────────────────────────────────────────────────────────────
+// EXAM 4
+// ─────────────────────────────────────────────────────────────
+[
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of the smooth endoplasmic reticulum (SER)?",o:["Synthesizing proteins","Synthesizing lipids and detoxifying drugs","Packaging proteins for export","Producing ATP"],a:1,e:"The smooth ER lacks ribosomes and is involved in lipid synthesis, steroid hormone production, detoxification of drugs and poisons, and calcium ion storage."},
+{s:"Cells & Genetics",q:"A test cross is used to determine:",o:["The phenotype of an organism","Whether an organism showing a dominant phenotype is homozygous or heterozygous","The number of chromosomes in a cell","The rate of mutation in a population"],a:1,e:"A test cross involves crossing an organism with a dominant phenotype with a homozygous recessive organism. If any offspring show the recessive phenotype, the dominant parent is heterozygous."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes incomplete dominance?",o:["One allele completely masks the other","The heterozygous phenotype is intermediate between the two homozygous phenotypes","Both alleles are fully expressed simultaneously","The dominant allele is expressed only in males"],a:1,e:"Incomplete dominance produces a blended phenotype in heterozygotes. For example, crossing red (RR) and white (WW) snapdragons produces pink (RW) offspring."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of restriction enzymes in genetic engineering?",o:["Joining DNA fragments together","Cutting DNA at specific nucleotide sequences","Replicating DNA","Transcribing DNA into RNA"],a:1,e:"Restriction enzymes (restriction endonucleases) cut DNA at specific recognition sequences, producing fragments that can be used in cloning, genetic engineering, and DNA fingerprinting."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of polymerase chain reaction (PCR)?",o:["A technique to sequence DNA","A technique to amplify specific DNA sequences in vitro","A method to insert genes into bacteria","A process to separate DNA fragments by size"],a:1,e:"PCR (Polymerase Chain Reaction) amplifies specific DNA sequences exponentially using repeated cycles of denaturation, annealing (primers), and extension (DNA polymerase), producing millions of copies."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the sinoatrial (SA) node?",o:["Filtering blood in the kidneys","Acting as the heart's natural pacemaker, initiating electrical impulses","Producing red blood cells","Regulating blood pressure in arteries"],a:1,e:"The SA node (sinoatrial node) in the right atrium is the heart's natural pacemaker. It generates electrical impulses that spread through the heart, causing coordinated contractions."},
+{s:"Body Systems",q:"Which of the following BEST describes the difference between arteries and veins?",o:["Arteries carry deoxygenated blood; veins carry oxygenated blood","Arteries carry blood away from the heart; veins carry blood toward the heart","Arteries have valves; veins do not","Arteries are thinner than veins"],a:1,e:"Arteries carry blood away from the heart (usually oxygenated) and have thick, elastic walls. Veins carry blood toward the heart (usually deoxygenated) and have thinner walls with valves to prevent backflow."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the villus in the small intestine?",o:["Producing digestive enzymes","Increasing surface area for nutrient absorption","Producing mucus to protect the intestinal lining","Contracting to move food through the intestine"],a:1,e:"Villi (and microvilli) are finger-like projections that dramatically increase the surface area of the small intestine, maximizing the absorption of nutrients into the bloodstream."},
+{s:"Body Systems",q:"Which of the following BEST describes the function of B lymphocytes (B cells)?",o:["Directly killing infected cells","Producing antibodies that target specific antigens","Regulating body temperature","Producing red blood cells"],a:1,e:"B lymphocytes (B cells) are part of the adaptive immune system. When activated, they differentiate into plasma cells that produce antibodies specific to a particular antigen."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the renin-angiotensin-aldosterone system (RAAS)?",o:["Regulating blood glucose levels","Regulating blood pressure and fluid balance","Controlling body temperature","Regulating calcium levels"],a:1,e:"The RAAS is a hormonal system that regulates blood pressure and fluid balance. When blood pressure drops, the kidneys release renin, triggering a cascade that increases blood pressure and sodium/water retention."},
+{s:"Homeostasis",q:"Which of the following BEST describes the concept of acclimatization?",o:["Genetic adaptation over many generations","Short-term physiological adjustments to environmental changes within an individual's lifetime","Behavioral changes in response to predators","The process of natural selection"],a:1,e:"Acclimatization is a reversible physiological adjustment an individual makes in response to environmental changes (e.g., increased red blood cell production at high altitude) within its lifetime, not involving genetic change."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the parathyroid glands?",o:["Regulating metabolic rate","Regulating blood calcium levels","Producing adrenaline","Regulating blood glucose"],a:1,e:"The parathyroid glands produce parathyroid hormone (PTH), which raises blood calcium levels by stimulating bone resorption, increasing calcium absorption in the intestine, and reducing calcium excretion by the kidneys."},
+{s:"Evolution",q:"Which of the following BEST describes the founder effect?",o:["A large population colonizing a new area","A small group of individuals establishing a new population, with reduced genetic diversity","The extinction of a population due to disease","The gradual adaptation of a population to a new environment"],a:1,e:"The founder effect occurs when a small group of individuals establishes a new population. The new population has reduced genetic diversity and may have different allele frequencies than the original population."},
+{s:"Evolution",q:"Which of the following BEST describes sympatric speciation?",o:["Speciation occurring due to geographic isolation","Speciation occurring within the same geographic area without physical barriers","Speciation caused by the bottleneck effect","Speciation occurring only in plants"],a:1,e:"Sympatric speciation occurs when new species evolve from a single ancestral species while inhabiting the same geographic region. It can occur through polyploidy (common in plants) or ecological specialization."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of punctuated equilibrium?",o:["Evolution occurs at a constant, slow rate","Long periods of stability are interrupted by rapid bursts of evolutionary change","Evolution only occurs during mass extinctions","All species evolve at the same rate"],a:1,e:"Punctuated equilibrium (proposed by Gould and Eldredge) suggests that species remain relatively stable for long periods (stasis) punctuated by rapid evolutionary changes, often associated with environmental disruptions."},
+{s:"Evolution",q:"Which of the following BEST describes the role of mutations in evolution?",o:["Mutations are always harmful and reduce fitness","Mutations are the ultimate source of new genetic variation in populations","Mutations only occur in somatic cells","Mutations are directed by environmental needs"],a:1,e:"Mutations are random changes in DNA sequence that create new alleles, providing the raw material for evolution. Most mutations are neutral, some are harmful, and occasionally one is beneficial."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of an ecosystem service?",o:["Services provided by humans to maintain ecosystems","Benefits that humans receive from ecosystems, such as clean water, pollination, and climate regulation","The economic value of endangered species","Services provided by zoos and aquariums"],a:1,e:"Ecosystem services are the benefits humans receive from ecosystems, including provisioning services (food, water), regulating services (climate, flood control), cultural services (recreation), and supporting services (nutrient cycling)."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of r-selected vs. K-selected species?",o:["r-selected species have few offspring with high parental care; K-selected species have many offspring with little care","r-selected species have many offspring with little parental care; K-selected species have few offspring with high parental care","Both strategies produce the same number of offspring","r-selected species only live in aquatic environments"],a:1,e:"r-selected species (rabbits, insects) produce many offspring with little parental care, adapted for unstable environments. K-selected species (elephants, humans) produce few offspring with extensive parental care, adapted for stable environments near carrying capacity."},
+{s:"Ecology",q:"Which of the following BEST describes the marine biome?",o:["Freshwater ecosystems with low salinity","The largest biome, covering about 71% of Earth's surface, with high salinity","Coastal wetlands with brackish water","Deep underground aquatic systems"],a:1,e:"The marine biome is the largest biome on Earth, covering about 71% of the surface. It includes oceans, coral reefs, and estuaries, characterized by high salinity and diverse ecosystems."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of competitive exclusion?",o:["Two species can coexist indefinitely in the same niche","Two species competing for identical resources cannot coexist; one will outcompete the other","Competition always leads to the extinction of both species","Species avoid competition by living in different biomes"],a:1,e:"The competitive exclusion principle (Gause's law) states that two species competing for exactly the same resources cannot coexist indefinitely; the superior competitor will eventually exclude the other."},
+{s:"Ecology",q:"Which of the following BEST describes the role of mycorrhizal fungi in ecosystems?",o:["Decomposing dead organic matter only","Forming mutualistic associations with plant roots, enhancing nutrient and water uptake","Parasitizing plant roots and reducing plant growth","Producing toxins that kill competing plants"],a:1,e:"Mycorrhizal fungi form mutualistic symbioses with plant roots. The fungi extend the plant's root system, dramatically increasing water and nutrient (especially phosphorus) uptake, while receiving carbohydrates from the plant."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of gel electrophoresis?",o:["Amplifying DNA sequences","Separating DNA fragments by size using an electric field","Inserting genes into host organisms","Sequencing the order of nucleotides in DNA"],a:1,e:"Gel electrophoresis separates DNA (or protein) fragments by size. An electric current moves negatively charged DNA through a gel matrix; smaller fragments move faster and farther than larger ones."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the corpus callosum?",o:["Regulating breathing and heart rate","Connecting the two cerebral hemispheres and allowing communication between them","Controlling balance and coordination","Processing sensory information from the skin"],a:1,e:"The corpus callosum is a thick band of nerve fibers connecting the left and right cerebral hemispheres, allowing them to communicate and coordinate functions."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of antidiuretic hormone (ADH)?",o:["Increasing urine production","Causing the kidneys to reabsorb more water, reducing urine output","Regulating blood glucose levels","Stimulating the immune system"],a:1,e:"ADH (vasopressin) is released by the posterior pituitary when blood osmolarity rises. It causes the kidneys to reabsorb more water, producing concentrated urine and maintaining blood water balance."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of gene flow?",o:["The movement of genes within a single organism","The transfer of alleles between populations through migration","Random changes in allele frequencies","The expression of genes in different tissues"],a:1,e:"Gene flow (migration) is the transfer of alleles from one population to another through the movement of individuals or gametes. It can introduce new alleles and reduce genetic differences between populations."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of an umbrella species?",o:["A species that provides shade for other organisms","A species whose conservation protects many other species sharing its habitat","A species at the top of the food chain","A species that is found in every ecosystem"],a:1,e:"An umbrella species is one whose conservation automatically protects many other species sharing its habitat. Protecting large-ranging species like grizzly bears or tigers preserves vast ecosystems."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of telomeres?",o:["Initiating DNA replication","Protecting the ends of chromosomes from degradation and fusion","Coding for essential proteins","Regulating gene expression"],a:1,e:"Telomeres are repetitive DNA sequences at the ends of chromosomes that protect them from degradation, fusion with other chromosomes, and loss of genetic information during replication."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the gallbladder?",o:["Producing bile","Storing and concentrating bile produced by the liver","Producing digestive enzymes","Absorbing fats from the small intestine"],a:1,e:"The gallbladder stores and concentrates bile produced by the liver. When fatty food enters the small intestine, the gallbladder releases bile to emulsify fats, aiding digestion."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of island biogeography?",o:["The study of species found only on islands","The theory that species richness on islands is determined by immigration and extinction rates, influenced by island size and distance from mainland","The study of how islands form","The distribution of marine species around islands"],a:1,e:"Island biogeography theory (MacArthur & Wilson) predicts that species richness on islands is determined by the balance between immigration (higher for larger, closer islands) and extinction (lower for larger islands)."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the concept of codominance?",o:["One allele partially masks the other","Both alleles are fully and simultaneously expressed in the heterozygote","The heterozygote shows an intermediate phenotype","Only one allele is expressed at a time"],a:1,e:"Codominance occurs when both alleles are fully expressed simultaneously in the heterozygote. AB blood type is an example: both A and B antigens are expressed on red blood cells."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the thymus gland?",o:["Producing thyroid hormones","Maturing T lymphocytes (T cells) for immune function","Producing red blood cells","Regulating blood calcium levels"],a:1,e:"The thymus is a lymphoid organ where T lymphocytes mature and become immunocompetent. It is most active during childhood and gradually shrinks with age."},
+{s:"Homeostasis",q:"Which of the following BEST describes the concept of allostasis?",o:["Maintaining a fixed set point for all physiological variables","Achieving stability through change, adjusting set points based on anticipated demands","A type of negative feedback loop","The process of acclimatization to cold temperatures"],a:1,e:"Allostasis refers to achieving stability through change. Unlike homeostasis (fixed set points), allostasis involves adjusting physiological parameters in anticipation of demands (e.g., increased heart rate before exercise)."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of kin selection?",o:["Selecting mates based on genetic similarity","Altruistic behavior that benefits relatives, increasing inclusive fitness","Competition between siblings for resources","The selection of traits that benefit the entire species"],a:1,e:"Kin selection is an evolutionary strategy where organisms favor the reproductive success of their relatives, even at a cost to themselves. Hamilton's rule: altruism evolves when rB > C (r=relatedness, B=benefit, C=cost)."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of ecological stoichiometry?",o:["The study of chemical reactions in ecosystems","The study of the balance of chemical elements in ecological interactions","The measurement of ecosystem productivity","The study of nutrient cycling in aquatic systems"],a:1,e:"Ecological stoichiometry examines how the balance of chemical elements (C, N, P) affects ecological interactions, from individual organisms to ecosystems, influencing growth, reproduction, and food web dynamics."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of the nucleolus?",o:["Storing genetic information","Producing ribosomal RNA (rRNA) and assembling ribosome subunits","Regulating cell division","Synthesizing proteins"],a:1,e:"The nucleolus is a dense region within the nucleus where ribosomal RNA (rRNA) is transcribed and ribosome subunits are assembled before being exported to the cytoplasm."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the autonomic nervous system?",o:["Controlling voluntary muscle movements","Regulating involuntary functions like heart rate, digestion, and breathing","Processing sensory information from the environment","Coordinating balance and fine motor control"],a:1,e:"The autonomic nervous system (ANS) regulates involuntary body functions. The sympathetic division activates the 'fight-or-flight' response; the parasympathetic division promotes 'rest-and-digest' functions."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the intermediate disturbance hypothesis?",o:["Ecosystems with no disturbance have the highest biodiversity","Ecosystems with intermediate levels of disturbance have the highest biodiversity","High levels of disturbance always increase biodiversity","Disturbance always decreases biodiversity"],a:1,e:"The intermediate disturbance hypothesis proposes that biodiversity is highest at intermediate levels of disturbance. Too little disturbance allows competitive exclusion; too much disturbance prevents species establishment."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of RNA interference (RNAi)?",o:["The process of transcribing DNA into RNA","A mechanism where small RNA molecules silence gene expression by degrading mRNA","The process of translating mRNA into protein","A method of DNA repair"],a:1,e:"RNA interference (RNAi) is a gene silencing mechanism where small RNA molecules (siRNA, miRNA) bind to complementary mRNA sequences, targeting them for degradation or blocking translation."}
+],
+
+// ─────────────────────────────────────────────────────────────
+// EXAM 5
+// ─────────────────────────────────────────────────────────────
+[
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of the vacuole in plant cells?",o:["Producing energy through photosynthesis","Storing water, nutrients, and waste products, and maintaining turgor pressure","Synthesizing proteins","Packaging and shipping proteins"],a:1,e:"The large central vacuole in plant cells stores water (maintaining turgor pressure for structural support), nutrients, pigments, and waste products. It can occupy up to 90% of the cell's volume."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the concept of pleiotropy?",o:["One gene controlling one trait","One gene affecting multiple phenotypic traits","Multiple genes controlling one trait","The interaction between two alleles of the same gene"],a:1,e:"Pleiotropy occurs when a single gene influences multiple phenotypic traits. Sickle cell disease is an example: the single mutation affects red blood cell shape, oxygen transport, and causes multiple organ complications."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the process of DNA repair?",o:["The process of DNA replication","Cellular mechanisms that detect and correct errors in DNA sequence","The process of gene expression","The degradation of damaged DNA"],a:1,e:"DNA repair mechanisms (base excision repair, nucleotide excision repair, mismatch repair) detect and correct errors in DNA sequence, preventing mutations from being passed to daughter cells."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of proto-oncogenes?",o:["Genes that suppress tumor formation","Normal genes that regulate cell growth and division, which can become oncogenes when mutated","Genes that cause apoptosis","Genes that repair DNA damage"],a:1,e:"Proto-oncogenes are normal genes that regulate cell growth and division. When mutated or overexpressed, they become oncogenes that drive uncontrolled cell proliferation, potentially leading to cancer."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the concept of polygenic inheritance?",o:["One gene controlling multiple traits","Multiple genes each contributing to a single trait, producing a continuous range of phenotypes","The inheritance of traits on sex chromosomes","The inheritance of traits through mitochondrial DNA"],a:1,e:"Polygenic inheritance involves multiple genes (each with multiple alleles) contributing to a single trait, producing a continuous range of phenotypes. Height, skin color, and intelligence are polygenic traits."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the hypothalamic-pituitary axis?",o:["Regulating digestion and nutrient absorption","The master regulatory system controlling many endocrine glands through releasing and inhibiting hormones","Regulating blood pressure through the kidneys","Controlling voluntary muscle movements"],a:1,e:"The hypothalamic-pituitary axis is the master regulatory system of the endocrine system. The hypothalamus releases hormones that stimulate or inhibit the pituitary gland, which in turn regulates other endocrine glands."},
+{s:"Body Systems",q:"Which of the following BEST describes the process of synaptic transmission?",o:["The movement of ions through gap junctions","The release of neurotransmitters from the presynaptic neuron, diffusion across the synapse, and binding to receptors on the postsynaptic neuron","The direct electrical connection between neurons","The reuptake of neurotransmitters by the postsynaptic neuron"],a:1,e:"Synaptic transmission: an action potential reaches the axon terminal → neurotransmitters are released into the synaptic cleft → they diffuse across and bind to receptors on the postsynaptic membrane → the signal is transmitted."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the complement system in immunity?",o:["Producing antibodies against specific antigens","A group of proteins that enhance the ability of antibodies and phagocytes to clear pathogens","Regulating the inflammatory response only","Producing T cells in the thymus"],a:1,e:"The complement system is a group of proteins that enhance (complement) the immune response by marking pathogens for destruction (opsonization), directly lysing pathogens, and promoting inflammation."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the glomerulus in the kidney?",o:["Reabsorbing glucose and amino acids","Filtering blood under pressure to produce filtrate","Concentrating urine by removing water","Secreting waste products into the tubule"],a:1,e:"The glomerulus is a capillary network in the nephron where blood is filtered under high pressure. Small molecules (water, glucose, ions, urea) pass into the Bowman's capsule as filtrate; large proteins and cells remain in the blood."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the baroreceptors in blood pressure regulation?",o:["Detecting changes in blood glucose levels","Detecting changes in blood pressure and triggering responses to maintain normal pressure","Regulating body temperature","Detecting changes in blood oxygen levels"],a:1,e:"Baroreceptors are stretch receptors in the walls of major blood vessels (aorta, carotid arteries) that detect changes in blood pressure and send signals to the brain to adjust heart rate and vessel diameter."},
+{s:"Homeostasis",q:"Which of the following BEST describes the concept of countercurrent exchange in the kidney?",o:["The exchange of gases in the lungs","A mechanism in the loop of Henle that creates an osmotic gradient to concentrate urine","The exchange of nutrients between blood and tissues","The regulation of blood pH by the lungs and kidneys"],a:1,e:"Countercurrent exchange in the loop of Henle creates an osmotic gradient in the kidney medulla. The descending limb loses water; the ascending limb pumps out ions, creating a gradient that allows the collecting duct to concentrate urine."},
+{s:"Homeostasis",q:"Which of the following BEST describes the role of the blood-brain barrier?",o:["Filtering blood in the brain","A selective barrier formed by tight junctions in brain capillaries that protects the brain from harmful substances","Regulating blood flow to the brain","Producing cerebrospinal fluid"],a:1,e:"The blood-brain barrier (BBB) is formed by tight junctions between endothelial cells of brain capillaries. It selectively allows essential nutrients to pass while blocking most pathogens, toxins, and many drugs."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of sexual dimorphism?",o:["The existence of two sexes in a species","Differences in morphology between males and females of the same species, often driven by sexual selection","The ability of some organisms to change sex","The genetic differences between males and females"],a:1,e:"Sexual dimorphism refers to differences in size, color, or morphology between males and females of the same species. It is often driven by sexual selection (e.g., peacock feathers, lion manes, deer antlers)."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of neutral evolution?",o:["Evolution driven by natural selection","Changes in allele frequencies due to random genetic drift, not natural selection","Evolution that has no effect on the organism","The evolution of traits that are neither beneficial nor harmful"],a:1,e:"Neutral evolution (neutral theory, proposed by Kimura) suggests that most genetic variation at the molecular level is selectively neutral and changes in allele frequencies are due to genetic drift rather than natural selection."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of exaptation?",o:["The evolution of a new trait from scratch","A trait that evolved for one function being co-opted for a different function","The loss of a trait over evolutionary time","The parallel evolution of similar traits in different lineages"],a:1,e:"Exaptation (pre-adaptation) occurs when a trait that evolved for one function is co-opted for a different function. Bird feathers may have evolved for thermoregulation before being co-opted for flight."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of macroevolution?",o:["Small-scale changes within a population over a few generations","Large-scale evolutionary changes above the species level, including speciation and extinction","The evolution of antibiotic resistance in bacteria","Changes in allele frequencies within a population"],a:1,e:"Macroevolution refers to large-scale evolutionary changes above the species level, including the origin of new species (speciation), extinction, and the evolution of major new body plans over geological time."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the ecological footprint?",o:["The physical area occupied by an organism","A measure of human demand on Earth's ecosystems, expressed as the area of land and water needed to sustain a population","The impact of invasive species on native ecosystems","The carbon emissions of a single individual"],a:1,e:"The ecological footprint measures the amount of biologically productive land and water area required to produce the resources consumed and absorb the waste generated by a population or individual."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the phosphorus cycle?",o:["The cycling of phosphorus through the atmosphere, soil, water, and living organisms","The cycling of phosphorus only through aquatic ecosystems","The conversion of phosphorus gas to usable forms by bacteria","The movement of phosphorus through the food web only"],a:0,e:"The phosphorus cycle moves phosphorus through rocks (weathering), soil, water, and living organisms. Unlike carbon and nitrogen, phosphorus has no significant atmospheric component; it cycles primarily through soil and water."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the edge effect in ecology?",o:["The decline of species at the edges of their geographic range","The increased biodiversity and unique species assemblages found at the boundaries between two different ecosystems","The negative effects of habitat fragmentation on interior species","The effect of ocean currents on coastal ecosystems"],a:1,e:"The edge effect refers to the increased biodiversity and unique ecological conditions found at the ecotone (boundary) between two different ecosystems. Edge habitats support species from both adjacent ecosystems plus edge specialists."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of biological control?",o:["Using chemicals to control pest populations","Using natural predators, parasites, or pathogens to control pest populations","Genetically modifying crops to resist pests","Physically removing pests from an ecosystem"],a:1,e:"Biological control uses natural enemies (predators, parasites, pathogens) to control pest populations. It is an environmentally friendly alternative to chemical pesticides, though it requires careful management to avoid unintended consequences."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the Gaia hypothesis?",o:["The idea that Earth was created by a single event","The hypothesis that Earth's biosphere, atmosphere, and geosphere interact as a self-regulating system","The theory that life originated from space","The concept that all ecosystems are interconnected through food webs"],a:1,e:"The Gaia hypothesis (James Lovelock) proposes that Earth's biosphere, atmosphere, hydrosphere, and geosphere interact as a complex, self-regulating system that maintains conditions suitable for life."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of tumor suppressor genes?",o:["Promoting cell division and growth","Inhibiting cell division and preventing tumor formation; mutations can lead to cancer","Repairing DNA damage only","Producing growth factors"],a:1,e:"Tumor suppressor genes (e.g., p53, BRCA1) normally inhibit cell division and promote apoptosis. When both copies are mutated (loss of function), cells can divide uncontrollably, leading to cancer."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the renin enzyme in blood pressure regulation?",o:["Directly constricting blood vessels","Initiating the RAAS cascade by converting angiotensinogen to angiotensin I","Directly increasing heart rate","Stimulating aldosterone production directly"],a:1,e:"Renin is released by the kidneys when blood pressure drops. It converts angiotensinogen (from the liver) to angiotensin I, which is then converted to angiotensin II, causing vasoconstriction and aldosterone release."},
+{s:"Homeostasis",q:"Which of the following BEST describes the concept of pH homeostasis in the blood?",o:["Blood pH is not regulated and varies widely","Blood pH is maintained between 7.35-7.45 by buffer systems, the lungs, and kidneys","Blood pH is regulated only by the kidneys","Blood pH is maintained at exactly 7.0"],a:1,e:"Blood pH is tightly regulated between 7.35-7.45 by three systems: chemical buffers (bicarbonate, phosphate, proteins), the respiratory system (CO₂ elimination), and the kidneys (H⁺ and HCO₃⁻ regulation)."},
+{s:"Evolution",q:"Which of the following BEST describes the concept of inclusive fitness?",o:["The total number of offspring an individual produces","An individual's direct reproductive success plus the indirect reproductive success gained through helping relatives","The fitness of an entire population","The fitness advantage gained through cooperation with non-relatives"],a:1,e:"Inclusive fitness (Hamilton) is the total effect an individual has on propagating its genes, including its own reproduction (direct fitness) plus the reproduction of relatives (indirect fitness), weighted by the degree of relatedness."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the trophic efficiency?",o:["The efficiency of photosynthesis in converting sunlight to chemical energy","The percentage of energy transferred from one trophic level to the next (typically ~10%)","The efficiency of decomposers in breaking down organic matter","The ratio of producers to consumers in an ecosystem"],a:1,e:"Trophic efficiency is the percentage of energy transferred from one trophic level to the next. Typically about 10% of energy is transferred; the rest is lost as heat through metabolic processes (respiration, movement)."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the concept of genomic imprinting?",o:["The process of DNA replication","A form of epigenetic regulation where gene expression depends on which parent the allele was inherited from","The process of gene mutation","The regulation of gene expression by transcription factors"],a:1,e:"Genomic imprinting is an epigenetic phenomenon where the expression of a gene depends on whether it was inherited from the mother or father. The imprinted allele is silenced through methylation."},
+{s:"Body Systems",q:"Which of the following BEST describes the role of the myelin sheath in nerve conduction?",o:["Producing neurotransmitters","Insulating the axon and increasing the speed of nerve impulse conduction","Connecting neurons at synapses","Producing the action potential"],a:1,e:"The myelin sheath is a fatty insulating layer around axons produced by Schwann cells (PNS) or oligodendrocytes (CNS). It enables saltatory conduction (jumping between nodes of Ranvier), dramatically increasing signal speed."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the paradox of the plankton?",o:["The observation that plankton are found in all oceans","The observation that many phytoplankton species coexist in the same water column despite competing for the same limited resources","The paradox that plankton are both producers and consumers","The observation that plankton populations fluctuate seasonally"],a:1,e:"The paradox of the plankton (Hutchinson) notes that many phytoplankton species coexist in the same water column competing for the same resources (light, nutrients), seemingly violating the competitive exclusion principle. Explanations include environmental fluctuations and predation."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the role of CRISPR-Cas9 in genetic engineering?",o:["A method to sequence entire genomes","A precise gene-editing tool that uses guide RNA to direct the Cas9 enzyme to cut specific DNA sequences","A technique to amplify DNA sequences","A method to insert genes into bacteria using plasmids"],a:1,e:"CRISPR-Cas9 is a revolutionary gene-editing technology. Guide RNA directs the Cas9 endonuclease to a specific DNA sequence, where it makes a precise cut. The cell's repair mechanisms can then be used to disable or modify the gene."},
+{s:"Body Systems",q:"Which of the following BEST describes the concept of immunological memory?",o:["The brain's ability to remember past infections","The ability of the immune system to respond more rapidly and strongly to a pathogen it has encountered before","The storage of antibodies in lymph nodes","The ability of T cells to recognize self from non-self"],a:1,e:"Immunological memory is the ability of the adaptive immune system to mount a faster, stronger response upon re-exposure to a previously encountered antigen. Memory B and T cells persist long-term after the initial infection or vaccination."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the metabolic theory of ecology?",o:["The study of energy metabolism in individual organisms","A theory linking metabolic rate to body size and temperature, predicting ecological patterns from individual to ecosystem levels","The study of how ecosystems process energy","The theory that all ecosystems have the same metabolic rate"],a:1,e:"The metabolic theory of ecology (Brown et al.) proposes that metabolic rate (scaling with body size and temperature) is the fundamental biological rate that governs ecological processes from individual organisms to entire ecosystems."},
+{s:"Cells & Genetics",q:"Which of the following BEST describes the concept of horizontal gene transfer?",o:["The transfer of genes from parent to offspring","The transfer of genetic material between organisms of the same or different species without reproduction","The movement of genes between chromosomes during meiosis","The transfer of genes between organelles within a cell"],a:1,e:"Horizontal gene transfer (HGT) is the transfer of genetic material between organisms outside of parent-to-offspring inheritance. It is common in bacteria (via conjugation, transformation, transduction) and has played a major role in prokaryotic evolution."},
+{s:"Ecology",q:"Which of the following BEST describes the concept of the Allee effect?",o:["The increase in population growth rate as population size increases","A decrease in individual fitness at low population densities, potentially leading to extinction","The effect of predators on prey population dynamics","The increase in competition as population density increases"],a:1,e:"The Allee effect describes a positive correlation between population size/density and individual fitness at low population sizes. Below a critical threshold, populations may decline to extinction due to difficulty finding mates, reduced cooperative defense, or inbreeding."}
+]
+
+]; // end EXAMS
+
+// ═══════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════
+let currentExam = null;
+let currentQ = 0;
+let answers = [];
+let timerInterval = null;
+let secondsLeft = 3600;
+let submitted = false;
+
+// ═══════════════════════════════════════════════════════════════
+//  TIMER
+// ═══════════════════════════════════════════════════════════════
+function startTimer() {
+  clearInterval(timerInterval);
+  secondsLeft = 3600;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    updateTimerDisplay();
+    if (secondsLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timer');
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer';
+  if (secondsLeft <= 300) el.classList.add('danger');
+  else if (secondsLeft <= 600) el.classList.add('warn');
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  START EXAM
+// ═══════════════════════════════════════════════════════════════
+function startExam(idx) {
+  currentExam = idx;
+  currentQ = 0;
+  answers = new Array(40).fill(null);
+  submitted = false;
+  document.getElementById('selector').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('exam-area').style.display = 'block';
+  document.getElementById('exam-title').textContent = `Practice Exam ${idx + 1}`;
+  startTimer();
+  renderQuestion();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  RENDER QUESTION
+// ═══════════════════════════════════════════════════════════════
+function renderQuestion() {
+  const q = EXAMS[currentExam][currentQ];
+  const total = EXAMS[currentExam].length;
+  const answered = answers.filter(a => a !== null).length;
+
+  // progress
+  document.getElementById('prog-bar').style.width = `${((currentQ + 1) / total) * 100}%`;
+  document.getElementById('prog-text').textContent = `Question ${currentQ + 1} of ${total}`;
+  document.getElementById('answered-count').textContent = `${answered} answered`;
+
+  // nav buttons
+  document.getElementById('prev-btn').disabled = currentQ === 0;
+  document.getElementById('next-btn').style.display = currentQ < total - 1 ? 'inline-block' : 'none';
+  document.getElementById('submit-btn').style.display = currentQ === total - 1 ? 'inline-block' : 'none';
+
+  const letters = ['A','B','C','D'];
+  const sel = answers[currentQ];
+
+  let optsHTML = q.o.map((opt, i) => {
+    let cls = 'opt';
+    if (submitted) {
+      if (i === q.a) cls += ' correct';
+      else if (i === sel && i !== q.a) cls += ' incorrect';
+    } else {
+      if (i === sel) cls += ' selected';
+    }
+    return `<div class="${cls}" onclick="${submitted ? '' : `selectAnswer(${i})`}">
+      <span class="opt-letter">${letters[i]}</span>
+      <span>${opt}</span>
+    </div>`;
+  }).join('');
+
+  const expHTML = submitted
+    ? `<div class="explanation show">💡 <strong>Explanation:</strong> ${q.e}</div>`
+    : '';
+
+  document.getElementById('q-container').innerHTML = `
+    <div class="q-card">
+      <div class="section-tag">${q.s}</div>
+      <div class="q-num">Question ${currentQ + 1} of ${total}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${optsHTML}</div>
+      ${expHTML}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SELECT ANSWER
+// ═══════════════════════════════════════════════════════════════
+function selectAnswer(idx) {
+  if (submitted) return;
+  answers[currentQ] = idx;
+  renderQuestion();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  NAVIGATE
+// ═══════════════════════════════════════════════════════════════
+function navigate(dir) {
+  currentQ = Math.max(0, Math.min(EXAMS[currentExam].length - 1, currentQ + dir));
+  renderQuestion();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SUBMIT
+// ═══════════════════════════════════════════════════════════════
+function submitExam() {
+  const unanswered = answers.filter(a => a === null).length;
+  if (unanswered > 0 && !submitted) {
+    if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
+  }
+  clearInterval(timerInterval);
+  submitted = true;
+  showResults();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  RESULTS
+// ═══════════════════════════════════════════════════════════════
+function showResults() {
+  const qs = EXAMS[currentExam];
+  let correct = 0;
+  const sectionMap = {};
+
+  qs.forEach((q, i) => {
+    const isCorrect = answers[i] === q.a;
+    if (isCorrect) correct++;
+    if (!sectionMap[q.s]) sectionMap[q.s] = { correct: 0, total: 0 };
+    sectionMap[q.s].total++;
+    if (isCorrect) sectionMap[q.s].correct++;
+  });
+
+  const pct = Math.round((correct / qs.length) * 100);
+  const pass = pct >= 70;
+
+  document.getElementById('exam-area').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  document.getElementById('res-score').textContent = `${correct} / ${qs.length}`;
+  document.getElementById('res-pct').textContent = `${pct}%`;
+  document.getElementById('res-pct').className = `score-pct ${pass ? 'pass' : 'fail'}`;
+  document.getElementById('res-pass').textContent = pass
+    ? '✅ Great work! You are on track to pass the GACE Life Science Testlet.'
+    : '📚 Keep studying! Aim for 70%+ before your exam.';
+
+  // breakdown by section
+  let bdHTML = '';
+  for (const [sec, data] of Object.entries(sectionMap)) {
+    const sp = Math.round((data.correct / data.total) * 100);
+    bdHTML += `<div class="breakdown-card">
+      <div class="val">${data.correct}/${data.total}</div>
+      <div class="lbl">${sec}</div>
+      <div style="font-size:.8rem;color:${sp>=70?'var(--accent)':'var(--danger)'};margin-top:4px">${sp}%</div>
+    </div>`;
+  }
+  document.getElementById('breakdown').innerHTML = bdHTML;
+
+  // review
+  const letters = ['A','B','C','D'];
+  let revHTML = '';
+  qs.forEach((q, i) => {
+    const isCorrect = answers[i] === q.a;
+    const userAns = answers[i] !== null ? letters[answers[i]] : 'No answer';
+    revHTML += `<div class="review-item ${isCorrect ? 'right' : 'wrong'}">
+      <div class="review-q"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div class="review-ans">
+        Your answer: <span class="${isCorrect ? 'c' : 'w'}">${userAns}${answers[i] !== null ? '. ' + q.o[answers[i]] : ''}</span>
+        ${!isCorrect ? `<br>Correct answer: <span class="c">${letters[q.a]}. ${q.o[q.a]}</span>` : ''}
+        <br><em style="color:var(--muted);font-size:.85rem">${q.e}</em>
+      </div>
+    </div>`;
+  });
+  document.getElementById('review-list').innerHTML = revHTML;
+  window.scrollTo(0, 0);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  GO HOME
+// ═══════════════════════════════════════════════════════════════
+function goHome() {
+  clearInterval(timerInterval);
+  submitted = false;
+  document.getElementById('exam-area').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('selector').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
