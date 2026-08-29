@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physical Science — Practice Exam 3 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#5389B0;
+    --moss-dim:#9EC1D9;
+    --rust:#2F6690;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#1B415C;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Middle Grades Science · 014 / 705 · Exam 3 of 5</p>
+    <h1>Physical Science — Practice Exam 3</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Physical Science subarea (Objective 1: Matter and Energy; Objective 2: Chemistry). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--rust);">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="3"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>1.A</span><span>1.B</span><span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "1.A", "text": "The process by which a liquid changes into a gas is called:", "options": ["Condensation", "Vaporization (evaporation/boiling)", "Sublimation", "Deposition"], "correct": 1}, {"tag": "1.A", "text": "Burning paper is an example of a:", "options": ["Physical change", "Chemical change", "Phase change only", "Nuclear change"], "correct": 1}, {"tag": "1.A", "text": "The number of protons in an atom's nucleus is called its:", "options": ["Mass number", "Atomic number", "Atomic mass", "Isotope number"], "correct": 1}, {"tag": "1.A", "text": "Elements in the periodic table are organized into vertical columns called:", "options": ["Periods", "Groups (families)", "Series only", "Rows"], "correct": 1}, {"tag": "1.B", "text": "An object's inertia is directly related to its:", "options": ["Velocity", "Mass", "Acceleration", "Weight only"], "correct": 1}, {"tag": "1.B", "text": "If a 5 kg object experiences a net force of 20 N, its acceleration is:", "options": ["4 m/s²", "25 m/s²", "100 m/s²", "0.25 m/s²"], "correct": 0}, {"tag": "1.B", "text": "A rocket expelling exhaust gases downward and accelerating upward demonstrates:", "options": ["Newton's First Law", "Newton's Second Law", "Newton's Third Law", "Conservation of mass"], "correct": 2}, {"tag": "1.B", "text": "The law of conservation of momentum applies to a system with:", "options": ["No external forces", "Only internal friction", "Constant external force", "Increasing mass"], "correct": 0}, {"tag": "1.B", "text": "Potential energy due to an object's height is called:", "options": ["Kinetic energy", "Gravitational potential energy", "Elastic potential energy", "Thermal energy"], "correct": 1}, {"tag": "1.B", "text": "The efficiency of a machine is always less than 100% due to:", "options": ["Excess input energy", "Energy losses to friction and heat", "Perfect energy transfer", "Increased mechanical advantage"], "correct": 1}, {"tag": "1.B", "text": "An object in orbit experiences continuous free fall but does not crash into the planet because of its:", "options": ["Zero velocity", "Forward (tangential) velocity", "Lack of mass", "Magnetic repulsion"], "correct": 1}, {"tag": "1.B", "text": "Specific heat capacity describes how much heat is needed to:", "options": ["Melt a substance completely", "Raise a unit mass of a substance by one degree", "Freeze a substance", "Vaporize a substance completely"], "correct": 1}, {"tag": "1.B", "text": "A material with low electrical resistance is called a good:", "options": ["Insulator", "Conductor", "Semiconductor only", "Capacitor"], "correct": 1}, {"tag": "1.B", "text": "The number of wave cycles passing a point per second is the wave's:", "options": ["Wavelength", "Frequency", "Amplitude", "Period"], "correct": 1}, {"tag": "2.A", "text": "A single covalent bond involves the sharing of how many electrons?", "options": ["One", "Two", "Four", "Zero"], "correct": 1}, {"tag": "2.A", "text": "Which of the following elements would most likely form an ionic bond with sodium (Na)?", "options": ["Chlorine (Cl)", "Oxygen only in covalent form", "Another sodium atom", "Neon"], "correct": 0}, {"tag": "2.A", "text": "The overall charge of an ionic compound is:", "options": ["Always negative", "Always positive", "Neutral (zero)", "Undefined"], "correct": 2}, {"tag": "2.B", "text": "Elements in the same group of the periodic table share similar chemical properties because they have the same number of:", "options": ["Protons", "Valence electrons", "Neutrons", "Total electrons"], "correct": 1}, {"tag": "2.B", "text": "The noble gases (Group 18) are generally unreactive because they have:", "options": ["No electrons", "A full outer electron shell", "Only one valence electron", "An unstable nucleus"], "correct": 1}, {"tag": "2.C", "text": "The coefficients in a balanced chemical equation represent the:", "options": ["Mass of each substance", "Mole ratio of reactants and products", "Volume in liters only", "Number of atoms in each element only"], "correct": 1}, {"tag": "2.C", "text": "An endothermic reaction:", "options": ["Releases heat to the surroundings", "Absorbs heat from the surroundings", "Has no temperature change", "Cannot occur naturally"], "correct": 1}, {"tag": "2.C", "text": "Increasing the concentration of reactants generally _______ the rate of a chemical reaction.", "options": ["Decreases", "Increases", "Has no effect on", "Reverses"], "correct": 1}, {"tag": "2.D", "text": "According to the Brønsted-Lowry definition, a base is a substance that:", "options": ["Donates a proton", "Accepts a proton", "Donates an electron", "Accepts a neutron"], "correct": 1}, {"tag": "2.D", "text": "The pH scale typically ranges from 0 to 14, with 7 representing:", "options": ["Strongly acidic", "Neutral", "Strongly basic", "Undefined"], "correct": 1}, {"tag": "2.D", "text": "A buffer solution helps to:", "options": ["Rapidly change pH", "Resist changes in pH", "Always increase pH", "Always decrease pH"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

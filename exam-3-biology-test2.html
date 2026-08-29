@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology Test II (027) — Practice Exam 3 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#4C97B5;
+    --moss-dim:#A8D1E0;
+    --rust:#206A87;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#113B4C;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Biology · Test II (027) · Exam 3 of 5</p>
+    <h1>Biology Test II (027) — Practice Exam 3</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering GACE Biology Test II (027): Scientific Inquiry, Processes, Technology &amp; Society (Subarea 3), Organismal Biology (Subarea 4), and Ecology: Organisms and Environment (Subarea 5). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--rust);">GACE Biology tests — official listing → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>3</span><span>4</span><span>5</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "3", "text": "In a well-designed experiment, a control group is used to:", "options": ["Receive the experimental treatment", "Provide a baseline for comparison against the treatment group", "Ensure the experiment fails", "Eliminate the need for a hypothesis"], "correct": 1}, {"tag": "3", "text": "Which of the following best describes the role of technology in modern biological research?", "options": ["Technology has no role in biology", "Technology, such as DNA sequencing, has expanded our ability to study living systems", "Technology only applies to physics", "Technology replaces the need for scientific inquiry entirely"], "correct": 1}, {"tag": "3", "text": "When working with live animals in a classroom lab, ethical and safety guidelines require:", "options": ["Handling animals with care and following institutional animal care guidelines", "No supervision is necessary", "Animals can be handled in any manner", "No safety measures are required"], "correct": 0}, {"tag": "3", "text": "A biology class collects data on plant height over several weeks. This type of data is best described as:", "options": ["Qualitative", "Quantitative", "Anecdotal", "Irrelevant"], "correct": 1}, {"tag": "3", "text": "Advances in vaccine technology illustrate the relationship between:", "options": ["Biology and public health", "Biology and mathematics only", "Biology and physics exclusively", "No relevant societal connection"], "correct": 0}, {"tag": "4", "text": "The six-kingdom classification system typically includes Bacteria, Archaea, Protista, Fungi, Plantae, and:", "options": ["Monera (outdated, replaced)", "Animalia", "Viruses", "Prokarya"], "correct": 1}, {"tag": "4", "text": "A dichotomous key is a tool used to:", "options": ["Measure population size", "Identify organisms based on a series of paired characteristics", "Sequence DNA", "Calculate genetic diversity"], "correct": 1}, {"tag": "4", "text": "Xylem tissue in vascular plants is responsible for transporting:", "options": ["Sugars produced during photosynthesis", "Water and dissolved minerals from roots upward", "Oxygen for respiration", "Pollen between flowers"], "correct": 1}, {"tag": "4", "text": "Photosynthesis in plants primarily occurs in which cellular structure?", "options": ["Mitochondria", "Chloroplasts", "Ribosomes", "Vacuoles"], "correct": 1}, {"tag": "4", "text": "Which of the following best describes an annelid, such as an earthworm?", "options": ["A segmented worm with a closed circulatory system", "An organism with radial symmetry and no segments", "An organism with an exoskeleton and jointed legs", "A soft-bodied organism with a single foot"], "correct": 0}, {"tag": "4", "text": "The human circulatory system's main function is to:", "options": ["Break down food", "Transport oxygen, nutrients, and wastes throughout the body", "Filter air", "Produce hormones exclusively"], "correct": 1}, {"tag": "4", "text": "Reptiles are distinguished from amphibians by having:", "options": ["Moist, permeable skin requiring water for reproduction", "Dry, scaly skin and amniotic eggs that can be laid on land", "Gills throughout their life", "No skeletal system"], "correct": 1}, {"tag": "4", "text": "The process of metamorphosis, seen in insects and amphibians, involves:", "options": ["No change in body form throughout life", "A dramatic change in body form during development", "Only changes in coloration", "Reproduction without offspring"], "correct": 1}, {"tag": "4", "text": "Mollusks, such as clams and snails, are characterized by having a:", "options": ["Segmented body and jointed legs", "Soft body, often protected by a shell, and a muscular foot", "Radially symmetric body with no organs", "Backbone and lungs"], "correct": 1}, {"tag": "4", "text": "The human skeletal and muscular systems work together to:", "options": ["Filter waste", "Enable movement and provide structural support", "Produce hormones", "Regulate body temperature exclusively"], "correct": 1}, {"tag": "4", "text": "Which structure in flowering plants develops into a fruit after fertilization?", "options": ["The stamen", "The ovary", "The petal", "The stem"], "correct": 1}, {"tag": "5", "text": "A population's growth rate is calculated based on birth rate, death rate, and:", "options": ["Genetic diversity only", "Immigration and emigration", "Predator population size only", "Soil composition"], "correct": 1}, {"tag": "5", "text": "In a predator-prey relationship, an increase in predator population typically leads to:", "options": ["An immediate increase in prey population", "A subsequent decrease in prey population, followed by a decrease in predators", "No change in either population", "Extinction of the predator immediately"], "correct": 1}, {"tag": "5", "text": "Commensalism is a relationship in which:", "options": ["Both species benefit", "One species benefits and the other is unaffected", "Both species are harmed", "One species is harmed while the other benefits"], "correct": 1}, {"tag": "5", "text": "The concept of a niche describes:", "options": ["The physical location where an organism lives", "The role an organism plays in its ecosystem, including resource use and interactions", "The population size of a species", "The climate of a region"], "correct": 1}, {"tag": "5", "text": "Primary succession begins in an area that:", "options": ["Has existing soil and vegetation", "Lacks soil, such as bare rock after a volcanic eruption", "Has recently experienced a forest fire", "Is an established climax community"], "correct": 1}, {"tag": "5", "text": "The carbon cycle involves the movement of carbon between the atmosphere, living organisms, and:", "options": ["The Moon", "Oceans and rocks", "Only the atmosphere", "Only living organisms"], "correct": 1}, {"tag": "5", "text": "A keystone species has a disproportionately large effect on its ecosystem relative to:", "options": ["Its size only", "Its abundance", "Its age", "Its color"], "correct": 1}, {"tag": "5", "text": "Biodiversity within an ecosystem generally contributes to:", "options": ["Decreased ecosystem stability", "Increased ecosystem resilience and stability", "No measurable effect on the ecosystem", "Faster extinction rates"], "correct": 1}, {"tag": "5", "text": "Overfishing is an example of human impact on ecosystems that can lead to:", "options": ["Increased fish populations", "Disruption of marine food webs and decreased biodiversity", "Improved ocean health", "No significant ecological effect"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biology Test I (026) — Practice Exam 3 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#4EA69C;
+    --moss-dim:#A6D6D0;
+    --rust:#1F7A72;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#0F433D;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Biology · Test I (026) · Exam 3 of 5</p>
+    <h1>Biology Test I (026) — Practice Exam 3</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering GACE Biology Test I (026): Cell Biology &amp; Biochemistry (Subarea 1) and Genetics &amp; Evolution (Subarea 2). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--rust);">GACE Biology tests — official listing → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>1</span><span>2</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "1", "text": "Which organelle contains digestive enzymes used to break down waste materials within the cell?", "options": ["Lysosome", "Peroxisome", "Golgi apparatus", "Ribosome"], "correct": 0}, {"tag": "1", "text": "The fluid mosaic model describes the structure of the:", "options": ["Nucleus", "Cell (plasma) membrane", "Mitochondria", "Cytoskeleton"], "correct": 1}, {"tag": "1", "text": "Osmosis is defined as the diffusion of:", "options": ["Solutes across a membrane", "Water across a selectively permeable membrane", "Proteins into a cell", "Gases only"], "correct": 1}, {"tag": "1", "text": "Active transport requires energy because it moves substances:", "options": ["Down their concentration gradient", "Against their concentration gradient", "Randomly", "Only out of the cell"], "correct": 1}, {"tag": "1", "text": "The cytoskeleton provides a cell with:", "options": ["Genetic information", "Structural support and enables movement", "Energy production", "Protein synthesis capability"], "correct": 1}, {"tag": "1", "text": "Which macromolecule is the primary source of quick, short-term energy for cells?", "options": ["Lipids", "Carbohydrates", "Nucleic acids", "Proteins exclusively"], "correct": 1}, {"tag": "1", "text": "The process of glycolysis, the first stage of cellular respiration, occurs in the:", "options": ["Mitochondria", "Cytoplasm", "Nucleus", "Golgi apparatus"], "correct": 1}, {"tag": "1", "text": "A hypertonic solution relative to a cell will cause the cell to:", "options": ["Swell and possibly burst", "Shrink as water leaves the cell", "Remain unchanged", "Divide rapidly"], "correct": 1}, {"tag": "1", "text": "Chloroplasts, found in plant cells, are the site of:", "options": ["Cellular respiration", "Photosynthesis", "Protein synthesis", "Waste removal"], "correct": 1}, {"tag": "1", "text": "The nuclear envelope's function is to:", "options": ["Produce ATP", "Separate the cell's genetic material from the cytoplasm", "Synthesize lipids only", "Store waste"], "correct": 1}, {"tag": "1", "text": "Denaturation of an enzyme occurs when:", "options": ["The enzyme's shape is altered, often by heat or pH extremes, reducing its function", "The enzyme binds successfully to its substrate", "A new enzyme is created", "The reaction rate increases indefinitely"], "correct": 0}, {"tag": "1", "text": "Prokaryotic cells differ from eukaryotic cells in that prokaryotic cells:", "options": ["Have a membrane-bound nucleus", "Lack a membrane-bound nucleus", "Cannot reproduce", "Lack ribosomes"], "correct": 1}, {"tag": "2", "text": "A codon is a sequence of how many nucleotides that codes for one amino acid?", "options": ["One", "Two", "Three", "Four"], "correct": 2}, {"tag": "2", "text": "The process by which ribosomes read mRNA to build a protein is called:", "options": ["Transcription", "Translation", "Replication", "Mutation"], "correct": 1}, {"tag": "2", "text": "A point mutation that changes a codon to a stop codon prematurely is called a:", "options": ["Missense mutation", "Nonsense mutation", "Silent mutation", "Frameshift mutation"], "correct": 1}, {"tag": "2", "text": "Which type of RNA carries amino acids to the ribosome during protein synthesis?", "options": ["mRNA", "tRNA", "rRNA", "DNA"], "correct": 1}, {"tag": "2", "text": "In incomplete dominance, heterozygous offspring display:", "options": ["The dominant phenotype only", "A blended phenotype intermediate between both parents", "Both parental phenotypes simultaneously", "A completely new phenotype unrelated to parents"], "correct": 1}, {"tag": "2", "text": "Crossing over during meiosis I results in:", "options": ["Identical chromosomes in daughter cells", "Genetic recombination and increased variation", "A doubling of chromosome number", "The elimination of all mutations"], "correct": 1}, {"tag": "2", "text": "A pedigree chart is used to:", "options": ["Sequence an organism's entire genome", "Trace the inheritance of a trait through a family", "Measure enzyme activity", "Identify bacterial species"], "correct": 1}, {"tag": "2", "text": "Charles Darwin's finches, observed on the Galápagos Islands, provided key evidence for:", "options": ["Genetic drift only", "Natural selection and adaptive radiation", "The law of segregation", "Codominance"], "correct": 1}, {"tag": "2", "text": "An allele that is expressed only when two copies are present in an organism's genotype is called:", "options": ["Dominant", "Recessive", "Codominant", "Incomplete"], "correct": 1}, {"tag": "2", "text": "Which of the following would most likely increase genetic variation within a population?", "options": ["Asexual reproduction only", "Sexual reproduction and mutation", "A population bottleneck", "Complete genetic isolation with no mutation"], "correct": 1}, {"tag": "2", "text": "The Hardy-Weinberg principle describes a population that is:", "options": ["Actively evolving rapidly", "In genetic equilibrium, not evolving", "Undergoing a bottleneck", "Experiencing strong natural selection"], "correct": 1}, {"tag": "2", "text": "Analogous structures, such as the wings of insects and birds, result from:", "options": ["Common ancestry", "Convergent evolution (similar function, different ancestry)", "Identical genetic codes", "Direct inheritance from a shared ancestor"], "correct": 1}, {"tag": "2", "text": "The scientific consensus on the origin of life suggests that early organic molecules may have formed under conditions including:", "options": ["An oxygen-rich atmosphere identical to today", "A reducing atmosphere with energy sources such as lightning", "Complete absence of any energy source", "Temperatures near absolute zero"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

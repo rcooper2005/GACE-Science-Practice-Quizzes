@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broad Field Science — Practice Exam 3 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#C9805A;
+    --moss-dim:#E6BBA0;
+    --rust:#A6552B;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#6B3115;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Broad Field Science · Exam 3 of 5</p>
+    <h1>Broad Field Science — Practice Exam 3</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Broad Field Science assessment's four subareas: Scientific Inquiry, Processes, Technology &amp; Society (I); Physical Science (II); Life Science (III); and Earth &amp; Space Science (IV). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" style="color:var(--rust);">GACE Science (6–12) (717) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>I</span><span>II</span><span>III</span><span>IV</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "I", "text": "A scientific theory differs from a hypothesis in that a theory is:", "options": ["A single untested guess", "A well-substantiated explanation supported by extensive evidence", "Always eventually proven false", "A personal belief"], "correct": 1}, {"tag": "I", "text": "The dependent variable in an experiment is:", "options": ["Deliberately changed by the researcher", "The outcome that is measured", "Always kept constant", "Ignored during analysis"], "correct": 1}, {"tag": "I", "text": "Before disposing of chemical waste in a school lab, students should:", "options": ["Pour it down any drain", "Follow proper disposal procedures as instructed", "Take it home", "Mix it with other waste randomly"], "correct": 1}, {"tag": "I", "text": "The internet and computer modeling have impacted scientific research primarily by:", "options": ["Slowing down data analysis", "Enabling faster data analysis and global collaboration", "Eliminating the need for experiments", "Having no effect on science"], "correct": 1}, {"tag": "II", "text": "The states of matter (solid, liquid, gas) are primarily determined by:", "options": ["The color of the substance", "The arrangement and energy of particles", "The mass of the container", "The type of container used"], "correct": 1}, {"tag": "II", "text": "Ionic bonds form between:", "options": ["Two nonmetals", "A metal and a nonmetal", "Two noble gases", "Two identical atoms only"], "correct": 1}, {"tag": "II", "text": "Isotopes of an element differ in their number of:", "options": ["Protons", "Neutrons", "Electrons in a neutral atom", "Atomic number"], "correct": 1}, {"tag": "II", "text": "A catalyst affects a chemical reaction by:", "options": ["Increasing the concentration of reactants", "Lowering the activation energy", "Being consumed in the reaction", "Changing the products formed"], "correct": 1}, {"tag": "II", "text": "A solution with a pH of 3 is:", "options": ["Basic", "Acidic", "Neutral", "Impossible to determine"], "correct": 1}, {"tag": "II", "text": "Ohm's Law relates voltage, current, and:", "options": ["Power", "Resistance", "Frequency", "Mass"], "correct": 1}, {"tag": "II", "text": "The law of conservation of mass states that in a chemical reaction, mass is:", "options": ["Created", "Neither created nor destroyed", "Always destroyed", "Converted entirely to energy"], "correct": 1}, {"tag": "III", "text": "Mitochondria are the primary site of:", "options": ["Photosynthesis", "Cellular respiration", "Protein synthesis", "DNA storage"], "correct": 1}, {"tag": "III", "text": "A codon consists of how many nucleotides?", "options": ["One", "Two", "Three", "Four"], "correct": 2}, {"tag": "III", "text": "Genetic drift has the strongest effect on evolution in:", "options": ["Large populations", "Small populations", "Populations with no variation", "Stable, unchanging populations"], "correct": 1}, {"tag": "III", "text": "Which kingdom includes organisms that absorb nutrients rather than photosynthesizing, such as mushrooms?", "options": ["Plantae", "Fungi", "Animalia", "Protista"], "correct": 1}, {"tag": "III", "text": "The human nervous system transmits signals primarily using:", "options": ["Hormones exclusively", "Electrical and chemical signals", "Muscle contractions", "Blood flow"], "correct": 1}, {"tag": "III", "text": "A symbiotic relationship in which both organisms benefit is called:", "options": ["Parasitism", "Mutualism", "Commensalism", "Competition"], "correct": 1}, {"tag": "III", "text": "The 10% rule in ecology refers to the:", "options": ["Percentage of species that go extinct annually", "Percentage of energy transferred from one trophic level to the next", "Percentage of decomposers in an ecosystem", "Percentage of a population that reproduces"], "correct": 1}, {"tag": "IV", "text": "Igneous rocks form from the cooling and solidification of:", "options": ["Sediment", "Magma or lava", "Existing metamorphic rock only", "Organic material"], "correct": 1}, {"tag": "IV", "text": "A divergent plate boundary is characterized by:", "options": ["Plates colliding", "Plates moving apart, often forming new crust", "Plates sliding past each other", "No plate movement"], "correct": 1}, {"tag": "IV", "text": "Groundwater is stored in permeable rock layers called:", "options": ["Deltas", "Aquifers", "Glaciers", "Estuaries"], "correct": 1}, {"tag": "IV", "text": "The ozone layer, which absorbs harmful UV radiation, is located in the:", "options": ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], "correct": 1}, {"tag": "IV", "text": "Earth's tilt on its axis is responsible for:", "options": ["The day/night cycle", "The changing seasons", "Tides", "Solar eclipses"], "correct": 1}, {"tag": "IV", "text": "The terrestrial (inner) planets of our solar system are characterized by being:", "options": ["Gas giants with rings", "Small and rocky", "Composed mostly of ice", "Larger than the outer planets"], "correct": 1}, {"tag": "IV", "text": "A solar eclipse occurs when:", "options": ["Earth's shadow falls on the Moon", "The Moon passes between the Sun and Earth", "The Moon is at its farthest point from Earth", "The Sun passes between Earth and the Moon"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>

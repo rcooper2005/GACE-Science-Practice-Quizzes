@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elementary Education Science — Practice Exam 4 | GACE Middle Grades Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE8DC;
+    --card:#F5F1E6;
+    --ink:#1F2B22;
+    --ink-soft:#4B5B4D;
+    --moss:#C79A3E;
+    --moss-dim:#E6CD8F;
+    --rust:#A87A1E;
+    --gold:#C9A227;
+    --correct:#3F7A4A;
+    --correct-bg:#E4EDE1;
+    --incorrect:#B23A2E;
+    --incorrect-bg:#F3E3DF;
+    --line:#C9C0A8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    padding-bottom:120px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a.back{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  a.back:hover{color:var(--rust);}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:32px 0 26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:16px 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 14px;
+  }
+  .instructions{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--rust);
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .instructions strong{color:var(--ink);}
+
+  .ledger-bar{display:flex;height:20px;border:1px solid var(--ink);overflow:hidden;margin-top:16px;}
+  .ledger-seg{flex:1;border-right:1px solid var(--paper);}
+  .ledger-seg:last-child{border-right:none;}
+  .ledger-seg[data-fill="2"]{background:var(--moss-dim);}
+  .ledger-seg[data-fill="3"]{background:var(--moss);}
+  .ledger-seg[data-fill="4"]{background:#6B4C0F;}
+  .ledger-ticks{display:flex;margin-top:4px;}
+  .ledger-ticks span{flex:1;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);text-align:center;}
+
+  #results{
+    display:none;
+    margin:28px 0;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:24px 22px;
+  }
+  #results.show{display:block;}
+  #results h2{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  #results .score-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  #results .breakdown{
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  ol.quiz{list-style:none;margin:30px 0 0;padding:0;}
+  .q-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 20px 18px;
+    margin-bottom:14px;
+    position:relative;
+  }
+  .q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .q-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:2px 7px;
+    white-space:nowrap;
+    visibility:hidden;
+  }
+  #results.show ~ ol.quiz .q-tag,
+  .revealed .q-tag{visibility:visible;}
+  .q-text{
+    font-size:15.5px;
+    margin:0 0 14px;
+  }
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-option{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    cursor:pointer;
+  }
+  .q-option:has(input:focus-visible){outline:2px solid var(--rust);outline-offset:1px;}
+  .q-option input{margin-top:3px;accent-color:var(--rust);flex-shrink:0;}
+  .q-option.correct-answer{background:var(--correct-bg);border-color:var(--correct);}
+  .q-option.wrong-answer{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .q-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+  .q-mark.correct{color:var(--correct);}
+  .q-mark.wrong{color:var(--incorrect);}
+
+  .submit-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    background:var(--ink);
+    padding:14px 24px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    align-items:center;
+    box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .submit-bar span{
+    color:#cfd8cf;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  #submitBtn, #retakeBtn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    background:var(--rust);
+    color:#fff;
+    border:none;
+    padding:11px 22px;
+    cursor:pointer;
+  }
+  #submitBtn:hover, #retakeBtn:hover{background:#8c4423;}
+  #retakeBtn{display:none;background:var(--moss);}
+  #retakeBtn:hover{background:#476348;}
+
+  @media (max-width:560px){
+    .q-top{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    * {scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← All exams</a>
+    <p class="eyebrow">GACE Elementary Education · Test 002 · Science Subarea · Exam 4 of 5</p>
+    <h1>Elementary Education Science — Practice Exam 4</h1>
+    <div class="instructions">
+      <strong>Directions:</strong> This practice test contains 25 multiple-choice questions covering the GACE Elementary Education (Test 002) Science subarea: Characteristics of Science (Obj. 1), Earth and Space Science (Obj. 2), Physical Science (Obj. 3), and Life Science (Obj. 4). Select the one best answer for each question. Answers are not scored until you submit the full exam.
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;">Official test info: <a href="https://www.gace.es.pearson.com/test/702" target="_blank" rel="noopener" style="color:var(--rust);">GACE Elementary Education (702) → gace.es.pearson.com</a></p>
+    <div class="ledger-bar" aria-hidden="true">
+      <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div>
+    </div>
+    <div class="ledger-ticks">
+      <span>1.A</span><span>1.B</span><span>1.C</span><span>2.A</span><span>2.B</span><span>2.C</span><span>3.A</span><span>3.B</span><span>4.A</span><span>4.B</span><span>4.C</span><span>4.D</span>
+    </div>
+  </header>
+
+  <div id="results">
+    <h2 id="scoreHeadline"></h2>
+    <div class="score-line" id="scoreLine"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <ol class="quiz" id="quiz"></ol>
+</div>
+
+<div class="submit-bar">
+  <span id="progressText">0 of 25 answered</span>
+  <button id="submitBtn">Submit exam</button>
+  <button id="retakeBtn">Retake exam</button>
+</div>
+
+<script>
+const QUESTIONS = [{"tag": "1.A", "text": "Before drawing a conclusion in a science investigation, a student should first:", "options": ["Skip data collection", "Collect and analyze data", "Guess the answer", "Ignore any unexpected results"], "correct": 1}, {"tag": "1.A", "text": "An experiment where a \"control group\" does not receive the treatment being tested helps scientists:", "options": ["Confuse the results", "Compare results to see the effect of the treatment", "Avoid collecting data", "Eliminate the need for a hypothesis"], "correct": 1}, {"tag": "1.B", "text": "A model of the solar system showing planets orbiting the Sun helps students understand:", "options": ["A single isolated fact", "The system of relationships between the Sun and planets", "Only the size of planets", "Chemical reactions"], "correct": 1}, {"tag": "1.B", "text": "Understanding how changing the amount of rainfall in a region affects both plants and animals living there demonstrates:", "options": ["An isolated, unrelated fact", "Interconnected systems in nature", "A chemical reaction", "A physical property only"], "correct": 1}, {"tag": "1.C", "text": "A law in science, such as the law of gravity, is different from a theory because a law:", "options": ["Explains the underlying cause of a phenomenon", "Describes a consistent, observed pattern, often mathematically", "Is less trustworthy", "Can never be tested"], "correct": 1}, {"tag": "1.C", "text": "Which of the following best represents an application of science and technology working together?", "options": ["A doctor using an X-ray machine to diagnose a broken bone", "A student reading a book with no technology involved", "A rock sitting in a field", "A tree growing naturally"], "correct": 0}, {"tag": "2.A", "text": "The phases of the Moon are caused by:", "options": ["Earth's shadow covering the Moon", "The changing relative positions of the Sun, Earth, and Moon", "The Moon changing size", "Clouds blocking our view"], "correct": 1}, {"tag": "2.A", "text": "A barometer is a tool used to measure:", "options": ["Temperature", "Air pressure", "Wind speed", "Rainfall amount"], "correct": 1}, {"tag": "2.B", "text": "The layer of Earth directly beneath the soil, made of solid rock, is called:", "options": ["Bedrock", "Magma", "The mantle", "The crust's atmosphere"], "correct": 0}, {"tag": "2.B", "text": "Which process is most responsible for breaking large rocks into smaller sediment over time?", "options": ["Photosynthesis", "Weathering", "Condensation", "Precipitation"], "correct": 1}, {"tag": "2.C", "text": "A river slowly carving out a canyon over millions of years is an example of a:", "options": ["Rapid, constructive process", "Slow, destructive (erosional) process", "Sudden, catastrophic event only", "Biological process"], "correct": 1}, {"tag": "2.C", "text": "A volcanic eruption that creates a new island is an example of a:", "options": ["Destructive process only", "Constructive process", "Weathering process", "Erosional process only"], "correct": 1}, {"tag": "3.A", "text": "Sorting rocks by their color and texture is an example of using:", "options": ["Chemical properties", "Physical properties", "Biological classification", "Historical dating"], "correct": 1}, {"tag": "3.A", "text": "Which of the following describes a chemical property, rather than a physical property, of a substance?", "options": ["Its color", "Its ability to burn (flammability)", "Its mass", "Its shape"], "correct": 1}, {"tag": "3.B", "text": "When you push a shopping cart, the cart moves because of an applied:", "options": ["Magnetic field", "Force", "Sound wave", "Chemical reaction"], "correct": 1}, {"tag": "3.B", "text": "Which of the following is an example of energy changing from one form to another?", "options": ["A rock sitting still on the ground", "A toaster converting electrical energy into heat energy", "Water freezing without any energy change", "A ball at rest"], "correct": 1}, {"tag": "4.A", "text": "Plants and animals are both classified as living things because they can:", "options": ["Move quickly", "Grow, use energy, and reproduce", "Only live in water", "Communicate using language"], "correct": 1}, {"tag": "4.A", "text": "Multicellular organisms, unlike single-celled organisms, are made up of:", "options": ["Only one cell", "Many cells working together", "No cells at all", "Only bacteria"], "correct": 1}, {"tag": "4.B", "text": "The stages of a plant's life cycle typically include seed, seedling, mature plant, and:", "options": ["Larva", "Flower/reproduction (producing new seeds)", "Pupa", "Metamorphosis"], "correct": 1}, {"tag": "4.B", "text": "Which of the following animals undergoes complete metamorphosis, including a pupa stage?", "options": ["A frog", "A butterfly", "A human", "A dog"], "correct": 1}, {"tag": "4.C", "text": "Two species of birds competing for the same nesting sites in a forest is an example of:", "options": ["Mutualism", "Competition", "Predation", "Commensalism"], "correct": 1}, {"tag": "4.C", "text": "In a food chain, an organism that eats only plants is called a(n):", "options": ["Carnivore", "Herbivore", "Decomposer", "Omnivore exclusively"], "correct": 1}, {"tag": "4.D", "text": "A trait that helps an organism survive and reproduce in its specific environment is called a(n):", "options": ["Mutation only", "Adaptation", "Learned skill exclusively", "Random event"], "correct": 1}, {"tag": "4.D", "text": "A dog learning to sit when given a treat is an example of a:", "options": ["Inherited trait", "Learned behavior", "Physical adaptation", "Genetic trait"], "correct": 1}, {"tag": "4.D", "text": "The thick fur of a polar bear, which helps it survive in cold climates, is an example of a(n):", "options": ["Learned behavior", "Inherited physical adaptation", "Random, non-useful trait", "Behavior taught by parents"], "correct": 1}];
+
+const quizEl = document.getElementById('quiz');
+const letters = ['A','B','C','D'];
+
+QUESTIONS.forEach((q, i) => {
+  const li = document.createElement('li');
+  li.className = 'q-card';
+  li.dataset.index = i;
+
+  const optsHTML = q.options.map((opt, j) => `
+    <label class="q-option" data-opt="${j}">
+      <input type="radio" name="q${i}" value="${j}">
+      <span>${letters[j]}. ${opt}</span>
+    </label>
+  `).join('');
+
+  li.innerHTML = `
+    <div class="q-top">
+      <span class="q-num">Question ${i + 1}</span>
+      <span class="q-tag">${q.tag}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">${optsHTML}</div>
+  `;
+  quizEl.appendChild(li);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter((_, i) =>
+    document.querySelector(`input[name="q${i}"]:checked`)
+  ).length;
+  document.getElementById('progressText').textContent = `${answered} of ${QUESTIONS.length} answered`;
+}
+quizEl.addEventListener('change', updateProgress);
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  let score = 0;
+  const objTotals = {};
+  const objCorrect = {};
+
+  QUESTIONS.forEach((q, i) => {
+    const card = quizEl.children[i];
+    card.classList.add('revealed');
+    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosenVal = chosen ? parseInt(chosen.value, 10) : null;
+    const isCorrect = chosenVal === q.correct;
+    if (isCorrect) score++;
+
+    objTotals[q.tag] = (objTotals[q.tag] || 0) + 1;
+    objCorrect[q.tag] = (objCorrect[q.tag] || 0) + (isCorrect ? 1 : 0);
+
+    const optionEls = card.querySelectorAll('.q-option');
+    optionEls.forEach((el, j) => {
+      el.querySelectorAll('input').forEach(inp => inp.disabled = true);
+      if (j === q.correct) {
+        el.classList.add('correct-answer');
+        if (chosenVal === j) {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">✓ Correct</span>');
+        } else {
+          el.insertAdjacentHTML('beforeend', '<span class="q-mark correct">Correct answer</span>');
+        }
+      } else if (j === chosenVal) {
+        el.classList.add('wrong-answer');
+        el.insertAdjacentHTML('beforeend', '<span class="q-mark wrong">✗ Your answer</span>');
+      }
+    });
+  });
+
+  const pct = Math.round((score / QUESTIONS.length) * 100);
+  document.getElementById('scoreHeadline').textContent = `${score} / ${QUESTIONS.length} correct (${pct}%)`;
+  document.getElementById('scoreLine').textContent =
+    pct >= 80 ? "Strong pass-range performance on this set." :
+    pct >= 60 ? "Solid, with a few competencies worth another look." :
+    "Worth reviewing the flagged competencies below before moving on.";
+
+  const breakdownLines = Object.keys(objTotals).sort().map(tag =>
+    `${tag} — ${objCorrect[tag]}/${objTotals[tag]}`
+  );
+  document.getElementById('breakdown').innerHTML =
+    '<div>Score by competency:</div><div>' + breakdownLines.join(' &nbsp;·&nbsp; ') + '</div>';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('retakeBtn').style.display = 'inline-block';
+  document.getElementById('progressText').style.display = 'none';
+
+  document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+document.getElementById('retakeBtn').addEventListener('click', () => {
+  window.location.reload();
+});
+
+</script>
+</body>
+</html>
