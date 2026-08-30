@@ -250,6 +250,96 @@
   .theme-chem { --rust:#8C3568; --moss:#B15F8F; --moss-dim:#DDB0CB; }
   .theme-eled { --rust:#A87A1E; --moss:#C79A3E; --moss-dim:#E6CD8F; }
   .theme-bfs { --rust:#A6552B; --moss:#C9805A; --moss-dim:#E6BBA0; }
+
+  /* --- Enhanced colorful/interactive styling --- */
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .section-head span:last-child{margin-left:auto;}
+  .section-icon{
+    flex-shrink:0;
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:color-mix(in srgb, var(--rust) 14%, var(--paper));
+    color:var(--rust);
+    border:1.5px solid color-mix(in srgb, var(--rust) 35%, var(--paper));
+  }
+  .section-icon svg{width:26px;height:26px;}
+
+  .exam-card{
+    transition:transform .18s ease, box-shadow .18s ease, border-color .15s ease;
+  }
+  .exam-card.live:hover{
+    transform:translateY(-3px) translateX(2px);
+    box-shadow:0 8px 20px -8px color-mix(in srgb, var(--rust) 55%, transparent);
+  }
+  .exam-card.live .exam-num{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--rust), color-mix(in srgb, var(--rust) 55%, var(--ink)));
+    color:#fff !important;
+    font-size:17px;
+    box-shadow:0 3px 8px -2px color-mix(in srgb, var(--rust) 60%, transparent);
+  }
+  .exam-card.soon .exam-num{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--line-soft);
+    color:var(--ink-soft) !important;
+    font-size:17px;
+  }
+  .exam-card.live .exam-cta{
+    background:linear-gradient(135deg, var(--rust), color-mix(in srgb, var(--rust) 60%, var(--ink)));
+    border:none;
+    transition:filter .15s ease, transform .15s ease;
+  }
+  .exam-card.live:hover .exam-cta{
+    filter:brightness(1.12);
+    transform:scale(1.03);
+  }
+  .section-head.theme-life,.section-head.theme-physsci,.section-head.theme-earth,
+  .section-head.theme-bfs,.section-head.theme-bio1,.section-head.theme-bio2,
+  .section-head.theme-chem,.section-head.theme-physics,.section-head.theme-eled{
+    border-bottom:2px solid color-mix(in srgb, var(--rust) 45%, var(--line));
+  }
+  .group-banner{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:56px 0 4px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .group-banner .line{flex:1;height:1px;background:var(--line);}
+  .hero-icon-strip{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:28px;
+  }
+  .hero-icon-strip .chip{
+    display:flex;align-items:center;gap:7px;
+    padding:7px 12px 7px 8px;
+    border-radius:999px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:500;
+    border:1px solid;
+  }
+  .hero-icon-strip .chip svg{width:18px;height:18px;}
+  @media (prefers-reduced-motion: reduce){
+    .exam-card{transition:none;}
+  }
 </style>
 </head>
 <body>
@@ -261,6 +351,68 @@
     <p class="hero-sub">25-question practice sets built to mirror the real GACE, one subarea at a time — covering Middle Grades Science, Biology, Chemistry, and the Elementary Education Science subarea.</p>
     <div class="hero-facts">
       <div><strong>45</strong>exams live</div>
+    <div class="hero-icon-strip">
+      <span class="chip" style="border-color:#3F7A4A44;color:#3F7A4A;background:#3F7A4A12;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4C24 4 12 10 12 22c0 8 6 12 12 12s12-4 12-12C36 10 24 4 24 4Z" stroke="#3F7A4A" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M24 8v26" stroke="#3F7A4A" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M24 16c-3 0-6 2-6 2s3 2 6 2 6-2 6-2-3-2-6-2Z" stroke="#3F7A4A" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M24 24c-3 0-6 2-6 2s3 2 6 2 6-2 6-2-3-2-6-2Z" stroke="#3F7A4A" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M16 40c3-3 5-4 8-4s5 1 8 4" stroke="#3F7A4A" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>Life Science</span>
+      <span class="chip" style="border-color:#2F669044;color:#2F6690;background:#2F669012;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="#2F6690" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M17 10h14" stroke="#2F6690" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 26h17" stroke="#2F6690" stroke-width="1.8"/>
+        <circle cx="20" cy="31" r="1.6" fill="#2F6690"/>
+        <circle cx="26" cy="34" r="1.3" fill="#2F6690"/>
+        <circle cx="23" cy="29" r="1" fill="#2F6690"/>
+      </svg>Physical Science</span>
+      <span class="chip" style="border-color:#B0562A44;color:#B0562A;background:#B0562A12;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="15" stroke="#B0562A" stroke-width="2.2"/>
+        <path d="M9 20c4 3 8 1 12 3s6 5 11 3 6-4 6-4" stroke="#B0562A" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M11 30c4-2 7 0 10 2s7 2 10-1" stroke="#B0562A" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="40" cy="10" r="3" stroke="#B0562A" stroke-width="1.8"/>
+        <path d="M35 12l-3 3" stroke="#B0562A" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>Earth & Space</span>
+      <span class="chip" style="border-color:#A6552B44;color:#A6552B;background:#A6552B12;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="16" stroke="#A6552B" stroke-width="2.2"/>
+        <path d="M24 8c4 5 6 11 6 16s-2 11-6 16" stroke="#A6552B" stroke-width="1.8"/>
+        <path d="M24 8c-4 5-6 11-6 16s2 11 6 16" stroke="#A6552B" stroke-width="1.8"/>
+        <path d="M8 24h32" stroke="#A6552B" stroke-width="1.8"/>
+        <path d="M11 16c4 2 8 3 13 3s9-1 13-3" stroke="#A6552B" stroke-width="1.6"/>
+        <path d="M11 32c4-2 8-3 13-3s9 1 13 3" stroke="#A6552B" stroke-width="1.6"/>
+      </svg>Broad Field</span>
+      <span class="chip" style="border-color:#1F7A7244;color:#1F7A72;background:#1F7A7212;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="#1F7A72" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="#1F7A72" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 12h17M14.5 24h19M15.5 36h17" stroke="#1F7A72" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>Biology I</span>
+      <span class="chip" style="border-color:#206A8744;color:#206A87;background:#206A8712;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="#206A87" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="#206A87" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 12h17M14.5 24h19M15.5 36h17" stroke="#206A87" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>Biology II</span>
+      <span class="chip" style="border-color:#8C356844;color:#8C3568;background:#8C356812;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="#8C3568" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M17 10h14" stroke="#8C3568" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 26h17" stroke="#8C3568" stroke-width="1.8"/>
+        <circle cx="21" cy="30" r="1.6" fill="#8C3568"/>
+        <circle cx="27" cy="33" r="1.3" fill="#8C3568"/>
+        <circle cx="24" cy="28" r="1" fill="#8C3568"/>
+      </svg>Chemistry</span>
+      <span class="chip" style="border-color:#5B4B9A44;color:#5B4B9A;background:#5B4B9A12;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="3" fill="#5B4B9A"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="#5B4B9A" stroke-width="2"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="#5B4B9A" stroke-width="2" transform="rotate(60 24 24)"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="#5B4B9A" stroke-width="2" transform="rotate(120 24 24)"/>
+      </svg>Physics</span>
+      <span class="chip" style="border-color:#A87A1E44;color:#A87A1E;background:#A87A1E12;"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 12l18-6 18 6-18 6-18-6Z" stroke="#A87A1E" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M14 16v10c0 3 5 5 10 5s10-2 10-5V16" stroke="#A87A1E" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M42 12v10" stroke="#A87A1E" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>Elementary Ed</span>
+    </div>
+
       <div><strong>25</strong>questions each</div>
       <div><strong>9</strong>subject areas</div>
       <div><strong>4</strong>certification tests</div>
@@ -270,8 +422,16 @@
 
 <main>
   <div class="wrap">
-    <p class="eyebrow" style="margin-top:0;">Middle Grades Science · 014 / 705</p>
-    <div class="section-head">
+<div class="group-banner"><span class="line"></span><span>Middle Grades Science · 014 / 705</span><span class="line"></span></div>
+
+<div class="section-head theme-life">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4C24 4 12 10 12 22c0 8 6 12 12 12s12-4 12-12C36 10 24 4 24 4Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M24 8v26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M24 16c-3 0-6 2-6 2s3 2 6 2 6-2 6-2-3-2-6-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M24 24c-3 0-6 2-6 2s3 2 6 2 6-2 6-2-3-2-6-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M16 40c3-3 5-4 8-4s5 1 8 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg></span>
       <h2>Life Science</h2>
       <span>01 – 05</span>
     </div>
@@ -351,7 +511,100 @@
 
     <p class="foot-note">Each exam scores itself instantly: submit your answers and the page reveals your total, the correct answer for every item, and the GACE competency code (e.g. 1.C, 2.F) each question was written to test — so a missed question points straight back to the content to review.</p>
 
-    <div class="section-head" style="margin-top:56px;">
+    
+<div class="section-head theme-physsci" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 26h17" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="20" cy="31" r="1.6" fill="currentColor"/>
+        <circle cx="26" cy="34" r="1.3" fill="currentColor"/>
+        <circle cx="23" cy="29" r="1" fill="currentColor"/>
+      </svg></span>
+      <h2>Physical Science</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-physsci" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Objective 1 (Matter &amp; Energy) &amp; Objective 2 (Chemistry) — Obj. 1.B spans motion, energy, heat, electricity, and waves, so it carries the heaviest weight</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="4"></div>
+        <div class="ledger-seg" data-fill="4"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="3"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>1.A</span><span>1.B</span>
+        <span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-physsci">
+      <a class="exam-card live" href="exam-1-physical-science.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 1</h3>
+          <p>Covers matter/atomic structure and chemistry, weighted toward motion, energy, heat, electricity &amp; waves (1.B) as on the real test.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-2-physical-science.html">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 2</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-3-physical-science.html">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 3</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-4-physical-science.html">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 4</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-5-physical-science.html">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Physical Science — Practice Exam 5</h3>
+          <p>Fresh question set, same competency spread.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+    </div>
+
+
+    <p class="eyebrow" style="margin-top:64px;">Standalone certification tests</p>
+    
+<div class="section-head theme-earth" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M9 20c4 3 8 1 12 3s6 5 11 3 6-4 6-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M11 30c4-2 7 0 10 2s7 2 10-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="40" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M35 12l-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg></span>
       <h2>Earth &amp; Space Science</h2>
       <span>01 – 05</span>
     </div>
@@ -430,73 +683,78 @@
       </a>
     </div>
 
-    <div class="section-head" style="margin-top:56px;">
-      <h2>Physical Science</h2>
+    
+<div class="group-banner"><span class="line"></span><span>Spans All Domains</span><span class="line"></span></div>
+
+<div class="section-head theme-bfs" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M24 8c4 5 6 11 6 16s-2 11-6 16" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M24 8c-4 5-6 11-6 16s2 11 6 16" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 24h32" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M11 16c4 2 8 3 13 3s9-1 13-3" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11 32c4-2 8-3 13-3s9 1 13 3" stroke="currentColor" stroke-width="1.6"/>
+      </svg></span>
+      <h2>Broad Field Science</h2>
       <span>01 – 05</span>
     </div>
-    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/705" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Middle Grades Science (705) → gace.es.pearson.com</a></p>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Science (6–12) (717) → gace.es.pearson.com</a></p>
 
-    <div class="ledger theme-physsci" style="margin-bottom:22px;">
-      <div class="ledger-label">Competency coverage across Objective 1 (Matter &amp; Energy) &amp; Objective 2 (Chemistry) — Obj. 1.B spans motion, energy, heat, electricity, and waves, so it carries the heaviest weight</div>
+    <div class="ledger theme-bfs" style="margin-bottom:22px;">
+      <div class="ledger-label">Competency coverage across Subarea I (Sci. Inquiry/STS), II (Physical Science), III (Life Science), IV (Earth &amp; Space Science)</div>
       <div class="ledger-bar" aria-hidden="true">
-        <div class="ledger-seg" data-fill="4"></div>
-        <div class="ledger-seg" data-fill="4"></div>
-        <div class="ledger-seg" data-fill="3"></div>
-        <div class="ledger-seg" data-fill="2"></div>
-        <div class="ledger-seg" data-fill="3"></div>
-        <div class="ledger-seg" data-fill="3"></div>
+        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
       </div>
       <div class="ledger-ticks">
-        <span>1.A</span><span>1.B</span>
-        <span>2.A</span><span>2.B</span><span>2.C</span><span>2.D</span>
+        <span>I</span><span>II</span><span>III</span><span>IV</span>
       </div>
     </div>
 
-    <div class="catalog theme-physsci">
-      <a class="exam-card live" href="exam-1-physical-science.html">
+    <div class="catalog theme-bfs">
+      <a class="exam-card live" href="exam-1-broad-field-science.html">
         <span class="exam-num">01</span>
         <span class="exam-body">
-          <h3>Physical Science — Practice Exam 1</h3>
-          <p>Covers matter/atomic structure and chemistry, weighted toward motion, energy, heat, electricity &amp; waves (1.B) as on the real test.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span><span>Obj. 1 &amp; 2</span></span>
+          <h3>Broad Field Science — Practice Exam 1</h3>
+          <p>One exam sampling all four subareas of the Broad Field Science certification — inquiry/STS plus physical, life, and earth science.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
         </span>
         <span class="exam-cta">Begin exam →</span>
       </a>
 
-      <a class="exam-card live" href="exam-2-physical-science.html">
+      <a class="exam-card live" href="exam-2-broad-field-science.html">
         <span class="exam-num">02</span>
         <span class="exam-body">
-          <h3>Physical Science — Practice Exam 2</h3>
+          <h3>Broad Field Science — Practice Exam 2</h3>
           <p>Fresh question set, same competency spread.</p>
           <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
         </span>
         <span class="exam-cta">Begin exam →</span>
       </a>
 
-      <a class="exam-card live" href="exam-3-physical-science.html">
+      <a class="exam-card live" href="exam-3-broad-field-science.html">
         <span class="exam-num">03</span>
         <span class="exam-body">
-          <h3>Physical Science — Practice Exam 3</h3>
+          <h3>Broad Field Science — Practice Exam 3</h3>
           <p>Fresh question set, same competency spread.</p>
           <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
         </span>
         <span class="exam-cta">Begin exam →</span>
       </a>
 
-      <a class="exam-card live" href="exam-4-physical-science.html">
+      <a class="exam-card live" href="exam-4-broad-field-science.html">
         <span class="exam-num">04</span>
         <span class="exam-body">
-          <h3>Physical Science — Practice Exam 4</h3>
+          <h3>Broad Field Science — Practice Exam 4</h3>
           <p>Fresh question set, same competency spread.</p>
           <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
         </span>
         <span class="exam-cta">Begin exam →</span>
       </a>
 
-      <a class="exam-card live" href="exam-5-physical-science.html">
+      <a class="exam-card live" href="exam-5-broad-field-science.html">
         <span class="exam-num">05</span>
         <span class="exam-body">
-          <h3>Physical Science — Practice Exam 5</h3>
+          <h3>Broad Field Science — Practice Exam 5</h3>
           <p>Fresh question set, same competency spread.</p>
           <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
         </span>
@@ -504,9 +762,15 @@
       </a>
     </div>
 
+    
+<div class="group-banner"><span class="line"></span><span>Standalone Certification Tests</span><span class="line"></span></div>
 
-    <p class="eyebrow" style="margin-top:64px;">Standalone certification tests</p>
-    <div class="section-head">
+<div class="section-head theme-bio1">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 12h17M14.5 24h19M15.5 36h17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg></span>
       <h2>Biology — Test I (026)</h2>
       <span>01 – 05</span>
     </div>
@@ -575,7 +839,13 @@
     </div>
 
 
-    <div class="section-head" style="margin-top:56px;">
+    
+<div class="section-head theme-bio2" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 12h17M14.5 24h19M15.5 36h17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg></span>
       <h2>Biology — Test II (027)</h2>
       <span>01 – 05</span>
     </div>
@@ -644,7 +914,16 @@
     </div>
 
 
-    <div class="section-head" style="margin-top:56px;">
+    
+<div class="section-head theme-chem" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M15.5 26h17" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="21" cy="30" r="1.6" fill="currentColor"/>
+        <circle cx="27" cy="33" r="1.3" fill="currentColor"/>
+        <circle cx="24" cy="28" r="1" fill="currentColor"/>
+      </svg></span>
       <h2>Chemistry</h2>
       <span>01 – 05</span>
     </div>
@@ -713,7 +992,89 @@
     </div>
 
 
-    <div class="section-head" style="margin-top:56px;">
+    
+<div class="section-head theme-physics" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="3" fill="currentColor"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/>
+        <ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(120 24 24)"/>
+      </svg></span>
+      <h2>Physics</h2>
+      <span>01 – 05</span>
+    </div>
+    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Physics tests (030/031) — official listing → gace.es.pearson.com</a></p>
+
+    <div class="ledger theme-physics" style="margin-bottom:22px;">
+      <div class="ledger-label">Standalone certification (Tests 030/031) — coverage across Mechanics, Thermodynamics/Atomic/Modern Physics, Electricity &amp; Magnetism, Optics &amp; Waves, and Scientific Inquiry/STS</div>
+      <div class="ledger-bar" aria-hidden="true">
+        <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="1"></div>
+      </div>
+      <div class="ledger-ticks">
+        <span>Mechanics</span><span>Thermo/Atomic</span><span>Electricity &amp; Mag.</span><span>Optics/Waves</span><span>Sci. Inquiry</span>
+      </div>
+    </div>
+
+    <div class="catalog theme-physics">
+      <a class="exam-card live" href="exam-1-physics.html">
+        <span class="exam-num">01</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 1</h3>
+          <p>Covers both Physics tests: Mechanics and Thermo/Atomic/Modern Physics (Test I), plus Electricity/Magnetism, Optics/Waves, and Scientific Inquiry (Test II).</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-2-physics.html">
+        <span class="exam-num">02</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 2</h3>
+          <p>Fresh question set, same five-subarea spread across both tests.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-3-physics.html">
+        <span class="exam-num">03</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 3</h3>
+          <p>Fresh question set, same five-subarea spread across both tests.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-4-physics.html">
+        <span class="exam-num">04</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 4</h3>
+          <p>Fresh question set, same five-subarea spread across both tests.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+
+      <a class="exam-card live" href="exam-5-physics.html">
+        <span class="exam-num">05</span>
+        <span class="exam-body">
+          <h3>Physics — Practice Exam 5</h3>
+          <p>Fresh question set, same five-subarea spread across both tests.</p>
+          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
+        </span>
+        <span class="exam-cta">Begin exam →</span>
+      </a>
+    </div>
+
+<div class="group-banner"><span class="line"></span><span>Saved for Last — Elementary Certification</span><span class="line"></span></div>
+
+<div class="section-head theme-eled" style="margin-top:56px;">
+      <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 12l18-6 18 6-18 6-18-6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M14 16v10c0 3 5 5 10 5s10-2 10-5V16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M42 12v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg></span>
       <h2>Elementary Education — Science (Test 002)</h2>
       <span>01 – 05</span>
     </div>
@@ -782,142 +1143,7 @@
     </div>
 
 
-    <div class="section-head" style="margin-top:56px;">
-      <h2>Broad Field Science</h2>
-      <span>01 – 05</span>
-    </div>
-    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Science (6–12) (717) → gace.es.pearson.com</a></p>
-
-    <div class="ledger theme-bfs" style="margin-bottom:22px;">
-      <div class="ledger-label">Competency coverage across Subarea I (Sci. Inquiry/STS), II (Physical Science), III (Life Science), IV (Earth &amp; Space Science)</div>
-      <div class="ledger-bar" aria-hidden="true">
-        <div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div><div class="ledger-seg" data-fill="4"></div>
-      </div>
-      <div class="ledger-ticks">
-        <span>I</span><span>II</span><span>III</span><span>IV</span>
-      </div>
-    </div>
-
-    <div class="catalog theme-bfs">
-      <a class="exam-card live" href="exam-1-broad-field-science.html">
-        <span class="exam-num">01</span>
-        <span class="exam-body">
-          <h3>Broad Field Science — Practice Exam 1</h3>
-          <p>One exam sampling all four subareas of the Broad Field Science certification — inquiry/STS plus physical, life, and earth science.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-2-broad-field-science.html">
-        <span class="exam-num">02</span>
-        <span class="exam-body">
-          <h3>Broad Field Science — Practice Exam 2</h3>
-          <p>Fresh question set, same competency spread.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-3-broad-field-science.html">
-        <span class="exam-num">03</span>
-        <span class="exam-body">
-          <h3>Broad Field Science — Practice Exam 3</h3>
-          <p>Fresh question set, same competency spread.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-4-broad-field-science.html">
-        <span class="exam-num">04</span>
-        <span class="exam-body">
-          <h3>Broad Field Science — Practice Exam 4</h3>
-          <p>Fresh question set, same competency spread.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-5-broad-field-science.html">
-        <span class="exam-num">05</span>
-        <span class="exam-body">
-          <h3>Broad Field Science — Practice Exam 5</h3>
-          <p>Fresh question set, same competency spread.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-    </div>
-
-    <div class="section-head" style="margin-top:56px;">
-      <h2>Physics</h2>
-      <span>01 – 05</span>
-    </div>
-    <p class="gace-official-link" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin:-6px 0 18px;">Official test info: <a href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;">GACE Physics tests (030/031) — official listing → gace.es.pearson.com</a></p>
-
-    <div class="ledger theme-physics" style="margin-bottom:22px;">
-      <div class="ledger-label">Standalone certification (Tests 030/031) — coverage across Mechanics, Thermodynamics/Atomic/Modern Physics, Electricity &amp; Magnetism, Optics &amp; Waves, and Scientific Inquiry/STS</div>
-      <div class="ledger-bar" aria-hidden="true">
-        <div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="3"></div><div class="ledger-seg" data-fill="2"></div><div class="ledger-seg" data-fill="1"></div>
-      </div>
-      <div class="ledger-ticks">
-        <span>Mechanics</span><span>Thermo/Atomic</span><span>Electricity &amp; Mag.</span><span>Optics/Waves</span><span>Sci. Inquiry</span>
-      </div>
-    </div>
-
-    <div class="catalog theme-physics">
-      <a class="exam-card live" href="exam-1-physics.html">
-        <span class="exam-num">01</span>
-        <span class="exam-body">
-          <h3>Physics — Practice Exam 1</h3>
-          <p>Covers both Physics tests: Mechanics and Thermo/Atomic/Modern Physics (Test I), plus Electricity/Magnetism, Optics/Waves, and Scientific Inquiry (Test II).</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-2-physics.html">
-        <span class="exam-num">02</span>
-        <span class="exam-body">
-          <h3>Physics — Practice Exam 2</h3>
-          <p>Fresh question set, same five-subarea spread across both tests.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-3-physics.html">
-        <span class="exam-num">03</span>
-        <span class="exam-body">
-          <h3>Physics — Practice Exam 3</h3>
-          <p>Fresh question set, same five-subarea spread across both tests.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-4-physics.html">
-        <span class="exam-num">04</span>
-        <span class="exam-body">
-          <h3>Physics — Practice Exam 4</h3>
-          <p>Fresh question set, same five-subarea spread across both tests.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-
-      <a class="exam-card live" href="exam-5-physics.html">
-        <span class="exam-num">05</span>
-        <span class="exam-body">
-          <h3>Physics — Practice Exam 5</h3>
-          <p>Fresh question set, same five-subarea spread across both tests.</p>
-          <span class="exam-meta"><span>25 items</span><span>~35 min</span></span>
-        </span>
-        <span class="exam-cta">Begin exam →</span>
-      </a>
-    </div>
-
+    
   </div>
 </main>
 
