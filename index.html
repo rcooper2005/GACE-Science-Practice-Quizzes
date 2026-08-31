@@ -36,11 +36,32 @@
 
   /* ---------- Header / Hero ---------- */
   header.hero{
+    position:relative;
     border-bottom:1px solid var(--line);
     padding:56px 0 40px;
+    overflow:hidden;
     background:
       repeating-linear-gradient(180deg, transparent, transparent 27px, rgba(92,122,94,0.06) 28px);
   }
+  header.hero::before{
+    content:"";
+    position:absolute;
+    top:-120px; right:-160px;
+    width:520px; height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle, #2D5C3733 0%, transparent 70%);
+    pointer-events:none;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    bottom:-180px; left:20%;
+    width:460px; height:460px;
+    border-radius:50%;
+    background:radial-gradient(circle, #42367433 0%, transparent 70%);
+    pointer-events:none;
+  }
+  header.hero .wrap{position:relative; z-index:1;}
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
     font-size:12px;
@@ -396,6 +417,7 @@
     border-radius:14px;
     border:2.5px solid var(--tile-color);
     background:linear-gradient(145deg, color-mix(in srgb, var(--tile-color) 30%, var(--card)) 0%, color-mix(in srgb, var(--tile-color) 6%, var(--card)) 75%);
+    box-shadow:0 4px 0 0 color-mix(in srgb, var(--tile-color) 55%, transparent);
     cursor:pointer;
     text-align:left;
     font-family:inherit;
@@ -514,6 +536,17 @@
     color:#7D3F1F;
     margin:28px 0 12px;
     padding-left:2px;
+  }
+
+  .hs-subgroup-box{
+    background:color-mix(in srgb, #7D3F1F 5%, var(--paper));
+    border:1.5px dashed color-mix(in srgb, #7D3F1F 40%, var(--paper));
+    border-radius:16px;
+    padding:20px 20px 24px;
+    margin-bottom:8px;
+  }
+  .hs-subgroup-label{
+    margin-top:0;
   }
 </style>
 </head>
@@ -640,38 +673,40 @@
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/test/717" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 717</a>
       </div>
     </div>
+    <div class="hs-subgroup-box">
     <p class="hs-subgroup-label">Biology, Chemistry &amp; Physics</p>
     <div class="subject-grid">
       <div class="subject-tile" data-panel="panel-bio-1" style="--tile-color:#145A54;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
         <span class="tile-name">Biology — Test I</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 026</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 026</a>
       </div>
       <div class="subject-tile" data-panel="panel-bio-2" style="--tile-color:#164D63;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
         <span class="tile-name">Biology — Test II</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 027</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 027</a>
       </div>
       <div class="subject-tile" data-panel="panel-chem-1" style="--tile-color:#6B2650;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
         <span class="tile-name">Chemistry — Test I</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 028</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 028</a>
       </div>
       <div class="subject-tile" data-panel="panel-chem-2" style="--tile-color:#8A4570;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
         <span class="tile-name">Chemistry — Test II</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 029</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 029</a>
       </div>
       <div class="subject-tile" data-panel="panel-phys-1" style="--tile-color:#423674;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
         <span class="tile-name">Physics — Test I</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 030</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 030</a>
       </div>
       <div class="subject-tile" data-panel="panel-phys-2" style="--tile-color:#5F5296;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
         <span class="tile-name">Physics — Test II</span>
-        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/tests" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 031</a>
+        <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://gace.nesinc.com/PageView.aspx?f=GEN_Tests.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">GACE 031</a>
       </div>
+    </div>
     </div>
     <div class="group-banner group-eled"><span class="group-banner-text">ELED Science</span><span class="group-banner-code">702</span></div>
     <div class="subject-grid">
