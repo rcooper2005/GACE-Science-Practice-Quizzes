@@ -350,6 +350,84 @@
     height:6px;
     background:linear-gradient(90deg, #3F7A4A, #2F6690, #B0562A, #A6552B, #1F7A72, #206A87, #8C3568, #5B4B9A, #A87A1E);
   }
+
+  /* --- Click-based subject navigation --- */
+  .subject-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:16px;
+    margin:8px 0 40px;
+  }
+  .subject-tile{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+    padding:22px 20px;
+    border-radius:14px;
+    border:2px solid var(--tile-color);
+    background:linear-gradient(145deg, color-mix(in srgb, var(--tile-color) 16%, var(--card)) 0%, var(--card) 70%);
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .subject-tile:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 24px -10px color-mix(in srgb, var(--tile-color) 60%, transparent);
+    background:linear-gradient(145deg, color-mix(in srgb, var(--tile-color) 30%, var(--card)) 0%, var(--card) 75%);
+  }
+  .subject-tile:focus-visible{
+    outline:3px solid var(--tile-color);
+    outline-offset:2px;
+  }
+  .tile-icon{
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:color-mix(in srgb, var(--tile-color) 20%, var(--card));
+    color:var(--tile-color);
+  }
+  .tile-icon svg{width:26px;height:26px;}
+  .tile-name{
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .tile-meta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  .back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin:0 0 28px;
+    padding:10px 18px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .back-btn:hover{
+    background:var(--paper);
+    border-color:var(--ink-soft);
+    transform:translateX(-2px);
+  }
+  .subject-panel .section-head{
+    margin-top:0 !important;
+  }
+  @media (max-width:640px){
+    .subject-grid{grid-template-columns:1fr 1fr;}
+    .tile-name{font-size:15px;}
+  }
 </style>
 </head>
 <body>
@@ -433,8 +511,77 @@
 
 <main>
   <div class="wrap">
-<div class="group-banner"><span class="line"></span><span>Middle Grades Science · 014 / 705</span><span class="line"></span></div>
-
+    <div id="subject-grid-wrap">
+    <div class="group-banner"><span class="line"></span><span>Middle Grades Science · 014/705</span><span class="line"></span></div>
+    <div class="subject-grid">
+      <button class="subject-tile" data-panel="panel-life-science" style="--tile-color:#3F7A4A;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4C24 4 12 10 12 22c0 8 6 12 12 12s12-4 12-12C36 10 24 4 24 4Z" stroke="currentColor" stroke-width="2.2"/><path d="M24 8v26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+        <span class="tile-name">Life Science</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-physical-science" style="--tile-color:#2F6690;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+        <span class="tile-name">Physical Science</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-earth-space" style="--tile-color:#B0562A;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.2"/><path d="M9 20c4 3 8 1 12 3s6 5 11 3 6-4 6-4" stroke="currentColor" stroke-width="1.8"/></svg></span>
+        <span class="tile-name">Earth & Space Science</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+    </div>
+    <div class="group-banner"><span class="line"></span><span>Spans All Domains · 717</span><span class="line"></span></div>
+    <div class="subject-grid">
+      <button class="subject-tile" data-panel="panel-broad-field" style="--tile-color:#A6552B;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2.2"/><path d="M24 8c4 5 6 11 6 16s-2 11-6 16" stroke="currentColor" stroke-width="1.8"/><path d="M8 24h32" stroke="currentColor" stroke-width="1.8"/></svg></span>
+        <span class="tile-name">Broad Field Science</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+    </div>
+    <div class="group-banner"><span class="line"></span><span>Standalone Certifications</span><span class="line"></span></div>
+    <div class="subject-grid">
+      <button class="subject-tile" data-panel="panel-bio-1" style="--tile-color:#1F7A72;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
+        <span class="tile-name">Biology — Test I</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-bio-2" style="--tile-color:#206A87;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
+        <span class="tile-name">Biology — Test II</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-chem-1" style="--tile-color:#8C3568;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
+        <span class="tile-name">Chemistry — Test I</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-chem-2" style="--tile-color:#8C3568;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
+        <span class="tile-name">Chemistry — Test II</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-phys-1" style="--tile-color:#5B4B9A;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
+        <span class="tile-name">Physics — Test I</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+      <button class="subject-tile" data-panel="panel-phys-2" style="--tile-color:#5B4B9A;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
+        <span class="tile-name">Physics — Test II</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+    </div>
+    <div class="group-banner"><span class="line"></span><span>Elementary Certification · 702</span><span class="line"></span></div>
+    <div class="subject-grid">
+      <button class="subject-tile" data-panel="panel-eled" style="--tile-color:#A87A1E;">
+        <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M6 12l18-6 18 6-18 6-18-6Z" stroke="currentColor" stroke-width="2.2"/><path d="M14 16v10c0 3 5 5 10 5s10-2 10-5V16" stroke="currentColor" stroke-width="2.2"/></svg></span>
+        <span class="tile-name">Elementary Education Science</span>
+        <span class="tile-meta">5 exams · 25 items each</span>
+      </button>
+    </div>
+    </div>
+    <div class="subject-panel" id="panel-life-science" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-life">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M24 4C24 4 12 10 12 22c0 8 6 12 12 12s12-4 12-12C36 10 24 4 24 4Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
@@ -523,6 +670,10 @@
     <p class="foot-note">Each exam scores itself instantly: submit your answers and the page reveals your total, the correct answer for every item, and the GACE competency code (e.g. 1.C, 2.F) each question was written to test — so a missed question points straight back to the content to review.</p>
 
     
+
+    </div>
+    <div class="subject-panel" id="panel-physical-science" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-physsci" style="margin-top:56px;">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
@@ -608,6 +759,10 @@
 
     <p class="eyebrow" style="margin-top:64px;">Standalone certification tests</p>
     
+
+    </div>
+    <div class="subject-panel" id="panel-earth-space" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-earth" style="margin-top:56px;">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.2"/>
@@ -697,6 +852,10 @@
     
 <div class="group-banner"><span class="line"></span><span>Spans All Domains</span><span class="line"></span></div>
 
+
+    </div>
+    <div class="subject-panel" id="panel-broad-field" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-bfs" style="margin-top:56px;">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2.2"/>
@@ -776,6 +935,10 @@
     
 <div class="group-banner"><span class="line"></span><span>Standalone Certification Tests</span><span class="line"></span></div>
 
+
+    </div>
+    <div class="subject-panel" id="panel-bio-1" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-bio1">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -851,6 +1014,10 @@
 
 
     
+
+    </div>
+    <div class="subject-panel" id="panel-bio-2" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-bio2" style="margin-top:56px;">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -926,7 +1093,11 @@
 
 
     
-    <div class="section-head theme-chem">
+    
+    </div>
+    <div class="subject-panel" id="panel-chem-1" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
+<div class="section-head theme-chem">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
         <path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -1002,7 +1173,11 @@
       </a>
     </div>
 
-    <div class="section-head theme-chem">
+    
+    </div>
+    <div class="subject-panel" id="panel-chem-2" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
+<div class="section-head theme-chem">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
         <path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -1078,7 +1253,11 @@
       </a>
     </div>
 
-    <div class="section-head theme-physics">
+    
+    </div>
+    <div class="subject-panel" id="panel-phys-1" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
+<div class="section-head theme-physics">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="24" cy="24" r="3" fill="currentColor"/>
         <ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/>
@@ -1152,7 +1331,11 @@
       </a>
     </div>
 
-    <div class="section-head theme-physics">
+    
+    </div>
+    <div class="subject-panel" id="panel-phys-2" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
+<div class="section-head theme-physics">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="24" cy="24" r="3" fill="currentColor"/>
         <ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/>
@@ -1228,6 +1411,10 @@
 
 <div class="group-banner"><span class="line"></span><span>Saved for Last — Elementary Certification</span><span class="line"></span></div>
 
+
+    </div>
+    <div class="subject-panel" id="panel-eled" style="display:none;">
+      <button class="back-btn" onclick="showGrid()">&larr; All subjects</button>
 <div class="section-head theme-eled" style="margin-top:56px;">
       <span class="section-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 12l18-6 18 6-18 6-18-6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
@@ -1301,10 +1488,38 @@
       </a>
     </div>
 
-
-    
+    </div>
   </div>
 </main>
+<script>
+  function showPanel(panelId) {
+    document.getElementById('subject-grid-wrap').style.display = 'none';
+    document.querySelectorAll('.subject-panel').forEach(function(p) { p.style.display = 'none'; });
+    var target = document.getElementById(panelId);
+    if (target) {
+      target.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }
+  function showGrid() {
+    document.querySelectorAll('.subject-panel').forEach(function(p) { p.style.display = 'none'; });
+    document.getElementById('subject-grid-wrap').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.subject-tile').forEach(function(tile) {
+      tile.addEventListener('click', function() {
+        showPanel(tile.getAttribute('data-panel'));
+      });
+    });
+    // Deep-linking: #panel-life-science in the URL opens that subject directly
+    var hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) {
+      showPanel(hash);
+    }
+  });
+</script>
+
 
 </body>
 </html>
