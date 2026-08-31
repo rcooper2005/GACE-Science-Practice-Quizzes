@@ -579,6 +579,32 @@
     transform:translateY(2px);
     box-shadow:0 3px 0 0 color-mix(in srgb, #1F4A6B 70%, black);
   }
+
+  .tile-go-exams{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    margin-top:8px;
+    padding:9px 14px;
+    width:100%;
+    box-sizing:border-box;
+    border-radius:8px;
+    border:2px solid var(--tile-color);
+    background:transparent;
+    color:var(--tile-color);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.02em;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, transform .15s ease;
+  }
+  .tile-go-exams:hover{
+    background:var(--tile-color);
+    color:#fff;
+    transform:translateY(-1px);
+  }
 </style>
 </head>
 <body>
@@ -685,16 +711,19 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4C24 4 12 10 12 22c0 8 6 12 12 12s12-4 12-12C36 10 24 4 24 4Z" stroke="currentColor" stroke-width="2.2"/><path d="M24 8v26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         <span class="tile-name">Life Science</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/705" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 705) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-life-science');">Go to Practice Exams &rarr;</button>
       </div>
       <div class="subject-tile" data-panel="panel-physical-science" style="--tile-color:#1F4A6B;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><path d="M17 10h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         <span class="tile-name">Physical Science</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/705" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 705) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-physical-science');">Go to Practice Exams &rarr;</button>
       </div>
       <div class="subject-tile" data-panel="panel-earth-space" style="--tile-color:#8A421F;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="15" stroke="currentColor" stroke-width="2.2"/><path d="M9 20c4 3 8 1 12 3s6 5 11 3 6-4 6-4" stroke="currentColor" stroke-width="1.8"/></svg></span>
         <span class="tile-name">Earth & Space Science</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/705" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 705) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-earth-space');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     <div class="group-banner group-hs"><span class="group-banner-text">HS Science</span><span class="group-banner-code">Standalone 6&ndash;12 Certifications</span></div>
@@ -703,6 +732,7 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2.2"/><path d="M24 8c4 5 6 11 6 16s-2 11-6 16" stroke="currentColor" stroke-width="1.8"/><path d="M8 24h32" stroke="currentColor" stroke-width="1.8"/></svg></span>
         <span class="tile-name">Broad Field Science</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/717" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 717) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-broad-field');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     <div class="hs-subgroup-box" style="--box-color:#145A54;">
@@ -712,11 +742,13 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
         <span class="tile-name">Biology — Test I</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/710" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 710) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-bio-1');">Go to Practice Exams &rarr;</button>
       </div>
       <div class="subject-tile" data-panel="panel-bio-2" style="--tile-color:#164D63;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6c0 8 20 8 20 16s-20 8-20 16" stroke="currentColor" stroke-width="2.2"/><path d="M34 6c0 8-20 8-20 16s20 8 20 16" stroke="currentColor" stroke-width="2.2"/></svg></span>
         <span class="tile-name">Biology — Test II</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/710" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 710) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-bio-2');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     </div>
@@ -728,11 +760,13 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
         <span class="tile-name">Chemistry — Test I</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/712" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 712) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-chem-1');">Go to Practice Exams &rarr;</button>
       </div>
       <div class="subject-tile" data-panel="panel-chem-2" style="--tile-color:#8A4570;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M19 6h10v10l8 16a4 4 0 0 1-3.6 5.8H14.6A4 4 0 0 1 11 32l8-16V6Z" stroke="currentColor" stroke-width="2.2"/><circle cx="21" cy="30" r="1.6" fill="currentColor"/><circle cx="27" cy="33" r="1.3" fill="currentColor"/></svg></span>
         <span class="tile-name">Chemistry — Test II</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/712" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 712) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-chem-2');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     </div>
@@ -744,11 +778,13 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
         <span class="tile-name">Physics — Test I</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/718" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 718) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-phys-1');">Go to Practice Exams &rarr;</button>
       </div>
       <div class="subject-tile" data-panel="panel-phys-2" style="--tile-color:#5F5296;" role="button" tabindex="0">
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/></svg></span>
         <span class="tile-name">Physics — Test II</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/718" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 718) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-phys-2');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     </div>
@@ -758,6 +794,7 @@
         <span class="tile-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M6 12l18-6 18 6-18 6-18-6Z" stroke="currentColor" stroke-width="2.2"/><path d="M14 16v10c0 3 5 5 10 5s10-2 10-5V16" stroke="currentColor" stroke-width="2.2"/></svg></span>
         <span class="tile-name">Elementary Education Science</span>
         <span class="tile-meta">5 exams · 25 items each</span><a class="tile-test-num" href="https://www.gace.es.pearson.com/studyguide/702" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Study Guide (GACE 702) &rarr;</a>
+        <button class="tile-go-exams" onclick="event.stopPropagation(); showPanel('panel-eled');">Go to Practice Exams &rarr;</button>
       </div>
     </div>
     </div>
