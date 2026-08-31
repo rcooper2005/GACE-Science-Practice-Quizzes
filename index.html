@@ -554,6 +554,31 @@
   .hs-subgroup-label{
     margin-top:0;
   }
+
+  .cta-practice-exams{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:32px;
+    padding:16px 32px;
+    border-radius:999px;
+    background:linear-gradient(135deg, #2D5C37, #1F4A6B);
+    color:#fff;
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 6px 0 0 color-mix(in srgb, #1F4A6B 70%, black);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-practice-exams:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 0 0 color-mix(in srgb, #1F4A6B 70%, black);
+  }
+  .cta-practice-exams:active{
+    transform:translateY(2px);
+    box-shadow:0 3px 0 0 color-mix(in srgb, #1F4A6B 70%, black);
+  }
 </style>
 </head>
 <body>
@@ -646,6 +671,7 @@
       <div><strong>11</strong>test sections</div>
       <div><strong>6</strong>certification tests</div>
     </div>
+    <a href="#subject-grid-wrap" class="cta-practice-exams" onclick="document.getElementById('subject-grid-wrap').scrollIntoView({behavior:'smooth'}); return false;">Go to Practice Exams &darr;</a>
   </div>
 </header>
 
