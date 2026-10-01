@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Density is mass per volume.", "Hardness is scratch resistance.", "Streak is powder color.", "Luster describes how light reflects off the surface."], "t": "Minerals and their properties", "u": "https://www.khanacademy.org/search?page_search_query=minerals+properties"}, {"w": ["Granite is not changed by heat and pressure, so it is not metamorphic.", "Chemical rocks are sedimentary.", "Granite did not form from sediment.", "Granite cooled slowly underground (intrusive igneous), giving large crystals."], "t": "Rock types and the rock cycle", "u": "https://www.khanacademy.org/search?page_search_query=rock+cycle"}, {"w": ["Weathering breaks rock down.", "Metamorphism uses heat and pressure.", "Crystallization is minerals forming from melt or solution.", "Lithification is compaction plus cementation."], "t": "Rock types and the rock cycle", "u": "https://www.khanacademy.org/search?page_search_query=rock+cycle"}, {"w": ["Wind shapes dunes and arches.", "Glaciers carve wide, U-shaped valleys.", "Rivers carve V-shaped valleys.", "Waves shape coastlines."], "t": "Weathering, erosion, and deposition", "u": "https://www.khanacademy.org/search?page_search_query=weathering+and+erosion"}, {"w": ["Slightly acidic water dissolves limestone, forming caves and sinkholes.", "Granite does not dissolve to form karst.", "Wind deposition makes dunes.", "Glaciers carve valleys."], "t": "Weathering, erosion, and deposition", "u": "https://www.khanacademy.org/search?page_search_query=weathering+and+erosion"}, {"w": ["Magnetism does not keep the core solid.", "Distance from the mantle is not the reason.", "The inner core is very dense.", "Enormous pressure keeps iron solid even above its normal melting point."], "t": "Earth's layers and seismic waves", "u": "https://www.khanacademy.org/search?page_search_query=earth%27s+layers+seismic+waves"}, {"w": ["Seismic waves are not a visual tool.", "Salinity is measured chemically.", "Weather is studied in the atmosphere.", "How seismic waves bend and speed up reveals Earth's layers."], "t": "Earth's layers and seismic waves", "u": "https://www.khanacademy.org/search?page_search_query=earth%27s+layers+seismic+waves"}, {"w": ["10,000 centuries is a million years, one hundred times too long.", "1,000 centuries is ten times too long.", "10 centuries is ten times too short.", "100,000 cm ÷ 10 cm/yr = 10,000 years = 100 centuries."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["200,000 years is ten times too short.", "20 million years is ten times too long.", "90 km = 9,000,000 cm; ÷ 4.5 cm/yr = 2,000,000 years.", "200 million years is one hundred times too long."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["48 multiplies instead of dividing.", "4.8 is not 12 ÷ 4.", "12 cm ÷ 4 yr = 3 cm/yr.", "12 is the total, not the yearly rate."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["100 g is one half-life.", "25 g is three half-lives.", "200 → 100 → 50 g after two half-lives.", "12.5 g is four half-lives."], "t": "Radiometric dating and half-life", "u": "https://www.khanacademy.org/search?page_search_query=radiometric+dating+half-life"}, {"w": ["5 × 25,000 = 125,000 years.", "50,000 years is two half-lives.", "25,000 years is one half-life.", "250,000 years is ten half-lives."], "t": "Radiometric dating and half-life", "u": "https://www.khanacademy.org/search?page_search_query=radiometric+dating+half-life"}, {"w": ["Only water evaporates; salts stay behind, so the vapor is fresh.", "Precipitation falls already fresh; it does not do the removing.", "Runoff carries dissolved salts.", "Infiltration filters some particles but does not desalinate."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["A watershed is all the land that drains into a given river or lake.", "An underground reservoir is an aquifer.", "A watershed is not a cloud type.", "Where a river meets the ocean is its mouth or delta."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["Abyssal plains are the flat, deep ocean floor.", "Ridges are mountain chains.", "Slopes are steep.", "Shelves are shallow."], "t": "Oceans: seafloor, currents, and salinity", "u": "https://www.khanacademy.org/search?page_search_query=ocean+currents"}, {"w": ["El Niño is a Pacific event.", "Warm central and eastern Pacific water shifts rainfall and weather worldwide.", "Unusually cold Pacific water is La Niña.", "Ocean temperature does change."], "t": "Oceans: seafloor, currents, and salinity", "u": "https://www.khanacademy.org/search?page_search_query=ocean+currents"}, {"w": ["Rain and rivers lower salinity.", "Melting ice adds fresh water.", "High evaporation with little fresh water raises salinity.", "Cloud cover reduces evaporation."], "t": "Oceans: seafloor, currents, and salinity", "u": "https://www.khanacademy.org/search?page_search_query=ocean+currents"}, {"w": ["The other layers hold the remainder, so it is not nearly 100%.", "The dense lowest layer holds about 75–80% of the atmosphere's mass.", "10% is far too low.", "25% is far too low."], "t": "Layers and composition of the atmosphere", "u": "https://www.khanacademy.org/search?page_search_query=layers+of+the+atmosphere"}, {"w": ["Argon is about 0.9%.", "Oxygen is about 21%.", "Nitrogen is about 78%.", "Carbon dioxide is about 0.04%."], "t": "Layers and composition of the atmosphere", "u": "https://www.khanacademy.org/search?page_search_query=layers+of+the+atmosphere"}, {"w": ["At an equinox, the Sun is over the equator and day and night are about 12 hours each everywhere.", "Earth is closest to the Sun around January 3 (perihelion).", "No hemisphere is fully dark at an equinox.", "The warmest Northern Hemisphere temperatures come after the June solstice."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["A local breeze is small-scale, not global.", "A tornado is a storm.", "Prevailing winds (trade winds, westerlies) come from global circulation.", "A microclimate is local."], "t": "Weather, climate, and the greenhouse effect", "u": "https://www.khanacademy.org/search?page_search_query=weather+and+climate"}, {"w": ["Mercury is the smallest planet.", "Uranus is tilted about 98°, so it rotates on its side.", "Uranus has 27+ known moons.", "Uranus is an ice giant with no liquid-water surface."], "t": "The solar system", "u": "https://www.khanacademy.org/search?page_search_query=solar+system+planets"}, {"w": ["An asteroid is a rocky body in space.", "A meteorite is a meteoroid that reaches the ground.", "A meteoroid is the object while still in space.", "A meteor is the streak of light in the sky."], "t": "The solar system", "u": "https://www.khanacademy.org/search?page_search_query=solar+system+planets"}, {"w": ["Alignment causes spring tides.", "At a 90° angle (quarter moons), the Sun's pull partly offsets the Moon's, causing neap tides.", "Tidal variation does happen.", "Same-side alignment (new moon) causes spring tides."], "t": "Moon phases, eclipses, and tides", "u": "https://www.khanacademy.org/search?page_search_query=moon+phases+eclipses+tides"}, {"w": ["Tidal locking matched the Moon's rotation to its orbit, so one side always faces Earth.", "The Moon does orbit Earth.", "Earth's day (24 hours) does not match the Moon's.", "The Moon does rotate."], "t": "Moon phases, eclipses, and tides", "u": "https://www.khanacademy.org/search?page_search_query=moon+phases+eclipses+tides"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

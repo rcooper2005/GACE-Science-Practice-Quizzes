@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Heat movement speed is conductivity.", "Maximum temperature is not specific heat.", "Specific heat is the energy per kg per °C.", "Radioactivity is unrelated."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Celsius sets 0° at water's freezing point.", "Rankine starts at absolute zero.", "Kelvin starts at absolute zero.", "Fahrenheit sets freezing at 32°."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Conduction requires contact.", "Radiation travels by EM waves, even through a vacuum.", "Sublimation is a phase change.", "Convection requires a fluid."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["W_net = ΔKE.", "Impulse changes momentum.", "Net work is about kinetic, not potential, energy.", "Mass does not change."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["36 is mass × velocity.", "3 is the acceleration.", "6 is not the result.", "a = 12 ÷ 4 = 3 m/s²; F = 3 × 3 = 9 N."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Pressure does not decrease.", "Pressure changes.", "At fixed V, P ∝ T.", "Pressure is never negative."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Speeding up is a result, not the condition.", "Changing mass is not the condition.", "With no external torque, L is conserved.", "Friction adds torque."], "t": "Torque and rotational equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=torque+rotational+equilibrium"}, {"w": ["200 N is too small.", "20,000 N is too large.", "a = 20 ÷ 10 = 2 m/s²; F = 2,000 × 2 = 4,000 N.", "2,000 N is the mass, not the force."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Proton-only is not a main type.", "Neutron-only is not a main type.", "Alpha, beta, and gamma are the main types.", "Delta is not a decay type."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["45 is not p = mv.", "p = 5 × 4 = 20 kg·m/s.", "1.25 divides instead of multiplying.", "9 adds the numbers."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["KE is lowest at the top.", "Speed is lowest at the top.", "Momentum is lowest at the top.", "PE is highest at the top."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Centripetal acceleration occurs in all circular motion.", "Centripetal acceleration points toward the center.", "It is not zero, because direction changes.", "Outward is the fictitious centrifugal force."], "t": "Centripetal force and circular motion", "u": "https://www.khanacademy.org/search?page_search_query=centripetal+force+circular+motion"}, {"w": ["The photoelectric effect is not mechanical.", "It is not explained by an electric field alone.", "Wave-only theory failed to explain it.", "Photons are discrete energy packets."], "t": "Photons, the photoelectric effect, and the Bohr model", "u": "https://www.khanacademy.org/search?page_search_query=photoelectric+effect+bohr+model"}, {"w": ["PE = ½kx², so doubling x gives 4×.", "The energy changes.", "x is squared, so it is not 2×.", "The energy grows, not shrinks."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Gravity still acts in free fall.", "Free fall is motion under gravity alone.", "Speed increases in free fall.", "Free fall happens near Earth too."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["Impulse = Δp.", "Position is not related to impulse.", "Mass does not change.", "Kinetic energy relates to work, not impulse."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["The joule is energy.", "The pascal is pressure.", "The newton is force.", "The watt is power."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Binding energy is the energy to fully separate a nucleus into nucleons.", "Forming a nucleus releases that energy.", "Ionizing removes electrons.", "Melting is a phase change."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["The force does not point away from Earth.", "The orbit requires a net force.", "The velocity is tangent, not the force.", "The net force is gravity, pointing toward Earth."], "t": "Centripetal force and circular motion", "u": "https://www.khanacademy.org/search?page_search_query=centripetal+force+circular+motion"}, {"w": ["Fission is not single-proton decay.", "Fusing is fusion.", "Fission releases energy.", "Fission splits heavy nuclei, releasing energy."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Twice would be inverse, not inverse-square.", "1/(1/2)² = 4 times as strong.", "Closer means stronger, not weaker.", "Closer means stronger."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Reactors do not use combustion.", "Reactors sustain a chain reaction.", "Fusion reactors are still experimental.", "Reactors use controlled fission."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["1/16 is four half-lives.", "30 ÷ 10 = 3 half-lives: (1/2)³ = 1/8.", "1/4 is two half-lives.", "1/2 is one half-life."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["h = ½(10)(2²) = 20 m.", "100 m is too large.", "10 m forgets the square.", "40 m forgets the ½."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["c = 200 ÷ (2 × 5) = 20.", "4 is too small.", "40 doubles the answer.", "100 is too large."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

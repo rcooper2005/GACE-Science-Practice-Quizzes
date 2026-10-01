@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["K >> 1 means products dominate at equilibrium.", "Equal amounts would be K ≈ 1.", "Reactants are favored when K << 1.", "Equilibrium is dynamic; reactions continue."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Molecules keep moving.", "At equilibrium, concentrations stay constant.", "Both rates are equal and nonzero.", "Equilibrium usually stops short of complete conversion."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Galvanic cells turn chemical energy into electrical energy.", "They do not produce sound.", "They are not nuclear.", "Their output is electricity, not mechanical energy."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Speeding up is what catalysts do.", "Inhibitors slow or block reactions.", "Inhibitors are the opposite of catalysts.", "Inhibitors do lower the rate."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Higher temperature speeds reactions.", "More concentration speeds reactions.", "Catalysts speed reactions.", "Less surface area means fewer collisions, so the rate does not increase."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Entropy measures disorder.", "Molarity is concentration.", "Enthalpy is heat content.", "Activation energy is an energy barrier."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Equal concentrations would need equal volumes.", "0.05 M halves the answer instead of doubling it.", "Moles of base = 0.050 L × 0.1 M = 0.005 mol; ÷ 0.025 L = 0.2 M acid.", "The concentration can be calculated (assuming a 1:1 reaction)."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Structure is found by spectroscopy.", "Titration finds an unknown concentration using a known solution.", "Density is not found by titration.", "Boiling point is not found by titration."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Adding inert gas does not stop the reaction.", "Partial pressures are unchanged, so there is no shift.", "Partial pressures are unchanged, so there is no shift.", "At constant volume, an inert gas does not change partial pressures, so there is no shift."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["A rate law relates rate to reactant concentrations (rate = k[A]ᵐ[B]ⁿ).", "Volume is not in the rate law.", "Temperature affects k but is not the relationship expressed.", "Color is not in the rate law."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Gas volumes are not conserved in general.", "Charge is balanced, but the key idea is atoms.", "Balanced equations conserve atoms (mass).", "Energy is not what balancing shows."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Donating electrons is a Lewis base.", "Accepting a proton is a base.", "Accepting OH⁻ is not a definition of an acid.", "A Brønsted–Lowry acid donates H⁺."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Activation energy does not determine direction.", "Activation energy affects rate.", "A higher barrier is slower, not faster.", "A higher barrier means fewer successful collisions, so the reaction is slower."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["pH above 7 is basic.", "Acidic is below 7.", "Neutral is 7.", "Strongly acidic is near 0."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["2 times is the difference in pH, not [H⁺].", "20 times is not a power of 10.", "Each pH unit is ×10: 10² = 100 times.", "200 times is not a power of 10."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["A 3-unit difference is not equal.", "Each unit is ×10, not ×1.", "pH 5 has 10³ = 1,000 times more H⁺.", "pH 8 is the less acidic one."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Electroplating is not acid–base chemistry.", "It is not nuclear.", "It is not organic synthesis.", "Electroplating uses electrolysis to deposit metal (redox)."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["The change is a factor of 10³, not 3.", "Lower pH means more H⁺.", "Lower pH means more H⁺.", "Down 3 pH units means 1,000 times more H⁺."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["pH 7 is well defined.", "Strongly acidic is near 0.", "pH 7 is neutral.", "Strongly basic is near 14."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Faster particles collide more often and with more energy.", "Heat increases reactivity.", "Heat increases motion.", "Heat speeds particles up."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Soluble products stay dissolved.", "A precipitate is not an acid.", "An insoluble product separates as a precipitate.", "A gas bubbles out; it is not a precipitate."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}, {"w": ["Metallic bonds are not in hydrocarbons.", "Unsaturated hydrocarbons have C=C or C≡C bonds.", "Hydrocarbons are covalent.", "Only single bonds means saturated."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["20 doubles instead of halving.", "H₂O₂:O₂ is 2:1, so 10 ÷ 2 = 5.", "2.5 divides by 4.", "10 assumes 1:1."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Leftover reactant is the excess reactant.", "An inhibitor slows reactions.", "Products are formed, not left over.", "A catalyst is not used up."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["The oxidizing agent does change.", "The oxidizing agent is reduced (gains electrons) and oxidizes the other substance.", "Being oxidized describes the reducing agent.", "Neutralization is acid–base chemistry."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

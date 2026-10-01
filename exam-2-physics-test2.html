@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["20 Ω is series.", "100 Ω multiplies.", "1/R = 1/10 + 1/10, so R = 5 Ω.", "Parallel resistance is lower than either resistor."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Gravitational fields come from mass.", "Electric fields exist everywhere around charges.", "An electric field is a region where a charge feels a force.", "Fields exert forces."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["Static electricity is not magnetic.", "Static electricity is a surface charge imbalance.", "Insulators hold static charge too.", "Flowing charge is current."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["Opposite poles attract.", "Motion is irrelevant.", "Like poles repel.", "Size is irrelevant."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Induced current opposes the change in flux.", "It does not oppose resistance.", "It is not always opposite conventional current.", "It is not about Newton's laws."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["2.5 divides.", "7 adds.", "20 doubles.", "v = fλ = 5 × 2 = 10 m/s."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["GPS needs relativity corrections.", "Relativity corrections keep GPS accurate.", "Without relativity, GPS errors grow by about 10 km/day.", "Thermodynamics is not the key."], "t": "Special relativity", "u": "https://www.khanacademy.org/search?page_search_query=special+relativity"}, {"w": ["Real, inverted images form beyond F.", "Real images are inverted.", "Close to a concave mirror: virtual, upright, magnified.", "Virtual images are upright."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["P = I/V is wrong.", "Power is a product, not a sum.", "P = IV.", "V/I² is wrong."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["5 m divides.", "λ = vT = 20 × 4 = 80 m.", "100 m is too large.", "16 m subtracts."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Reflection bounces light.", "TIR traps light.", "Polarization filters light.", "Different colors refract by different amounts: dispersion."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["The ohm is resistance.", "The volt is potential.", "The ampere is current.", "The watt is power."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Reflection alone does not split colors.", "Refraction plus dispersion separates colors.", "Rainbows are not caused by absorption.", "Diffraction is not the main cause."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Nuclear technology is not only math.", "It links physics to energy, medicine, and policy.", "Its impact is broad.", "It is not only military."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Refraction is not how noise cancellation works.", "Constructive interference amplifies sound.", "Diffraction does not block sound.", "An inverted wave cancels the noise: destructive interference."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Not the third law.", "Not momentum.", "Not Coulomb's law.", "Changing current in one coil induces voltage in the other."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["Current is charge per unit time.", "Voltage is potential difference.", "Power is energy per time.", "Resistance opposes current."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Never touch exposed wires.", "Never bypass interlocks.", "Use lockout/tagout and insulated tools.", "Never work with wet hands."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Identical waves traveling in opposite directions form standing waves.", "Different frequencies give beats, not standing waves.", "One wave alone cannot form a standing wave.", "Standing waves are not only electromagnetic."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Pitch is set by frequency.", "Amplitude sets loudness.", "Speed is set by the medium.", "Wavelength depends on the medium."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}, {"w": ["Theories can be revised.", "A theory is a well-substantiated explanation backed by extensive evidence.", "Theories are strongly supported.", "Theories are evidence-based."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["Nuclear plants use fission heat.", "Friction is not the source.", "Combustion is fossil fuels.", "Wind is a different source."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Diffraction is unrelated.", "Refraction is a different law.", "The critical angle is TIR.", "Angle of incidence = angle of reflection."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["AC reverses direction periodically.", "One direction is DC.", "AC powers homes.", "AC has voltage."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["The force changes.", "The force grows, not shrinks.", "Both charges double, not one.", "F ∝ q₁q₂: 2 × 2 = 4."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

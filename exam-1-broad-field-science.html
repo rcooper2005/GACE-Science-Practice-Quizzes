@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["The dependent variable is what you measure.", "A confounding variable is an unwanted extra influence.", "Controlled variables are kept constant.", "The independent variable is the one the researcher deliberately changes."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Peer review, replication, and new evidence continually test and refine scientific knowledge.", "No result is beyond question.", "Governments cannot validate science.", "Evidence decides scientific questions, not votes."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["By convention, the independent variable goes on the x-axis.", "The legend identifies data series.", "The title describes the graph.", "The y-axis is for the dependent variable."], "t": "Graphing and analyzing data", "u": "https://www.khanacademy.org/search?page_search_query=graphing+data+independent+dependent+variable"}, {"w": ["Renewables still produce electricity.", "Renewables replace finite, polluting fossil fuels.", "Technology builds on science; it does not replace it.", "Renewables reduce emissions, not increase them."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["F = ma = 5 × 4 = 20 N.", "1.25 comes from dividing instead of multiplying.", "9 comes from adding.", "45 does not come from F = ma."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["4 halves the answer.", "16 doubles the answer.", "H₂:H₂O is 2:2 (1:1), so 8 mol gives 8 mol.", "2 does not follow from the ratio."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Electron transfer forming ions is an ionic bond.", "Covalent bonds share electrons.", "Hydrogen bonds are attractions between molecules.", "Metallic bonds involve a sea of electrons."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Valence electrons are shared within a group (column).", "Each element has a different number of protons.", "Elements in a period have the same number of occupied electron shells.", "Neutron numbers vary."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Catalysts change rate, not heat flow.", "Exothermic reactions release heat (ΔH < 0).", "Endothermic reactions absorb heat.", "Equilibrium is about balanced rates."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["A salt is a product of neutralization.", "A base accepts protons.", "A buffer resists pH change.", "A Brønsted–Lowry acid donates H⁺."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Neutralization is an acid–base reaction.", "Losing electrons is oxidation (OIL RIG: Oxidation Is Loss).", "Reduction is gaining electrons.", "\"Ionized\" is not the redox term."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Aa × Aa can produce aa offspring.", "Aa × Aa gives 1/4 aa, so 25% show the recessive trait.", "75% show the dominant trait.", "50% are Aa."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["25,000 kcal would be 50%.", "500 kcal is two transfers.", "10% of 50,000 = 5,000 kcal.", "Energy decreases at each transfer."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["A mutation is a DNA change.", "Translation at ribosomes uses mRNA to build a protein.", "Transcription makes mRNA from DNA.", "Replication copies DNA."], "t": "Transcription and translation", "u": "https://www.khanacademy.org/search?page_search_query=transcription+and+translation"}, {"w": ["Identical genotypes leave nothing to select.", "Natural selection works in sexual species too.", "Changing environments often drive selection.", "Heritable variation is required for natural selection."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Phylogenetic (cladistic) classification groups organisms by shared ancestry.", "Habitat does not reflect relatedness.", "Alphabetical order is arbitrary.", "Size does not reflect relatedness."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Filtering air is the respiratory system's job.", "Breaking down food is digestion.", "Hormones come from the endocrine system.", "The circulatory system transports O₂, nutrients, and wastes."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["About 10% of energy passes to the next trophic level.", "1% is too low.", "100% would mean no losses.", "50% is too high."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Sedimentary rocks form from sediment.", "Metamorphic rocks form from heat and pressure.", "Igneous rocks form when magma or lava cools.", "Chemical rocks are sedimentary."], "t": "Rock types and the rock cycle", "u": "https://www.khanacademy.org/search?page_search_query=rock+cycle"}, {"w": ["The asthenosphere lies below the lithosphere.", "The inner core is at the center.", "The lithosphere is the crust plus the rigid uppermost mantle.", "The outer core is liquid metal."], "t": "Earth's layers and seismic waves", "u": "https://www.khanacademy.org/search?page_search_query=earth%27s+layers+seismic+waves"}, {"w": ["Subduction zones destroy crust.", "Transform boundaries slide past each other.", "Convergent boundaries collide.", "Divergent boundaries create new oceanic crust."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["Evaporation is from water surfaces.", "Transpiration is vapor released from plants.", "Precipitation falls from clouds.", "Condensation forms clouds."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["The thermosphere is very high and thin.", "The mesosphere is where meteors burn up.", "The stratosphere holds the ozone layer.", "The troposphere is where weather happens."], "t": "Layers and composition of the atmosphere", "u": "https://www.khanacademy.org/search?page_search_query=layers+of+the+atmosphere"}, {"w": ["Solar flares do not cause seasons.", "Ocean currents do not cause seasons.", "Axial tilt causes the seasons.", "Earth is closest to the Sun in January."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["A collapsing rotating nebula formed the Sun and planets.", "Colliding asteroids are not the origin.", "A stellar explosion may have triggered the collapse but is not the theory itself.", "A stable cloud would not collapse."], "t": "The solar system", "u": "https://www.khanacademy.org/search?page_search_query=solar+system+planets"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

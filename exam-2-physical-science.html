@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Crystal describes a solid's structure, not a separate state.", "The three common states are solid, liquid, and gas.", "\"Vapor\" usually means the gas form of something that is liquid at room temperature; gas is the general term.", "Plasma is a fourth state; it is not one of the three common ones."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["A physical change keeps the same chemical composition.", "Volume can change, as when water freezes and expands.", "Shape often changes, as in cutting or bending.", "Temperature often changes during physical changes."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["Ions differ in electrons, not neutrons.", "Electron count does not define isotopes.", "Isotopes differ in their number of neutrons.", "The proton number is the same for isotopes of an element."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Neutron counts are not used to order elements.", "Density does not set the order.", "The modern table is ordered by atomic number, not atomic mass.", "The table is ordered by increasing atomic number."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["25 m/s gives KE = ½(4)(25²) = 1,250 J.", "2.5 m/s gives 12.5 J.", "12.5 is 50 ÷ 4, which skips the ½ and the square root.", "50 = ½(4)v² → v² = 25 → v = 5 m/s."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["20 kg gives PE = 20 × 10 × 5 = 1,000 J.", "0.5 kg gives 25 J.", "50 kg gives 2,500 J.", "m = PE/(gh) = 100 ÷ (10 × 5) = 2 kg."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["The reaction force is equal, not smaller.", "Every action force has an equal and opposite reaction force.", "The paired forces act at the same time.", "The reaction force is equal, not larger."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Momentum p = m × v (velocity).", "Weight is a force, not part of momentum.", "Force relates to the change in momentum, not momentum itself.", "Mass × acceleration is net force (F = ma)."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["mgh is gravitational potential energy.", "ma is force.", "KE = ½mv².", "Fd is work."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Pulleys do not eliminate friction.", "No machine reduces the total work.", "A single fixed pulley lets you pull down to lift up; adding pulleys also lowers the force needed.", "Mass does not change."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["F = Gm₁m₂/d², so force is inversely proportional to the square of the distance.", "Force is directly proportional to mass, not inversely.", "Time is not in the equation.", "Velocity is not in the equation."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Heat flows from higher to lower temperature.", "This reverses the natural direction of heat flow.", "Heat flow is not random.", "There is no net flow at equal temperatures."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Time is not in Ohm's law.", "Power is P = IV, a separate equation.", "Charge relates to current by I = Q/t, not Ohm's law.", "Ohm's law: I = V/R."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Wavelength is the distance from crest to crest.", "Frequency is the number of waves per second.", "Amplitude is the wave's height from rest position.", "Period is the time for one cycle."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Forming oppositely charged ions is ionic bonding.", "A pool of free electrons is metallic bonding.", "Covalent bonds form when atoms share electrons.", "Complete transfer is ionic bonding."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Two nonmetals bond covalently.", "Metals lose electrons to nonmetals, forming ionic compounds such as NaCl.", "Noble gases rarely bond at all.", "Two metals form metallic bonds or alloys."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Metallic bonding is a lattice of metal cations in a sea of delocalized electrons, which explains conductivity.", "Sharing between two atoms is covalent bonding.", "Complete electron transfer is ionic bonding.", "Metallic bonding depends on electron interaction."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Neutron numbers vary across a period.", "Each element in a period has a different number of protons.", "Elements in the same period have the same number of electron shells (the period number).", "Valence electrons change across a period; they are shared within a group."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Transition metals are generally less reactive than alkali metals.", "Group 1 alkali metals lose their single valence electron very easily, so they are the most reactive metals.", "Halogens are the most reactive nonmetals, not metals.", "Noble gases are unreactive."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["10 doubles 5 instead of using the 3:1 ratio.", "The ratio is 6/2 = 3 product per reactant, so 5 × 3 = 15.", "20 uses the wrong ratio.", "30 multiplies 5 by 6, ignoring the 2."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["10 uses the O₂ coefficient.", "2.5 halves the amount incorrectly.", "CH₄:CO₂ is 1:1, so 5 mol CH₄ gives 5 mol CO₂.", "20 multiplies the amount incorrectly."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["A catalyst does not add products.", "A catalyst lowers the activation energy.", "Catalysts are regenerated, not consumed.", "A catalyst does not change the temperature."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Amphoteric substances can act as acid or base; that is not defined by pH.", "Basic is pH above 7.", "Neutral is pH 7.", "pH below 7 is acidic."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Acid + base → salt + water is a neutralization reaction.", "Combustion is a fuel reacting with O₂.", "Decomposition is one compound breaking apart.", "Synthesis is combining substances into one product; it does not specifically describe acid + base."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Strong acids ionize at ordinary temperatures.", "Partial ionization describes weak acids.", "Acids do ionize in water.", "Strong acids (HCl, HNO₃, H₂SO₄) ionize completely in water."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

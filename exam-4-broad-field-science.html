@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Repeating trials shows whether results are consistent: reliability.", "Replication takes more time, not less.", "Replication repeats the test, not adds hypotheses.", "Replication reduces bias."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Soil type, if kept constant, is a controlled variable.", "Water amount is what is deliberately changed.", "Plant height is the dependent variable.", "Temperature, if kept constant, is a controlled variable."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Protective gear is required.", "Never leave a flame unattended.", "Always follow posted procedures.", "Use heat-resistant equipment and stay with the flame."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Renewables do not eliminate energy use.", "Renewables reduce fossil fuel use.", "Renewables reduce reliance on nonrenewable sources.", "Renewables support research rather than replace it."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["v = fλ = 10 × 3 = 30 m/s.", "300 is ten times too large.", "3.3 divides instead of multiplying.", "13 comes from adding."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["9 is the original amount.", "27 multiplies by 9.", "3 is the reactant amount.", "Ratio 1:3: 6 × 3 = 18 mol."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Same valence electrons give similar chemistry.", "Neutrons do not set chemistry.", "Total electrons differ down a group.", "Protons differ."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Exothermic reactions release heat.", "Combustion is exothermic.", "\"Neutral\" is not a thermochemistry term.", "Endothermic reactions absorb heat."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Acid + base → salt + water.", "Gas is not the defining product.", "A precipitate is not required.", "Water also forms."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Mass × acceleration is force.", "Mass × velocity is momentum.", "Force ÷ time is not work.", "W = Fd."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Low resistance means a good conductor.", "Semiconductors are in between.", "Capacitors store charge.", "Insulators resist current."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["3/4 show the dominant trait.", "Not all offspring are Ee.", "Ee × Ee gives 1/2 Ee.", "1/4 are EE or ee."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["4 is the total growth over two generations.", "8 is not the per-generation factor.", "1 would mean no growth.", "100 → 200 → 400 is a factor of 2 each generation."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Vestigial structures are reduced.", "Homologous structures share an origin.", "Analogous structures share function but not origin.", "Convergent structures are analogous."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Size and color are not used in names.", "The name is genus + species.", "Habitat is not used in names.", "The name uses lower ranks, not domain and kingdom."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["The circulatory system transports materials.", "Gas exchange is the respiratory system's job.", "Digestion is a separate system.", "Hormones are endocrine."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Migration is a separate idea.", "Carrying capacity is the maximum sustainable population.", "Birth rate is a separate idea.", "Diversity is a separate idea."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Primary succession starts on bare rock with no soil.", "A climax community is the end point.", "After a fire, soil remains, so that is secondary succession.", "Existing soil means secondary succession."], "t": "Ecological succession", "u": "https://www.khanacademy.org/search?page_search_query=ecological+succession"}, {"w": ["Cooling magma makes igneous rock.", "Eruptions make igneous rock.", "Compaction and cementation of sediment make sedimentary rock.", "Heat and pressure make metamorphic rock."], "t": "Rock types and the rock cycle", "u": "https://www.khanacademy.org/search?page_search_query=rock+cycle"}, {"w": ["Plates move.", "Transform plates slide horizontally past each other.", "Moving apart is divergent.", "Colliding is convergent."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["Evaporation is from water surfaces.", "Transpiration releases vapor from plants.", "Infiltration is soaking into the ground.", "Condensation forms clouds."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["Temperature is not the main factor.", "Lower altitude means higher pressure.", "Pressure decreases as altitude increases.", "Time of day is a minor factor."], "t": "Layers and composition of the atmosphere", "u": "https://www.khanacademy.org/search?page_search_query=layers+of+the+atmosphere"}, {"w": ["Constant clouds would mean moisture.", "The rain shadow strongly affects climate.", "Mountains block moisture, leaving the leeward side dry.", "The leeward side gets less precipitation."], "t": "Weather, climate, and the greenhouse effect", "u": "https://www.khanacademy.org/search?page_search_query=weather+and+climate"}, {"w": ["Neptune and Uranus are blue.", "The Great Red Spot is Jupiter's.", "Io (a moon of Jupiter) is volcanic.", "Saturn is known for its rings."], "t": "The solar system", "u": "https://www.khanacademy.org/search?page_search_query=solar+system+planets"}, {"w": ["The Moon blocking sunlight is a solar eclipse.", "A new moon allows solar eclipses.", "Earth's shadow on the Moon is a lunar eclipse.", "Same side is a new moon arrangement."], "t": "Moon phases, eclipses, and tides", "u": "https://www.khanacademy.org/search?page_search_query=moon+phases+eclipses+tides"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

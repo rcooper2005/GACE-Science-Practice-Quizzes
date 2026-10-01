@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["3 assumes 1 N₂.", "2 assumes 1:1.", "N₂:H₂ is 1:3, so 2 × 3 = 6.", "4 does not follow."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Neutralization is not redox.", "A gas is not the typical product.", "A precipitate is not required.", "Acid + base → salt + water."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["5:15 simplifies to 1:3.", "3:1 is inverted.", "1:2 does not match.", "1:1 does not match."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Heating does not stop the reaction.", "Heating does shift it.", "Heating does not favor the exothermic direction.", "Heat acts as a product, so the reverse (endothermic) direction is favored."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["The backbone is the carbon skeleton.", "A functional group is the atom group that sets chemical behavior.", "Carbon count is not a functional group.", "A single hydrogen is not a functional group."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Half-life is not about double mass.", "Stability takes many half-lives.", "A half-life is when half the original amount decays.", "Complete decay takes many half-lives."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Basic is above 7.", "Neutral is 7.", "pH 2 is strongly acidic.", "Strongly basic is near 14."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["K is not a rate.", "K depends on temperature but is not a temperature.", "K is the ratio of products to reactants at equilibrium.", "K is not mass."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Exergonic refers to free energy, not heat absorbed.", "Exothermic releases heat.", "Catalytic is unrelated.", "Endothermic reactions absorb heat, so the surroundings cool."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["The limiting reactant is not specific to gases.", "The limiting reactant runs out first and caps the product.", "Excess is the opposite.", "It does react."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Functional groups set chemical properties and reactivity.", "State is not only from functional groups.", "Color is not the main effect.", "Mass is not the main effect."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Zn loses electrons, so it is not reduced.", "Zn → Zn²⁺: it loses electrons, so it is oxidized.", "Zn changes.", "This is redox, not neutralization."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["A + BC → AC + B.", "Combining is synthesis.", "Breaking apart is decomposition.", "Single replacement is not limited to solutions."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}, {"w": ["5 is half.", "15 is 1.5×.", "90 multiplies instead of dividing.", "The ratio is 1:3, so 30 ÷ 3 = 10."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Iron loses electrons to oxygen: redox.", "Rusting is not nuclear.", "Rusting is not neutralization.", "Rusting is chemical."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["The minimum energy for a successful collision is the activation energy.", "Free energy is ΔG.", "Bond energy is the energy per bond.", "Ionization energy removes electrons."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["There is no excess at the equivalence point.", "There is no excess at the equivalence point.", "Moles of acid and base are stoichiometrically equal.", "It is defined."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Protons are acid–base chemistry.", "Reduction is gain of electrons (RIG).", "Protons are acid–base chemistry.", "Losing electrons is oxidation."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Extra reactant shifts the equilibrium forward to consume it.", "The reverse is not favored.", "The reaction does not stop.", "It shifts."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["A battery is not neutralization.", "A battery is not a phase change.", "A battery houses a spontaneous redox reaction.", "A battery is not nuclear."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Exothermic releases heat.", "Combustion is exothermic.", "Neutralization is exothermic.", "Endothermic reactions absorb heat and cool the surroundings."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Oxygen is not the definition.", "Arrhenius acids increase H⁺.", "Increasing OH⁻ is what bases do.", "Chloride is a spectator ion."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Equal sides would mean no shift.", "Gas moles are what matter.", "Lowering pressure favors more molecules.", "Higher pressure favors fewer gas moles."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Oxidized means losing electrons.", "Gaining electrons is reduction.", "This is redox, not neutralization.", "Ionized is not the redox term."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Exothermic reactions release heat and warm the surroundings.", "Endothermic reactions absorb heat.", "\"Isothermic\" (isothermal) means constant temperature.", "Adiabatic means no heat exchange."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

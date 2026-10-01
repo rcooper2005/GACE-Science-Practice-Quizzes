@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Hypotheses are tested, not already proven.", "A hypothesis is a testable, tentative explanation.", "Hypotheses build on prior knowledge, not random guesses.", "A hypothesis is not a variable."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The measured outcome is the dependent variable.", "Constants are held fixed.", "The independent variable is manipulated.", "The independent variable is what the experimenter changes."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Never eat or drink in the lab.", "Supervision is required.", "Goggles, gloves, and other PPE protect against chemical and biological hazards.", "Biological waste needs biohazard disposal."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["GM crops affect food, farming, health, and policy.", "The effects reach far beyond labs.", "The effects go well beyond funding.", "The societal effects are broad."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["A theory is a well-substantiated explanation backed by extensive evidence.", "Theories are not opinions.", "Theories can be revised, and they are not laws.", "Theories are strongly supported, not guesses."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["Appearance can mislead classification.", "Diet does not define domains.", "Habitat does not define domains.", "Domains are based on cell type and molecular data (rRNA)."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Domain and kingdom are broad ranks.", "Class and order are middle ranks.", "The two-part name is genus + species.", "Kingdom and phylum are broad ranks."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Alphabetical order is arbitrary.", "Cladistics groups by shared ancestry, shown in cladograms.", "Size does not reflect relatedness.", "Habitat does not reflect relatedness."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Fungi are eukaryotic.", "Fungi do not photosynthesize.", "Fungi absorb nutrients (they are heterotrophs).", "Fungi have chitin cell walls."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Xylem moves water and minerals upward.", "Phloem moves sugars.", "The epidermis is the outer covering.", "The cortex is storage tissue."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["One of the stages is haploid.", "One of the stages is diploid.", "Alternation of generations is about ploidy, not reproduction type.", "Plants alternate between a haploid gametophyte and a diploid sporophyte."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Stomata open and close to control CO₂/O₂ exchange and water loss.", "Roots anchor the plant.", "Starch is stored in plastids.", "Chlorophyll absorbs sunlight."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["The excretory system removes waste.", "The circulatory system transports materials.", "The digestive system breaks down and absorbs food.", "The respiratory system exchanges gases."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The immune system defends against pathogens.", "Hormones are endocrine.", "Filtering waste is excretory.", "Oxygen transport is circulatory."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Blood flow is circulatory.", "Muscles respond to nerve signals.", "Hormones are endocrine.", "Neurons use electrical impulses and neurotransmitters."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Radial symmetry and a water vascular system describe echinoderms.", "A soft body with one foot describes mollusks.", "Arthropods have segmented bodies, exoskeletons, and jointed appendages.", "A backbone describes vertebrates."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["200 + 50 − 20 = 230.", "200 ignores births and deaths.", "250 ignores deaths.", "170 subtracts the births."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["450 subtracts instead of adding.", "500 × 1.10 = 550.", "500 ignores growth.", "600 uses 20%."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Deaths exceed births, so it does not increase.", "It changes.", "100 − 150 = −50.", "250 adds births and deaths together."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Competition harms both species.", "Mutualism benefits both.", "Parasitism harms one.", "Commensalism leaves one unaffected."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Cooperation is mutualism.", "Eating another species is predation.", "Same species is intraspecific competition.", "Different species competing for the same resource is interspecific competition."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["A community is all the species in an area.", "A niche is the organism's role and resource use.", "A biome is a large climate region.", "A population is one species in an area."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Transfer is far from 100%.", "Some energy does transfer.", "Energy decreases up the levels.", "About 10% passes on; most is lost as heat."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Decomposers recycle nutrients from dead matter.", "Preying on consumers is what predators do.", "Decomposers do not use sunlight.", "Producers photosynthesize."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Biomagnification is about toxins.", "Primary succession starts on bare rock with no soil.", "A climax community is the end point.", "Secondary succession starts with soil present."], "t": "Ecological succession", "u": "https://www.khanacademy.org/search?page_search_query=ecological+succession"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

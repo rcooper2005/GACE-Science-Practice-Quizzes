@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["GPS needs relativity corrections.", "Thermodynamics is not the key.", "Physics is central to GPS.", "Classical mechanics alone fails for GPS."], "t": "Special relativity", "u": "https://www.khanacademy.org/search?page_search_query=special+relativity"}, {"w": ["Experiments are still needed.", "Models simplify reality.", "Models simplify, explain, predict, and can be revised.", "Models are used in physics too."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["16 A adds.", "8 A subtracts.", "48 A multiplies.", "I = V/R = 12 ÷ 4 = 3 A."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["A diverging lens never inverts.", "A diverging lens always forms a virtual, upright, reduced image.", "A diverging lens never forms real images.", "A diverging lens never forms real images."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Reflection bounces light.", "Bending at an air–water boundary is refraction.", "Polarization filters light.", "Diffraction bends around edges."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Field lines do form loops.", "Field lines extend outside the magnet.", "Outside the magnet, lines go N to S.", "Outside the magnet, field lines run from N to S."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Current in = current out (conservation of charge).", "Current is not lost at a junction.", "Current is not converted.", "Current is not squared."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["A motor's output is motion, not just sound.", "Motors make electrical energy into mechanical energy.", "Motors are not nuclear.", "Motors are not chemical."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["Quadrupling is wrong.", "Current changes.", "I = V/R: doubling V doubles I.", "Halving is wrong."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["V = IR = 2 × 6 = 12 V.", "24 V doubles.", "8 V adds.", "3 V divides."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["UV is short.", "Gamma rays are the shortest.", "Radio waves are the longest.", "X-rays are short."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["All EM waves travel at the same speed in a vacuum.", "Color does not change speed in a vacuum.", "EM waves are not stationary.", "All EM waves travel at c in a vacuum."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["Red is the longest visible wavelength.", "Green is in the middle.", "Violet is the shortest visible wavelength (about 400 nm).", "Orange is long."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["Not Ohm's law.", "Generators use electromagnetic induction.", "Not radioactive decay.", "Not Coulomb's law."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["λ is not four times as long.", "λ changes.", "Higher f gives shorter λ, not longer.", "λ = v/f: twice the frequency gives half the wavelength."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Resistance is a separate quantity.", "Voltage is not a magnetic field.", "Rate of charge flow is current.", "Voltage is the potential difference between two points."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["3 m divides.", "24 m is too large.", "λ = vT = 6 × 2 = 12 m.", "6 m forgets the period."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["F ∝ q₁q₂.", "F decreases with distance.", "Temperature is not in Coulomb's law.", "Mass is not in Coulomb's law."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["F = qv × B is perpendicular to both v and B.", "The force is not parallel to v.", "The force is nonzero when moving.", "The force depends on speed."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["The impact goes beyond labs.", "The impact goes beyond theory.", "The impact goes beyond funding.", "Radiation therapy improves public health."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Speed does not drop to one-third.", "v = fλ, so tripling f triples v.", "Speed changes.", "Speed does not drop to one-ninth."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Energy is measured in joules.", "Amperes measure current.", "Ohms measure resistance.", "Teslas measure magnetic field."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["Technology relies on physics.", "MRI uses magnetism for imaging.", "Society is affected.", "Physics has applications."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["A convex lens converges light.", "A convex lens is curved, not flat.", "A prism disperses light.", "A concave lens diverges light."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Report all data.", "Share data.", "Report methods and data transparently and completely.", "Never omit data."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Hypotheses are tested, not assumed.", "A hypothesis must be falsifiable: some result could prove it wrong.", "Hypotheses are evidence-based.", "Hypotheses can be disproven."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Art is not the connection.", "History is not the connection.", "The connection is clear.", "Medical treatments link science to technology and society."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Never skip safety instructions.", "Gloves are required.", "Use PPE and follow disposal protocols.", "Never eat in the lab."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Plant growth is the dependent variable.", "The hypothesis is not a variable.", "Fertilizer amount is the independent variable.", "Light, water, and soil are held constant."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Weather is unrelated to genome sequencing.", "Genome sequencing enables personalized medicine and genetic testing.", "Its impact is significant.", "It has many applications."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Size does not define domains.", "Domains are based on cell and molecular features.", "Diet does not define domains.", "Habitat does not define domains."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["A lichen is a fungus plus an alga or cyanobacterium (mutualism).", "Viruses are not involved.", "Lichens are not two plants.", "Lichens are not animals."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Roots absorb water.", "The vascular cambium adds width: secondary growth.", "Flowers make seeds.", "Leaves photosynthesize."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["A waxy cuticle prevents water loss on land.", "Swim bladders belong to fish.", "Gills belong to aquatic animals.", "Fins belong to fish."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Sponges lack true tissues and filter-feed.", "Sponges have no organ systems.", "Sponges have no backbone.", "Sponges do not undergo complex metamorphosis."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Bone marrow makes blood cells.", "Digestion is a separate system.", "Gas exchange is respiratory.", "The kidneys filter blood and excrete urine."], "t": "The kidney and nephron", "u": "https://www.khanacademy.org/science/biology/human-biology/kidney-nephron/v/the-kidney-and-nephron"}, {"w": ["Insects have no backbone.", "Insects have legs.", "Insects have six legs and three body parts.", "Eight legs describe arachnids."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Spores come from sporophytes.", "An endosperm also forms.", "One sperm forms the zygote and the other forms the endosperm.", "Pollen delivers the sperm."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Keratin is in hair and nails.", "Bony fish have bone skeletons.", "Chitin is in arthropods.", "Sharks have cartilage skeletons."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Filtering waste is excretory.", "Hormones are endocrine.", "Oxygen transport is circulatory.", "The immune system defends against pathogens."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Mosses have cell walls.", "Mosses have chlorophyll.", "Mosses do reproduce.", "Mosses lack vascular tissue."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["10 × 3⁴ = 10 × 81 = 810.", "270 is three generations.", "2,430 is five generations.", "90 is two generations."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["The change is defined.", "All inputs and outputs balance, so there is no change.", "Gains equal losses, so no increase.", "Gains equal losses, so no decrease."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["500 deaths would give no growth.", "300 is the net change.", "1,500 + 500 − 1,800 = 200 deaths.", "100 deaths would give 1,900."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["A biome is a large region with a characteristic climate and communities.", "A single population is not a biome.", "Genetic makeup is a gene pool.", "A single local ecosystem is smaller than a biome."], "t": "Ecology", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap"}, {"w": ["Phosphorus has no significant gas phase.", "Phosphorus also cycles through rock and water.", "Phosphorus cycles through rock weathering and water.", "Phosphorus is essential (DNA, ATP)."], "t": "Biogeochemical cycles: carbon, nitrogen, phosphorus", "u": "https://www.khanacademy.org/search?page_search_query=biogeochemical+cycles"}, {"w": ["Succession leads to a stable climax community.", "Pioneer species come first.", "A disturbance restarts succession.", "Succession builds communities rather than ending in extinction."], "t": "Ecological succession", "u": "https://www.khanacademy.org/search?page_search_query=ecological+succession"}, {"w": ["Bioaccumulation is not dilution.", "Migration is unrelated.", "Toxins build up within one organism over its lifetime.", "The toxins persist rather than break down."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}, {"w": ["Sustainability balances human needs with long-term ecosystem health.", "Population growth must be considered.", "Short-term extraction is unsustainable.", "Sustainable management does not eliminate resource use."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}, {"w": ["Biodiversity does not intensify the greenhouse effect.", "Deforestation and fossil fuels raise atmospheric CO₂.", "Industrialization increased, not decreased.", "Agriculture increased."], "t": "Weather, climate, and the greenhouse effect", "u": "https://www.khanacademy.org/search?page_search_query=weather+and+climate"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

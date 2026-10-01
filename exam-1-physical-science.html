@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Melting is solid to liquid.", "Condensation is gas to liquid.", "Sublimation is solid directly to gas, as with dry ice.", "Deposition is the reverse: gas directly to solid."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Electrons can change (forming ions) without changing the element.", "Protons plus neutrons is the mass number.", "Neutron count varies among isotopes and does not set the element.", "The atomic number is the number of protons, and it defines the element."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Isomers are compounds with the same formula but different structures.", "Ions are atoms with a charge from gaining or losing electrons.", "Allotropes are different structural forms of one element, like diamond and graphite.", "Isotopes have the same number of protons but different numbers of neutrons, e.g., C-12 and C-14."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["In a physical change (melting, cutting, dissolving), the substance's identity and composition stay the same.", "Forming a new substance is a chemical change.", "Breaking and forming bonds between atoms is a chemical change.", "Physical changes can absorb or release energy (freezing releases it)."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["18 is the force, not the acceleration.", "6 is the mass.", "a = F/m = 18 N ÷ 6 kg = 3 m/s².", "108 comes from multiplying F × m instead of dividing."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["1.25 comes from dividing velocity by mass.", "45 does not come from any momentum formula.", "p = mv = 4 kg × 5 m/s = 20 kg·m/s.", "9 comes from adding mass and velocity."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Forces come in equal and opposite pairs acting on different objects.", "The reaction force is simultaneous, not delayed.", "Newton's third law says nothing about changes in mass.", "There is always a paired force."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Momentum is not converted into heat (kinetic energy can be).", "With no external force, total momentum does not decrease.", "With no external force, total momentum stays constant.", "Total momentum does not increase without an external force."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Temperature reflects the average kinetic energy of particles, but that is not the definition of kinetic energy.", "Energy in chemical bonds is chemical potential energy.", "Energy from position is gravitational potential energy.", "Kinetic energy is the energy of motion: KE = ½mv²."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["A lever lets you trade force for distance (or change direction) while doing the same work.", "Some input force is always required.", "A lever does not change the object's mass.", "Machines never reduce the total work; friction actually adds a little."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["Gravitational force depends on distance.", "Force falls as distance increases, so it cannot double.", "Gravity follows an inverse-square law, not a simple inverse.", "F ∝ 1/d², so doubling d gives 1/2² = 1/4 the force."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Heat never flows spontaneously from cold to hot (second law of thermodynamics).", "Density does not determine the direction of heat flow.", "Objects at equal temperature exchange no net heat.", "Heat flows from hot to cold until thermal equilibrium is reached."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["With voltage fixed, more resistance lowers the current.", "Current changes because I = V/R.", "I = V/R: if R goes up while V stays the same, I goes down.", "Current becomes very large only as resistance approaches zero."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Relative motion compresses or stretches the waves, changing the frequency (pitch) the listener hears.", "Amplitude relates to loudness, not pitch.", "Sound travels through air whether or not the source moves.", "The speed of sound in air does not depend on the source's motion."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["An ionic bond forms when electrons transfer from one atom (usually a metal) to another (a nonmetal), making ions that attract.", "Unequal sharing between nonmetals is a polar covalent bond.", "A sea of electrons describes metallic bonding.", "Equal sharing is a nonpolar covalent bond."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["A metallic lattice describes metallic bonding.", "Covalent bonds share one or more electron pairs.", "Attraction between opposite charges describes ionic bonding.", "Complete transfer of electrons is ionic bonding."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["An alloy is a solid solution of metals.", "An aqueous solution is any solution in which water is the solvent.", "A colloid has particles that are dispersed but do not truly dissolve (e.g., milk).", "In a suspension, particles settle out over time."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["The modern periodic table is ordered by atomic number (number of protons).", "Neutron counts vary among isotopes and are not used for ordering.", "Melting point is not the ordering basis.", "Mendeleev used atomic mass, but the modern table uses atomic number."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Elements in a group can be in different states (e.g., Group 17 has gases, a liquid, and solids).", "Each element has a different number of protons.", "Atomic mass increases going down a group.", "Elements in a group share the same number of valence electrons, so they react similarly."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["1 does not follow from the 2:2 mole ratio.", "The mole ratio of H₂ to H₂O is 2:2 (1:1), so 4 mol H₂ gives 4 mol H₂O.", "8 doubles the answer incorrectly.", "2 halves the answer incorrectly."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["6 assumes a 1:1 ratio.", "18 multiplies by 3 instead of using the ratio.", "The ratio H₂:NH₃ is 3:2, so 6 × (2/3) = 4 mol NH₃.", "2 divides by 3 without multiplying by 2."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Concentration is a separate factor; a catalyst does not change it.", "A catalyst provides a lower-energy pathway, which lowers the activation energy.", "Catalysts are not consumed in the reaction.", "Temperature is a separate factor; a catalyst does not change it."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Accepting a proton is the Brønsted–Lowry definition of a base.", "A Brønsted–Lowry acid donates a proton (H⁺).", "Donating OH⁻ is the Arrhenius definition of a base.", "Acids can neutralize weak bases too."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Neutral is pH 7.", "pH below 7 is acidic, and pH 3 is fairly strongly acidic.", "Strongly basic is near pH 12–14.", "Weakly basic is just above pH 7."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["SO₂ and NOₓ (from burning fossil fuels) react with water to form sulfuric and nitric acids.", "CO₂ makes only weak carbonic acid, and oxygen is not a pollutant.", "Ozone and N₂ are not the main causes of acid rain.", "Methane and helium do not form acids."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

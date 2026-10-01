@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Liquid to gas is vaporization.", "Gas to solid is deposition.", "Liquid to solid is freezing.", "Sublimation is solid directly to gas."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Rusting makes a new substance, so it is not physical.", "No new state of the same substance forms.", "Rusting does not involve the nucleus.", "Iron reacts with oxygen and water to form iron oxide, a new substance."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["Atomic number is the proton count.", "Mass number is protons + neutrons for one isotope.", "Atomic mass is the abundance-weighted average of the isotopes.", "\"Isotopic number\" is not a standard term."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Metals are not only in the top row.", "Metals fill the left side and center (transition metals).", "Metals are not only in the bottom rows.", "Nonmetals are on the right."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Quadrupling would require doubling both masses, or halving the distance.", "F ∝ m₁m₂, so doubling one mass doubles the force.", "Halving would come from decreasing a mass.", "Force depends on mass."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["v = at = 4 × 5 = 20 m/s (starting from rest).", "4 is the acceleration.", "15 does not come from the motion equations.", "12 is mass × acceleration, which is the force in newtons."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["The first law is inertia.", "Energy is not the point here.", "The second law relates F, m, and a; the force pair here shows the third law.", "You push the boat back and it pushes you forward: an action–reaction pair."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Volume is not a conserved collision quantity.", "Weight is not what is conserved in collisions.", "In elastic collisions, both momentum and kinetic energy are conserved.", "Mass is always conserved; kinetic energy is the special case."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["The theorem is about kinetic, not potential, energy.", "Mass does not change.", "Temperature is not in the theorem.", "W_net = ΔKE."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Ramps do not eliminate friction.", "A longer path means less force for the same work.", "The object's mass is unchanged.", "The object's weight is unchanged."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["Charge affects electric force, not gravity.", "More distance means less force.", "More mass means more gravitational force.", "Less mass means less force."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Sublimation is a phase change.", "Radiation travels by electromagnetic waves.", "Convection is heat carried by moving fluid currents.", "Conduction is heat transfer by direct contact."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Losing all current describes a series circuit.", "Each branch has its own path, so the others keep working.", "Voltage does not become infinite.", "Resistance does not drop to zero."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Electromagnetic waves can travel through a vacuum.", "Mechanical waves (sound, water waves) need a medium.", "Standing waves are an interference pattern.", "Light is electromagnetic."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Ionic bonds come from complete electron transfer.", "Covalent bonds share electrons.", "Metallic bonds share delocalized electrons.", "Hydrogen bonds are attractions between molecules."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Identical atoms share equally (nonpolar).", "Equal sharing is nonpolar.", "There is sharing.", "Unequal sharing comes from an electronegativity difference, e.g., in H₂O."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["A dissolved solid is spread evenly throughout, so it is a homogeneous mixture (a solution).", "A compound has fixed proportions and chemical bonds.", "A heterogeneous mixture has visibly different parts.", "In a suspension, particles settle out."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["Atomic radius decreases across a period, not down a group.", "Radius changes going down a group.", "Radius is never negative.", "Going down a group adds electron shells, so atoms get larger."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Noble gases are in Group 18.", "Halogens are nonmetals.", "Halogens need one electron to fill their shell, so they are very reactive.", "Group 18, not Group 17, is unreactive."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["H₂O₂:O₂ is 2:1, so 6 ÷ 2 = 3 mol O₂.", "12 multiplies by 2 instead of dividing.", "6 assumes a 1:1 ratio.", "1.5 divides by 4."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Fe:Fe₂O₃ is 4:2 (2:1), so 8 ÷ 2 = 4 mol.", "6 uses the O₂ coefficient.", "2 divides by 4 without multiplying by 2.", "8 assumes 1:1."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Higher temperature means faster particles and more energetic collisions, so the rate increases.", "A higher temperature speeds reactions up.", "Heating does not stop reactions.", "Temperature does affect the rate."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Acetic acid only partly ionizes, so it is a weak acid.", "Strong acids ionize completely.", "Vinegar is acidic, not basic.", "Vinegar is not a base."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Weak bases are not the typical product.", "Active metal + acid → salt + H₂ gas.", "Oxygen is not released.", "A precipitate is not the defining product."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["pH 12 is within the 0–14 scale.", "Neutral is 7.", "pH 12 is strongly basic.", "Strongly acidic is near 0."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

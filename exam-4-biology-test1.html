@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Organelle count is not the issue.", "Volume outgrows surface area, so exchange cannot keep up.", "Large cells do have nuclei.", "The ratio gets low, not high."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["SA = 6 × 36 = 216 and V = 216, so the ratio is 1:1.", "1:6 inverts the ratio.", "3:1 is for a 2 μm cube.", "6:1 was the original ratio."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Bacteria do exchange materials.", "A small cell is more efficient, not less.", "Size matters.", "A high SA:V means efficient exchange."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Bursting happens in hypotonic solutions.", "Equal solute means no net water movement.", "Tonicity does not trigger division.", "Shrinking happens in hypertonic solutions."], "t": "Diffusion and osmosis", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport/diffusion-and-osmosis"}, {"w": ["Activation energy is the minimum needed to start a reaction.", "Total energy released is ΔH.", "Products' energy is a separate quantity.", "Enzymes lower activation energy, but it is not zero."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Nucleic acids are one of the four classes.", "Vitamins are not a macromolecule class.", "Proteins are one of the four classes.", "Carbohydrates are one of the four classes."], "t": "Introduction to macromolecules", "u": "https://www.khanacademy.org/science/biology/macromolecules/introduction-to-macromolecues/a/introduction-to-macromolecules"}, {"w": ["C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP.", "Oxygen and sunlight relate to photosynthesis.", "ATP is also produced, not only heat.", "Glucose is a reactant."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Mitosis does not produce a haploid cell.", "Mitosis produces two cells, not four.", "Mitosis produces two identical diploid cells.", "Four haploid cells is meiosis."], "t": "The cell cycle and mitosis", "u": "https://www.khanacademy.org/search?page_search_query=cell+cycle+mitosis"}, {"w": ["Chitin is in fungal walls.", "Plant cell walls are cellulose.", "Cell walls are not protein.", "Peptidoglycan is in bacterial walls."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["DNA replication is in the nucleus.", "Division is mitosis or cytokinesis.", "Taking in particles is endocytosis.", "In exocytosis, vesicles fuse with the membrane to release contents."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Prophase is chromosome condensation.", "Cytokinesis divides the cytoplasm.", "G1 is a growth phase.", "Interphase is preparation."], "t": "The cell cycle and mitosis", "u": "https://www.khanacademy.org/search?page_search_query=cell+cycle+mitosis"}, {"w": ["SA:V does not set the DNA replication rate.", "Color is unrelated.", "The genetic code is unaffected.", "SA:V sets how efficiently a cell exchanges materials."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["1:2:1 comes from Ww × Ww.", "Ww offspring occur too.", "WW × Ww gives 1 WW : 1 Ww.", "3:1 is a phenotype ratio."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["4 × 1/4 = 1 expected recessive child.", "aa is possible.", "2 is the expected Aa count.", "4 would mean all aa."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["1:2:1 is monohybrid.", "3:1 is monohybrid.", "A dihybrid testcross gives 1:1:1:1.", "9:3:3:1 needs AaBb × AaBb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["A heterozygous partner gives ambiguous results.", "Other species are not used.", "Two unknowns cannot reveal a genotype.", "Crossing with a homozygous recessive reveals the unknown genotype."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["A single gene gives discrete classes.", "Recessive alleles alone do not explain it.", "Many genes adding small effects give continuous variation.", "Genes are involved, not only the environment."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["Homologous pairs line up and separate randomly into gametes.", "Chromosome number halves, not doubles.", "Fusion of gametes is fertilization.", "Mutation rate is unrelated."], "t": "Meiosis, crossing over, and independent assortment", "u": "https://www.khanacademy.org/search?page_search_query=meiosis+crossing+over"}, {"w": ["Bacteria are identified other ways.", "Enzymes are measured with assays.", "A karyotype displays chromosomes by size and shape to check for abnormalities.", "Genome sequencing reads the DNA."], "t": "Sex linkage, pedigrees, and karyotypes", "u": "https://www.khanacademy.org/search?page_search_query=sex-linked+traits+pedigree"}, {"w": ["Gene flow is migration.", "A bottleneck is random, not selection.", "A bottleneck is genetic drift after a population crash.", "A bottleneck is not mutation."], "t": "Genetic drift, bottleneck, and founder effect", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics/v/genetic-drift-bottleneck-effect-and-founder-effect"}, {"w": ["Embryos differ later in development.", "Embryology is useful evidence.", "Animals show embryological similarities too.", "Shared early stages (e.g., pharyngeal arches) suggest common ancestry."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Directional selection shifts the population toward one extreme.", "No favored phenotype means no selection.", "Favoring the average is stabilizing selection.", "Favoring both extremes is disruptive selection."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Random change is drift.", "Selection is a separate mechanism.", "Mutation rate is a separate idea.", "Gene flow is the transfer of alleles by migration."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["A species is a group that can interbreed and produce fertile offspring.", "Sharing a habitat does not define a species.", "Many species look alike.", "Common names are not scientific."], "t": "Speciation and reproductive isolation", "u": "https://www.khanacademy.org/search?page_search_query=speciation+reproductive+isolation"}, {"w": ["Transitional forms do exist.", "Fossils show gradual change.", "DNA varies across species.", "Anatomy differs among organisms."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

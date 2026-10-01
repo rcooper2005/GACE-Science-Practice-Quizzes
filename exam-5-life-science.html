@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Mitochondria produce ATP.", "The nucleus stores the genetic information.", "Lysosomes break down wastes.", "Ribosomes translate mRNA to build proteins."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Breaking down glucose is cellular respiration.", "Moving ions with energy is active transport, such as the Na+/K+ pump.", "Osmosis is the diffusion of water across a selectively permeable membrane.", "Moving large particles in is endocytosis."], "t": "Diffusion and osmosis", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport/diffusion-and-osmosis"}, {"w": ["The cytoskeleton is a protein network for shape and movement.", "The nuclear envelope is a double membrane with pores that separates the nucleus from the cytoplasm.", "The plasma membrane surrounds the whole cell, not the nucleus.", "The cell wall surrounds the outside of plant, fungal, and bacterial cells."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Photosynthesis produces glucose and oxygen, not just water and heat.", "Amino acids are not the direct products, and CO2 is a reactant.", "6CO2 + 6H2O + light → C6H12O6 + 6O2: glucose and oxygen.", "ATP is made and used up within the process, and nitrogen is not involved."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["Energy in ATP bonds is chemical potential energy, not activation energy.", "Activation energy is the energy barrier that must be overcome to start a reaction.", "Heat lost in respiration is waste energy, not activation energy.", "Total energy released is the change in free energy (ΔG)."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Rr × Rr gives 1/4 rr, so 25% have white flowers.", "75% is the red (dominant) percentage.", "50% is the Rr percentage.", "White (rr) offspring do occur."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["tt offspring are impossible, because the TT parent always passes T.", "Every offspring gets T from one parent and t from the other, so all are Tt.", "TT is impossible, because the tt parent always passes t.", "50/50 would come from Tt × tt."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["25% would come from Yy × Yy.", "Not all can be recessive; the Yy parent passes Y half the time.", "Yy × yy gives 1 Yy : 1 yy, so 50% are recessive.", "yy offspring do occur."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Artificial selection does change allele frequencies.", "Artificial selection happens in domesticated populations, not wild ones.", "Neither type of selection is driven mainly by random mutation; mutation supplies the variation.", "In artificial selection, humans choose which individuals breed based on desired traits."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Gene flow is the transfer of alleles between populations through migration.", "Natural selection is a different mechanism of evolution.", "Mutation rate is a different concept.", "Random change in small populations is genetic drift."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["Many transitional hominin fossils exist.", "Hominin fossils are abundant, e.g., Australopithecus and Homo erectus.", "Comparative anatomy and DNA (about 98–99% shared with chimpanzees) support common ancestry.", "Human and reptile skeletons are homologous but not identical."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Eukarya includes the protists, fungi, plants, and animals.", "Bacteria and Archaea are separate domains.", "Animalia is only one of the kingdoms in Eukarya.", "Protists and animals are also in Eukarya."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["This list runs from most specific to broadest, the reverse of what was asked.", "Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species. A mnemonic: \"Dear King Philip Came Over For Good Soup.\"", "Domain is broader than Kingdom, so it must come first.", "Domain and Kingdom come before Phylum."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Flowers are reproductive organs.", "Roots, especially root hairs, absorb water and minerals.", "Leaves photosynthesize and lose water through stomata.", "Stems transport materials and provide support."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Ferns are seedless vascular plants that reproduce with spores.", "Angiosperms are flowering plants whose seeds are enclosed in fruit.", "Gymnosperms (e.g., conifers) have \"naked\" seeds and no flowers or fruit.", "Bryophytes (mosses) are nonvascular and seedless."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["The circulatory system (heart, vessels, blood) transports O2, nutrients, hormones, and wastes.", "Breaking down food is digestion.", "Digestive enzymes come from the digestive system.", "Filtering air happens in the respiratory system."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The somatic nervous system is part of the peripheral system (it controls voluntary muscles).", "The autonomic nervous system is part of the peripheral system (it controls involuntary functions).", "The peripheral system is the nerves outside the brain and spinal cord.", "The brain and spinal cord form the central nervous system (CNS)."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["An exoskeleton and jointed legs describe arthropods.", "Cell walls and chloroplasts describe plants.", "All chordates have a notochord, dorsal hollow nerve cord, pharyngeal slits, and a post-anal tail at some stage.", "Radial symmetry and a water vascular system describe echinoderms."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Digesting nutrients is the job of the digestive system.", "Hormones come from the endocrine system.", "Filtering plasma is done by the kidneys.", "The respiratory system exchanges O2 and CO2 between the body and the environment."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["More births than deaths and more immigrants than emigrants both add individuals, so the population increases.", "Every factor here adds individuals, so extinction is not expected.", "The population would be stable only if gains matched losses.", "All factors favor growth, not decline."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Type III: huge numbers of offspring and high early mortality, as in fish.", "Large birds of prey show Type I or II curves.", "Humans show Type I.", "Elephants show Type I."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Parasitism involves a host being harmed by a parasite.", "Mutualism benefits both species.", "Commensalism leaves one species unaffected.", "Two species competing for the same limited food is interspecific competition."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Decomposers (fungi, bacteria) break down dead matter and return nutrients to the soil.", "Primary consumers eat producers.", "Producers make their own food by photosynthesis.", "Secondary consumers eat primary consumers."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["100,000 kcal is after one transfer.", "100 kcal would be four transfers.", "Three transfers: 1,000,000 → 100,000 → 10,000 → 1,000 kcal.", "10,000 kcal is after two transfers."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["30,000 kcal is two levels below.", "30 kcal would be less than the secondary consumers have; energy decreases going up, not down.", "300,000 kcal is three levels below.", "One level below: 300 × 10 = 3,000 kcal."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["The fluid mosaic model describes a flexible phospholipid bilayer with proteins that drift within it, like a mosaic.", "The membrane is fluid, not rigid.", "The membrane passes many substances: gases, ions through channels, and more.", "The membrane is mostly lipids, with proteins embedded in it."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Dividing into two cells is cytokinesis or mitosis.", "Taking in large particles is endocytosis.", "In exocytosis, a vesicle fuses with the membrane and releases its contents outside the cell.", "Breaking down molecules with lysosomes is intracellular digestion."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Ribosomes are in all cells.", "Animal cells also have mitochondria.", "Plant cells also have a nucleus.", "Plant cells have a cell wall and chloroplasts; animal cells have neither."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["Glucose (C6H12O6) is oxidized during respiration, releasing energy that is captured in ATP.", "DNA stores information; it is not broken down for energy.", "Cholesterol is a membrane lipid and hormone precursor, not the main fuel.", "RNA carries genetic messages; it is not a fuel."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Carbohydrates are fuel and structure, not catalysts.", "Lipids form membranes and store energy, but they are not catalysts.", "Most enzymes are proteins whose folded shapes form active sites.", "Only a few catalytic RNAs (ribozymes) exist; most enzymes are proteins."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Not all offspring are Ee; the ee parent always passes e, so half are ee.", "Ee × ee gives 1 Ee : 1 ee, so half are heterozygous.", "The Ee parent passes E half the time, so Ee offspring do occur.", "1/4 Ee does not happen in this cross."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["1/16 is the fraction that is both recessive (aabb).", "3/16 is one of the mixed classes (dominant for one trait, recessive for the other).", "3/4 × 3/4 = 9/16 show both dominant traits.", "4/16 does not match any phenotype class in a dihybrid cross."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["aa parents would show the disorder themselves.", "Two unaffected carriers (Aa × Aa) have a 1/4 chance of an affected aa child.", "AA parents cannot pass on the a allele.", "An aa parent would be affected."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Fossils in dated rock layers show organisms changing over geologic time, including transitional forms.", "Fossils do not disprove mutation.", "Fossils show that species do change.", "Fossils show different species appearing at different times."], "t": "Evidence for evolution: fossils", "u": "https://www.khanacademy.org/search?page_search_query=evidence+for+evolution+fossils"}, {"w": ["Gene flow (migration) moves alleles between populations.", "Genetic drift changes allele frequencies by chance.", "Mitosis copies body cells exactly, so it does not change allele frequencies in the population.", "Natural selection changes allele frequencies by differential reproduction."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["Descent with modification covers natural processes, not only human-driven artificial selection.", "Darwin's idea is gradual change, not instant creation.", "The idea says species do change over generations.", "Descendants inherit traits from ancestors and accumulate modifications over many generations."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Phylogenetic classification groups organisms by shared ancestry and shows it in cladograms.", "Habitat is not used for classification.", "Physical similarity alone is the older approach and can mislead because of convergent evolution.", "Alphabetical order has no biological meaning."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Family and order are higher ranks, not parts of a species name.", "The two-part name is genus + species, e.g., Felis catus.", "Kingdom and phylum are much broader ranks.", "Domain and kingdom are the broadest ranks."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Xylem carries water and minerals up from the roots.", "The cortex is ground tissue for storage, not long-distance sugar transport.", "The cuticle is a waxy protective layer.", "Phloem carries sugars from the leaves (sources) to the rest of the plant (sinks)."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Lignin stiffens cell walls, especially in xylem, so plants can stand upright against gravity.", "Gills belong to aquatic animals.", "Swim bladders belong to fish.", "Fins belong to fish."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["The skeletal system is bones.", "The digestive system breaks down and absorbs food.", "The pituitary is closely tied to the brain, but it secretes hormones, which makes it endocrine.", "The pituitary secretes hormones that regulate other endocrine glands; it is part of the endocrine system."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Body temperature is regulated by the nervous, endocrine, and integumentary systems.", "Nutrients are transported by the circulatory system.", "Waste is filtered by the excretory system.", "The reproductive system produces gametes (eggs, sperm) that unite to form offspring."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Bilateral symmetry and jointed appendages describe arthropods.", "Cnidarians are invertebrates and have no backbone.", "Cnidarians have radial symmetry and stinging cells (cnidocytes) used to capture prey.", "Cnidarians have no circulatory system at all."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["White blood cells (leukocytes) fight pathogens and infection.", "Platelets clot wounds.", "Digestive enzymes, not blood cells, digest food.", "Red blood cells carry oxygen."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The death rate is mortality, not movement.", "Emigration means individuals Exit (leave) a population.", "Moving into a population is immigration.", "The birth rate is natality."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Exponential growth is the one without an upper limit.", "Logistic growth applies to animals, microbes, and plants alike.", "Logistic growth slows and levels off near carrying capacity, making an S-curve.", "Logistic growth levels off; it does not always lead to decline."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Predator and prey populations are linked, so change in one affects the other.", "More prey means more food, so predator numbers rise after a lag.", "More food would not immediately decrease predators.", "The prey population would not suddenly go extinct."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Habitat is the physical place where an organism lives.", "A niche is the organism's whole role, not just its address.", "A community is all the populations living in an area.", "A biome is a large climate-defined region."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Not all of it is lost; about 10% passes on.", "2,000 kcal is what passes to primary consumers, not what is lost.", "200 kcal is what would reach secondary consumers.", "About 90% is lost: 20,000 − 2,000 = 18,000 kcal."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["500 kcal would be three transfers below.", "Two transfers: 500,000 → 50,000 → 5,000 kcal.", "50,000 kcal is after only one transfer.", "Energy decreases with each transfer."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

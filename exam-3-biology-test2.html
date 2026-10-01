@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["A hypothesis is still needed.", "The treatment group receives the treatment.", "Controls improve the experiment.", "The control provides a baseline for comparison."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Technology applies to all sciences.", "Technology is central to biology.", "Inquiry is still needed.", "Tools like DNA sequencing have greatly expanded biology."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Animals require humane handling.", "Animals must be handled with care under institutional guidelines.", "Safety measures are required.", "Supervision is required."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Plant height is a numerical measurement, so it is quantitative.", "Qualitative data are descriptive.", "The data are relevant.", "The data are measured, not anecdotal."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The connection goes beyond mathematics.", "The connection is clear.", "Vaccines link biology to public health.", "The connection goes beyond physics."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Animalia completes the six kingdoms.", "Viruses are not in any kingdom.", "Prokarya is not one of the six kingdoms.", "Monera was replaced by Bacteria and Archaea."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["DNA is sequenced in a lab.", "A dichotomous key identifies organisms using paired choices.", "Population size is a separate topic.", "Genetic diversity is a separate topic."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Oxygen diffuses through stomata.", "Pollen moves by pollinators.", "Xylem carries water and minerals upward.", "Sugars move in phloem."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Vacuoles store water.", "Mitochondria carry out respiration.", "Photosynthesis occurs in chloroplasts.", "Ribosomes make proteins."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["Radial symmetry describes cnidarians.", "An exoskeleton describes arthropods.", "A single foot describes mollusks.", "Annelids are segmented worms with a closed circulatory system."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Filtering air is respiratory.", "The circulatory system transports O₂, nutrients, and wastes.", "Breaking down food is digestive.", "Hormones are endocrine."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Moist skin describes amphibians.", "Reptiles have dry, scaly skin and amniotic eggs.", "Reptiles have skeletons.", "Gills describe fish and larval amphibians."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Metamorphosis is a dramatic change in body form.", "It is more than color.", "It is part of development, not reproduction.", "Body form clearly changes."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Mollusks have a soft body, a mantle, often a shell, and a muscular foot.", "A backbone describes vertebrates.", "Mollusks have organs.", "Segmented bodies with jointed legs describe arthropods."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Temperature is regulated by many systems.", "Filtering waste is excretory.", "Muscles and bones together provide movement and support.", "Hormones are endocrine."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The stem supports the plant.", "The stamen is the male part.", "Petals attract pollinators.", "The ovary develops into the fruit."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["800 − 40 × 2 = 720.", "680 is three years of loss.", "760 is one year of loss.", "640 is four years of loss."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["40 is the net change, not the rate.", "12% uses births only.", "(60 − 20) ÷ 500 = 8%.", "4% is half the rate."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["100 − 40 = +60.", "+40 confuses the numbers.", "+140 adds emigration.", "+100 ignores emigration."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Physical location is habitat.", "Population size is a separate concept.", "Climate is regional.", "A niche is the organism's role and resource use."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Existing soil means secondary succession.", "Primary succession starts on bare rock with no soil.", "After a fire, soil remains (secondary).", "A climax community is the end point."], "t": "Ecological succession", "u": "https://www.khanacademy.org/search?page_search_query=ecological+succession"}, {"w": ["Carbon is not only in living things.", "Carbon cycles through the atmosphere, organisms, oceans, and rocks.", "The Moon is not part of Earth's cycles.", "Carbon is not only in the atmosphere."], "t": "Biogeochemical cycles: carbon, nitrogen, phosphorus", "u": "https://www.khanacademy.org/search?page_search_query=biogeochemical+cycles"}, {"w": ["Color is not the comparison.", "Size is not the comparison.", "A keystone species has a large effect relative to its abundance.", "Age is not the comparison."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["More species give redundancy, which means resilience.", "Diversity lowers extinction risk.", "Diversity increases stability.", "Diversity has measurable effects."], "t": "Biodiversity and ecosystem stability", "u": "https://www.khanacademy.org/search?page_search_query=biodiversity+ecosystem"}, {"w": ["Overfishing has major effects.", "Overfishing harms ocean health.", "Overfishing reduces fish populations.", "Removing fish disrupts food webs and biodiversity."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

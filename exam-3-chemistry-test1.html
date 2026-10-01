@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Safety gear is always required.", "Never skip the briefing.", "Read all safety and hazard information first.", "Always read instructions first."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["ΔH°f is one mole of a compound formed from its elements in standard states.", "Decomposition is the reverse.", "Standard means specific conditions.", "Equilibrium is unrelated."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Headphones are not PPE.", "Sunglasses do not seal against splashes.", "Winter gloves are not chemical-resistant.", "Goggles protect the eyes."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Pressure is affected but is not the measure.", "Average kinetic energy ∝ Kelvin temperature.", "Color is unrelated.", "Volume is not the measure."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Beta is stopped by aluminum.", "Gamma is the most penetrating; it needs lead or concrete.", "Alpha is stopped by paper.", "Gamma penetrates."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Sound is ultrasound imaging.", "PET does not detect bond breaking.", "PET detects gamma rays, not visible light.", "PET detects radiation from radioactive tracers."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Total pressure is the sum of partial pressures.", "It is not a difference.", "It is not an average.", "It is not a product."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Transfer is ionic.", "A sea of electrons is metallic.", "Ions are ionic.", "Covalent bonds share electron pairs."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Unequal sharing comes from an electronegativity difference.", "Equal sharing is nonpolar.", "Transfer is ionic.", "Electrons are involved."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Raising gas temperature uses specific heat.", "Liquid to gas is vaporization.", "ΔH_fus melts one mole at the melting point.", "Nuclear fusion is unrelated."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Laws are tested.", "Laws are reliable.", "A law describes what happens, often as an equation.", "Explaining why is what a theory does."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["Distinct parts are visible in heterogeneous mixtures.", "Heterogeneous mixtures have non-uniform, visible parts.", "A mixture has more than one substance.", "Uniform composition is homogeneous."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["Absolute zero is unrelated.", "Critical mass sustains, not prevents, a reaction.", "Shielding absorbs radiation.", "Critical mass is the minimum to sustain a chain reaction."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Forming bonds releases energy.", "Energy changes.", "Breaking bonds absorbs energy.", "Mass conversion is nuclear."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Renewables still have some impacts.", "Cost varies.", "Renewables are replenished on human timescales.", "Renewables do make electricity."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["28 is off by two.", "26 is the proton count.", "56 is the mass number.", "56 − 26 = 30 neutrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Melting energy breaks the intermolecular forces.", "No chemical bonds form.", "Motion increases.", "Temperature stays constant while melting."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Atomic number = protons.", "Total nucleons is the mass number.", "Valence electrons are not the atomic number.", "Neutrons vary."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["P ∝ n at constant T and V, so pressure increases.", "It does not decrease.", "Pressure is never negative.", "It changes."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Adding water to acid can boil and splatter.", "Always add acid to water slowly while stirring.", "Store acids away from bases.", "Gloves are required."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Dalton thought atoms were indivisible.", "Dalton: indivisible, indestructible atoms unique to each element.", "Empty space came from Rutherford.", "Dalton said elements differ."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Pressure is defined.", "Pressure changes.", "P ∝ T at constant volume.", "Pressure rises with temperature."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Neutral atoms of an element have equal electrons.", "Valence electrons are the same.", "Protons are the same.", "Isotopes differ in neutrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["A precipitate is not what a calorimeter measures.", "Calorimetry measures the temperature change of a known mass (q = mcΔT).", "Volume is not the measurement.", "Color is not the measurement."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["44.8 L is 2 mol.", "1 L is far too small.", "1 mol of ideal gas at STP ≈ 22.4 L.", "11.2 L is half a mole."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

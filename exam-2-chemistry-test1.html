@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Cost is not what defines renewable.", "They need infrastructure.", "They are naturally replenished.", "Output size does not define renewable."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Rate constants are kinetics.", "Calorimetry measures heat flow.", "Geometry is structure.", "Mass spectrometry measures atomic mass."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Adding heat or doing work on the system raises its internal energy.", "Releasing heat lowers internal energy.", "Doing work lowers internal energy.", "Zero entropy is unrelated."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Temperature stays constant during boiling.", "Gas density is lower.", "Pressure is unchanged.", "Heat at the boiling point breaks intermolecular forces."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Variables are analyzed.", "The independent variable is changed by the experimenter.", "Constants are kept the same.", "The measured outcome is dependent."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Thermochemistry relates reactions and heat.", "Mass and volume give density.", "Charge and current are electricity.", "Wavelength and frequency are waves."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["A positron is a positive particle with the mass of an electron.", "An electron is beta-minus.", "A helium nucleus is alpha.", "A neutron is not emitted in positron emission."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["High specific heat means it takes lots of energy to change temperature.", "Water absorbs heat readily.", "Water boils at 100 °C.", "Water heats and cools slowly."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["V ∝ n, so volume changes.", "Volume would not become zero.", "More gas does not shrink volume.", "More moles mean more volume (Avogadro)."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Constant temperature is isothermal.", "Adiabatic means no heat exchange (Q = 0).", "Constant pressure is isobaric.", "Constant volume is isochoric."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Charge balance alone is not enough.", "Mass number and atomic number must both balance.", "Volume and pressure are gas properties.", "Formulas are chemical, not nuclear."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Trailing zeros after a decimal count.", "Leading zeros never count.", "3, 4, and the trailing 0 are significant: 3.", "5 counts leading zeros."], "t": "Significant figures", "u": "https://www.khanacademy.org/search?page_search_query=significant+figures"}, {"w": ["Positrons are emitted, not resident.", "Electrons orbit outside the nucleus.", "Photons are light.", "The nucleus holds protons and neutrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["11 − 10 = +1.", "+2 would need 9 electrons.", "Unequal counts mean a charge.", "−1 would need 12 electrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["The gas does not escape.", "No reaction occurs.", "Cold lowers volume at constant pressure: Charles's law.", "Boyle's law is about pressure, not temperature."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["3 is half.", "14 would be a mass number.", "12 is double.", "Atomic number = protons = 6."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Use a brush and dustpan; never use your hands.", "Feet are unsafe.", "Never use bare hands.", "Leaving it endangers others."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Heat removed alone is incomplete.", "ΔU = Q − W (W done by the system).", "Work alone is incomplete.", "The work done by the system is subtracted, not added."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Neutrons do not set chemistry.", "Protons differ.", "The same valence electrons give similar chemistry.", "Energy levels are shared across a period."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["The second law is about entropy.", "The first law is conservation of energy.", "The zeroth law is about thermal equilibrium.", "The third law is about entropy at absolute zero."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["3 drops zeros that count.", "6 adds a digit.", "4 drops the trailing zero.", "All digits count (captive and trailing-after-decimal zeros): 5."], "t": "Significant figures", "u": "https://www.khanacademy.org/search?page_search_query=significant+figures"}, {"w": ["16 − 18 = −2.", "+2 would need 14 electrons.", "Unequal counts mean a charge.", "−1 would need 17 electrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Three pairs is a triple bond.", "Two pairs is a double bond.", "Covalent bonds share electrons.", "A single bond is one shared pair."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["1 ignores the zeros.", "3 drops the trailing zero.", "The decimal makes the trailing zero count: 4.", "2 is too few."], "t": "Significant figures", "u": "https://www.khanacademy.org/search?page_search_query=significant+figures"}, {"w": ["7 is half.", "Atoms have protons.", "Neutral means protons = electrons = 15.", "30 is double."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

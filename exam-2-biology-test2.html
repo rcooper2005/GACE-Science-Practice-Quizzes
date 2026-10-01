@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Claiming an effect is the alternative hypothesis.", "The null hypothesis is not about the data type.", "Hypotheses do not predict failure.", "The null hypothesis states there is no effect or difference."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Peer review does not replace replication.", "Experts evaluate research for validity before it is published.", "Peer review slows publication down by adding scrutiny.", "No review guarantees perfection."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Never take biohazards home.", "Cultures must be sterilized, not poured down a drain.", "Follow the established biohazard protocol (e.g., autoclave).", "Regular trash is unsafe."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Safety is also a concern.", "CRISPR is highly relevant to policy.", "CRISPR raises ethical questions.", "Editing genomes raises ethical questions."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Plant growth is the measured outcome, the dependent variable.", "Temperature is a controlled variable.", "Light color is the independent variable.", "Plant type is controlled."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Many fungi are multicellular.", "Fungi have chitin cell walls.", "Fungi absorb nutrients; plants photosynthesize.", "Fungi do not photosynthesize."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Dichotomous keys identify organisms.", "Binomial nomenclature is the two-part genus + species name.", "Cladistics is classification by ancestry.", "Phylogenetics studies evolutionary history."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Geographic distribution is biogeography.", "Population size is a separate topic.", "A cladogram shows hypothesized evolutionary relationships.", "Chemical composition is chemistry."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Mosses and ferns have chlorophyll.", "Mosses lack true vascular tissue; ferns lack seeds.", "They do reproduce, by spores.", "They are made of cells."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Fertilization is the fusion of gametes.", "Pollination moves pollen from anther to stigma.", "Germination is a seed sprouting.", "Photosynthesis is making food."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Gymnosperms do have seeds.", "Gymnosperms have exposed (\"naked\") seeds, often in cones, with no flowers or fruit.", "Most gymnosperms live on land.", "Flowers and fruit describe angiosperms."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["The skeletal system is bones.", "The endocrine system is hormones.", "The nervous system is the brain, spinal cord, and nerves.", "The circulatory system is the heart and vessels."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Alveoli exchange O₂ and CO₂ with blood.", "Blood cells are made in bone marrow.", "Digestion is in the gut.", "Glands secrete hormones."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Arthropods have exoskeletons, segments, and jointed legs.", "A backbone describes vertebrates.", "Radial symmetry describes echinoderms and cnidarians.", "A single foot describes mollusks."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["The endocrine system regulates body processes through hormones.", "Filtering blood is the kidneys' job.", "The larynx produces sound.", "Digestion is a separate system."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Amphibians change from aquatic larvae (tadpoles) to land-living adults.", "Amphibians use gills, lungs, and skin to breathe.", "Exoskeletons belong to arthropods.", "Amphibians usually need water for reproduction."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Growth slows near K.", "Populations do not reverse instantly.", "Growth tapers rather than stopping instantly.", "Near carrying capacity, growth slows."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["132 adds deaths and emigrants instead of subtracting them.", "122 adds the deaths.", "100 + 20 − 10 + 5 − 3 = 112.", "102 adds only the births."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["150 is 50 × 3, not doubling.", "800 is four doublings.", "300 is wrong.", "50 → 100 → 200 → 400."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Zero growth is equilibrium, not competitive exclusion.", "Predation is a different interaction.", "Cooperation is mutualism.", "Two species using the same limited niche cannot coexist indefinitely."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["A food web shows many interconnected feeding links.", "Food webs include consumers.", "Food webs can include decomposers.", "A single linear path is a food chain."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Concentration increases, not decreases.", "Toxins concentrate rather than dilute.", "Many toxins (e.g., DDT, mercury) resist breakdown.", "Toxins become more concentrated at higher trophic levels."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}, {"w": ["Algae are minor players in nitrogen fixation.", "Fungi decompose, but they are not the key fixers.", "Bacteria fix N₂ into usable forms.", "Herbivores are consumers."], "t": "Biogeochemical cycles: carbon, nitrogen, phosphorus", "u": "https://www.khanacademy.org/search?page_search_query=biogeochemical+cycles"}, {"w": ["Succession happens on land too.", "Secondary succession keeps the soil, so recovery is faster.", "Recovery does occur.", "Bare rock means primary succession."], "t": "Ecological succession", "u": "https://www.khanacademy.org/search?page_search_query=ecological+succession"}, {"w": ["Deforestation and fossil fuels cause habitat loss and climate change.", "They increase CO₂.", "They reduce stability.", "They reduce biodiversity."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

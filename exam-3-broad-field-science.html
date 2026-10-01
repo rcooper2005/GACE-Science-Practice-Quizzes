@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Theories are well supported and refined, not destined to fail.", "An untested guess is not a theory.", "A theory is a well-substantiated explanation backed by extensive evidence.", "Beliefs are not theories."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["Constants are kept the same.", "The variable you change is the independent variable.", "The dependent variable is the measured outcome.", "Data are analyzed, not ignored."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Follow your teacher's disposal instructions.", "Never take lab chemicals home.", "Mixing waste can cause dangerous reactions.", "Many chemicals must not go down drains."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Computers speed up analysis, not slow it.", "Computing enables fast analysis and global collaboration.", "Experiments are still needed.", "The impact on science is huge."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["R = V/I = 10/2 = 5 Ω.", "8 comes from subtracting.", "12 comes from adding.", "20 comes from multiplying."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Mass number = protons + neutrons = 14 + 14 = 28.", "14 is the atomic number.", "42 does not come from the counts given.", "26 does not come from the counts given."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Isotopes differ in their number of neutrons.", "The atomic number is the same.", "The proton count is the same.", "A neutral atom's electrons equal its protons, so they are the same."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Catalysts are not consumed.", "A catalyst lowers the activation energy.", "The products stay the same.", "Concentration is unchanged."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["pH 3 is acidic.", "pH tells us directly.", "Basic is above 7.", "Neutral is 7."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Frequency is not in Ohm's law.", "V = IR relates voltage, current, and resistance.", "Mass is not in Ohm's law.", "Power is P = IV."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Mass is neither created nor destroyed; atoms are rearranged.", "Mass is not created.", "That happens only in nuclear reactions, not chemical ones.", "Mass is not destroyed."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["1:2:1 comes from Bb × Bb genotypes.", "Bb × bb gives 1 Bb : 1 bb.", "9:3:3:1 is dihybrid.", "3:1 comes from Bb × Bb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["40,000 kcal is three levels below.", "400,000 kcal is four levels below.", "40 × 10 × 10 = 4,000 kcal.", "400 kcal is one level below."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Chance effects are strongest in small populations.", "Large populations dampen drift.", "Without variation there is nothing to drift.", "Population stability is not the factor."], "t": "Genetic drift, bottleneck, and founder effect", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics/v/genetic-drift-bottleneck-effect-and-founder-effect"}, {"w": ["Animals ingest food.", "Plants photosynthesize.", "Protists are mostly single-celled.", "Fungi absorb nutrients."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Blood flow is circulation.", "Muscles respond to nerves; they do not send signals.", "Hormones are endocrine signals.", "Neurons use electrical impulses and chemical neurotransmitters."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["In parasitism, one is harmed.", "In commensalism, one is unaffected.", "Competition harms both.", "In mutualism, both benefit."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["The 10% rule is not about decomposers.", "About 10% of energy passes to the next trophic level.", "It is not about extinction.", "It is not about reproduction."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Igneous rock forms from melt, not only from metamorphic rock.", "Sediment makes sedimentary rock.", "Organic material makes some sedimentary rocks.", "Igneous rock forms from cooled magma or lava."], "t": "Rock types and the rock cycle", "u": "https://www.khanacademy.org/search?page_search_query=rock+cycle"}, {"w": ["Sliding past is a transform boundary.", "Plates do move.", "Divergent boundaries pull apart and form new crust.", "Colliding is convergent."], "t": "Plate tectonics", "u": "https://www.khanacademy.org/search?page_search_query=plate+tectonics"}, {"w": ["Deltas are landforms.", "Estuaries are where rivers meet the sea.", "Glaciers are ice.", "Aquifers store groundwater."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["The mesosphere is above the ozone layer.", "The troposphere is below it.", "The thermosphere is higher still.", "Ozone is in the stratosphere."], "t": "Layers and composition of the atmosphere", "u": "https://www.khanacademy.org/search?page_search_query=layers+of+the+atmosphere"}, {"w": ["Eclipses come from orbits.", "Tides come from the Moon.", "Axial tilt causes the seasons.", "Day and night come from rotation."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["Icy bodies are outer.", "The inner planets are small and rocky.", "The outer planets are larger.", "Gas giants are outer."], "t": "The solar system", "u": "https://www.khanacademy.org/search?page_search_query=solar+system+planets"}, {"w": ["Distance changes eclipse type, not the cause.", "Earth's shadow on the Moon is a lunar eclipse.", "The Moon between the Sun and Earth makes a solar eclipse.", "The Sun never passes between them."], "t": "Moon phases, eclipses, and tides", "u": "https://www.khanacademy.org/search?page_search_query=moon+phases+eclipses+tides"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

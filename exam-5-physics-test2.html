@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["This reverses the rule.", "Poles do interact.", "Like poles repel; opposite poles attract.", "Like poles repel."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Refraction is not found with the right-hand rule.", "The right-hand rule gives the field direction around a current.", "Gravity is not found with it.", "Sound is not found with it."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Plastic is nonmagnetic.", "Iron is ferromagnetic.", "Copper is nonmagnetic.", "Aluminum is only weakly magnetic."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["The hypothesis is not a variable.", "Mass is the independent variable.", "The period is the dependent variable.", "Length and angle are kept constant."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["In-phase waves add to a larger amplitude.", "Zero amplitude is destructive interference.", "Smaller amplitude is destructive interference.", "Frequency does not become \"opposite.\""], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["One break opens the whole series circuit.", "A series break stops all current.", "The other bulbs go dark, not brighter.", "The circuit changes."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Polarized light's E-field vibrates in one plane.", "Light always has an electric field.", "All wavelengths is white light.", "Polarized light travels through materials too."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Use shielding, distance, and limited time.", "Sources must be locked up.", "Supervision is required.", "Never use bare hands."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["0.1 Hz is the period mistaken for frequency.", "f = 1/T = 1/0.1 = 10 Hz.", "100 Hz is too large.", "1 Hz is wrong."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Resonance is not always at the lowest frequency.", "Resonance is not random.", "Resonance needs a frequency.", "Driving at the natural frequency gives resonance."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["E = kq/r², so the field falls with distance squared.", "Mass is irrelevant.", "Time is irrelevant.", "Temperature is irrelevant."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["Bending through a lens is refraction.", "Splitting colors is dispersion.", "Absorption is a different process.", "Polarization restricts vibration to one plane."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Mass is the independent variable.", "Surface type is controlled.", "Acceleration is the measured outcome.", "Temperature is controlled."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["A rectifier converts AC to DC.", "Step-down lowers voltage.", "A capacitor stores charge.", "A step-up transformer raises voltage."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["Ohm's law is for circuits.", "Faraday's law is induction.", "Gauss's law relates flux to enclosed charge.", "Newton's laws are mechanics."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["24 multiplies.", "4.8 is not either combination.", "Series resistances add: 4 + 6 = 10 Ω.", "2.4 Ω is parallel."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["A galvanometer detects small currents.", "Pole strength is not what it measures.", "Temperature uses a thermometer.", "It does not generate light."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Copper conducts.", "Silver conducts.", "Aluminum conducts.", "Rubber insulates."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Less current weakens the field.", "More turns and more current strengthen the field.", "Removing the iron core weakens the field.", "Fewer turns weaken the field."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Out-of-phase waves cancel: destructive interference.", "Out-of-phase waves do change the sound.", "In-phase waves are constructive.", "Interference does not change speed."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Radio waves are the longest.", "Gamma rays have the shortest wavelength and highest energy.", "Visible light is in the middle.", "Infrared is long."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["850 Hz is too large.", "170 Hz multiplies by 0.5.", "340 Hz ignores λ.", "f = v/λ = 340 ÷ 0.5 = 680 Hz."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}, {"w": ["Peer review does not replace experiments.", "Peer review adds scrutiny.", "Other physicists evaluate validity before publication.", "No review guarantees perfection."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Check cords and equipment for damage before use.", "Never bypass fuses.", "Never overload circuits.", "Never use wet hands."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Refraction is for light here.", "Absorption reduces sound.", "An echo is reflected sound.", "Sound is mechanical, not electromagnetic."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

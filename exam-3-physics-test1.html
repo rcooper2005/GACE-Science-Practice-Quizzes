@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["1,500 N forgets g.", "150,000 N is too large.", "150 N divides by g.", "At constant velocity, T = mg = 1,500 × 10 = 15,000 N."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Inertia resists changes in motion.", "Weight is a force.", "Energy of motion is kinetic energy.", "Force needed is not inertia."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Stability takes many half-lives.", "A half-life is when half the sample decays.", "Mass does not double.", "Complete decay takes many half-lives."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["100 is off by a factor of 2.", "25 is half the answer.", "c = Q/(mΔT) = 500 ÷ (5 × 2) = 50.", "250 is not the result."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Vertical velocity changes.", "Projectiles accelerate vertically under gravity.", "Vertical motion exists.", "Horizontal velocity is constant."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["40 g is one half-life.", "20 g is two half-lives.", "5 g is four half-lives.", "15 ÷ 5 = 3 half-lives: 80 → 40 → 20 → 10 g."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Changing proton number changes the element: transmutation.", "This is nuclear, not chemical.", "The nucleus changes.", "This is not a physical change."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Hydrogen is a single proton.", "Carbon is too large.", "An alpha particle is a helium nucleus.", "Uranium is far too large."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Total momentum is conserved.", "Momentum is not lost.", "Momentum is not gained.", "Momentum is not lost."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Fusion is not explained by Bohr.", "Bohr's quantized levels explain hydrogen's discrete lines.", "Quarks came much later.", "Uncertainty forbids exact positions."], "t": "Photons, the photoelectric effect, and the Bohr model", "u": "https://www.khanacademy.org/search?page_search_query=photoelectric+effect+bohr+model"}, {"w": ["The net force points inward, not away.", "Orbiting objects accelerate, so the net force is not zero.", "The net force is centripetal, toward the center.", "The velocity is tangent; the force is not."], "t": "Centripetal force and circular motion", "u": "https://www.khanacademy.org/search?page_search_query=centripetal+force+circular+motion"}, {"w": ["Equilibrium has a defined net force.", "The net force is zero, not maximum.", "A nonzero net force means acceleration.", "Equilibrium means zero net force."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["More vibration means more spacing, so the solid expands.", "Particles never stop.", "Heating increases vibration.", "Mass is constant."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["F depends on v².", "F ∝ v², not v.", "Doubling speed does not halve the force.", "F = mv²/r, so doubling v gives 4F."], "t": "Centripetal force and circular motion", "u": "https://www.khanacademy.org/search?page_search_query=centripetal+force+circular+motion"}, {"w": ["With no force, the ball does not stop.", "Speeding up needs a force.", "Slowing needs friction.", "With no net force, velocity stays constant (first law)."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Photons eject electrons: particle behavior.", "The effect shows particle behavior.", "Light travels through materials too.", "Light does interact with matter."], "t": "Photons, the photoelectric effect, and the Bohr model", "u": "https://www.khanacademy.org/search?page_search_query=photoelectric+effect+bohr+model"}, {"w": ["Speed is a scalar.", "Time is a scalar.", "Displacement has magnitude and direction: a vector.", "Distance is a scalar."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["Work is not equal to weight.", "There is no displacement, so the work is not negative.", "There is no displacement, so the work is not large.", "No displacement means zero work."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Objects do not pass through each other.", "Perfectly inelastic means they stick together.", "They do not stop unless the momenta cancel.", "No energy loss describes elastic collisions."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["E = hf: higher frequency means higher energy.", "This reverses the relation.", "Frequency and wavelength are linked (c = fλ).", "They are directly related."], "t": "Photons, the photoelectric effect, and the Bohr model", "u": "https://www.khanacademy.org/search?page_search_query=photoelectric+effect+bohr+model"}, {"w": ["Momentum is not lost.", "Momentum is not halved.", "Momentum after equals momentum before.", "Momentum is not doubled."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Horizontal velocity is constant (no horizontal force).", "Vertical acceleration (g) is constant and always downward.", "Vertical velocity changes.", "Speed changes."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["Alpha decay lowers the mass number by 4.", "One type of decay leaves A unchanged.", "In beta decay, a neutron becomes a proton, so A is unchanged.", "Alpha decay changes A."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["KE changes during the swing.", "Falling converts PE into KE, so KE increases.", "KE is greatest at the bottom.", "KE increases on the way down."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Energy is not always lost.", "Energy is conserved (first law).", "Energy cannot be created.", "Energy cannot be destroyed."], "t": "Laws of thermodynamics", "u": "https://www.khanacademy.org/search?page_search_query=laws+of+thermodynamics"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

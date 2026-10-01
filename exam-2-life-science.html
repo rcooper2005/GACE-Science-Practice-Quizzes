@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Animal cells are eukaryotic and have a nucleus.", "Plant cells are eukaryotic and have a nucleus.", "Eukaryotic means a membrane-bound nucleus is present.", "Prokaryotes (bacteria, archaea) keep their DNA in a nucleoid region with no surrounding membrane."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["Active transport uses energy (usually ATP) to move substances against their concentration gradient.", "Active transport happens in all kinds of cells, including animal and bacterial cells.", "Needing no energy describes passive transport, the opposite of active transport.", "Moving down a concentration gradient is passive transport."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Exocytosis is the reverse: vesicles fuse with the membrane to release materials outward.", "In endocytosis (including phagocytosis), the membrane folds around particles to bring them inside.", "Osmosis is water diffusing across a membrane, not engulfing particles.", "Facilitated diffusion moves small molecules through proteins, not large particles."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["ATP is not an enzyme, though enzymes help make and use it.", "ATP is a nucleotide-based molecule found throughout the cell, not only in the nucleus.", "ATP stores energy in its phosphate bonds and transfers it to power cell work.", "ATP is not a protein; it is built from adenine, ribose, and three phosphates."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Carbon dioxide is a reactant that plants take in, not the energy-storage product.", "ATP is made in the light reactions but is used right away to build sugar, not stored long-term.", "Water is a reactant and oxygen is a byproduct; neither stores the captured energy.", "Light energy ends up stored in the chemical bonds of glucose."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["50 is the expected number of bb (recessive) offspring.", "100 would be the number of Bb offspring alone.", "Bb × Bb gives 3/4 dominant (BB + Bb): 3/4 of 200 = 150.", "Not all can be dominant; about 1/4 are bb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["O blood requires ii, but the AB mother has no i allele to pass on.", "AB requires both A and B alleles; the father can pass only i.", "O requires ii; the mother always passes either A or B.", "The mother passes A or B and the father passes i, so the children are Ai (type A) or Bi (type B)."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["9:3:3:1 is the dihybrid AaBb × AaBb ratio.", "Bb × bb gives 1 Bb : 1 bb, so half show each phenotype: 1:1.", "3:1 comes from Bb × Bb.", "1:2:1 is the genotype ratio from Bb × Bb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Homologous structures share an ancestral origin even when their functions differ, like a bat wing and a whale flipper.", "Analogous structures have the same function but different origins.", "Vestigial structures are reduced and have little or no function, like the human tailbone.", "Convergent evolution produces analogous structures, not shared-ancestry ones."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Directional selection does change variation by shifting the population toward one extreme.", "When one extreme phenotype is favored, the population's average shifts in that direction over time.", "Favoring the middle is stabilizing selection.", "Favoring both extremes is disruptive selection."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["In small populations, random events can quickly change or eliminate alleles.", "With no variation there are no different alleles for drift to change.", "In large populations, random effects average out, so drift is weak.", "Drift is random and works regardless of selection pressure."], "t": "Genetic drift, bottleneck, and founder effect", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics/v/genetic-drift-bottleneck-effect-and-founder-effect"}, {"w": ["Species is the most specific rank; its members are the most closely related.", "Family is broader, containing many genera.", "Genus is broader, containing one or more species.", "Kingdom is one of the broadest ranks."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["A clade is defined by ancestry, not geography.", "A clade includes all descendants of the ancestor, not just immediate offspring.", "Looking similar does not define a clade; convergent evolution can make unrelated organisms look alike.", "A clade is a common ancestor plus all of its descendants (a monophyletic group)."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Roots absorb water and minerals; they usually lack chloroplasts.", "Stems support the plant and transport materials; some photosynthesize, but they are not the main site.", "Leaves are packed with chloroplasts and are the main site of photosynthesis.", "Flowers handle reproduction, not photosynthesis."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Gills are respiratory organs in aquatic animals, not a plant adaptation.", "Gill slits are found in chordate embryos, not plants.", "A waxy cuticle covers leaves and stems and slows evaporation.", "Fins are aquatic animal structures."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Sweat glands are exocrine glands that release sweat through ducts onto the skin.", "Endocrine glands secrete hormones directly into the blood.", "Salivary glands are exocrine glands that release saliva into the mouth through ducts.", "Sebaceous glands are exocrine glands that release oil onto the skin."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The larynx (voice box) is an airway passage; it does not exchange gases.", "Bronchi carry air into the lungs; their walls are too thick for gas exchange.", "Alveoli are tiny thin-walled sacs surrounded by capillaries where O2 and CO2 are exchanged.", "The trachea carries air to the bronchi; it is not an exchange surface."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Earthworms are segmented worms (Annelida).", "Starfish are echinoderms.", "Spiders are arthropods (arachnids).", "Clams are mollusks: soft-bodied animals with a shell and a muscular foot."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Muscles pull on bones to produce movement, and the skeleton provides support.", "Hormones come from the endocrine system.", "Shivering helps with heat, but temperature regulation is not their primary shared role.", "Filtering blood is the job of the kidneys (excretory system)."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Type III curves show high early mortality with few survivors to old age (e.g., fish, many plants).", "There is no standard Type IV survivorship curve.", "Type I shows low early mortality and death mostly in old age (e.g., humans).", "Type II shows a constant death rate throughout life (e.g., many birds)."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Genetic diversity is not what the demographic transition model tracks.", "Age at first reproduction is a life-history trait, not the model's focus.", "Migration is not the focus of the model.", "The model tracks birth and death rates falling (deaths first, then births) as a country industrializes."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Competition harms both species over a shared resource.", "Mutualism benefits both species.", "Parasitism: the parasite benefits while the host is harmed.", "Commensalism leaves the other organism unaffected."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["A niche is an organism's full role: what it eats, where it lives, and how it interacts.", "A biome is a large region with a characteristic climate and community, such as a desert.", "Habitat is only the physical place an organism lives, which is part of its niche.", "A population is a group of the same species in one area."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["50,000 kcal would be three transfers below, not two.", "Two transfers at about 10% each: 50 × 10 × 10 = 5,000 kcal.", "500,000 kcal would be four transfers below.", "500 kcal is only one transfer below (the primary consumer level)."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["1,000 kcal is what passes to primary consumers, not what is lost.", "About 90% is lost as heat: 10,000 − 1,000 = 9,000 kcal lost.", "Energy is always lost in transfers (second law of thermodynamics).", "Not all of it is lost; about 10% passes on."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

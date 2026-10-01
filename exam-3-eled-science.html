@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Sharing results and having others repeat them is replication and peer review.", "Science avoids untested assumptions.", "Guessing is not a scientific process.", "Fabrication means faking data, which is misconduct."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The conclusion is what you decide at the end.", "The variable you choose to change (the paper towel type) is the independent variable.", "The water absorbed is the dependent variable you measure.", "Constants are kept the same, like the amount of water."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The rock cycle is about rocks.", "The thermostat senses temperature and adjusts the heater: a feedback system.", "A thermostat is not alive.", "Its behavior is controlled, not random."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["Measuring mass is a measurement skill.", "Classifying rocks is classification.", "Explaining how connected parts work together is systems thinking.", "The water cycle is a different system."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["Technology includes many tools, not only electronics.", "Technology is closely tied to science.", "Pure knowledge without application is basic science.", "Technology applies science to practical problems."], "t": "Science, technology, and engineering design", "u": "https://www.khanacademy.org/search?page_search_query=engineering+design+process"}, {"w": ["Models simplify, so they are never perfect in every detail.", "Models get revised with new evidence.", "Models support observation; they do not replace it.", "Models simplify complex ideas to explain and predict."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Earth's tilt during its orbit causes the seasons.", "Distance from the Sun is not the cause.", "Moon phases do not cause seasons.", "Ocean currents do not cause seasons."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["Air temperature is measured with a thermometer.", "A rain gauge collects and measures precipitation.", "Wind direction is shown by a wind vane.", "Cloud cover is observed, not measured with a gauge."], "t": "Weather instruments", "u": "https://www.khanacademy.org/search?page_search_query=weather+instruments"}, {"w": ["Air helps weathering but is not the material.", "Organisms add organic matter, but rock is the base material.", "Water helps weathering but is not the material.", "Soil forms from weathered rock plus organic matter."], "t": "Weathering, erosion, and deposition", "u": "https://www.khanacademy.org/search?page_search_query=weathering+and+erosion"}, {"w": ["Lava destroys remains.", "Metamorphism usually destroys fossils.", "Cooling magma does not preserve fossils.", "Fossils form in layers of sediment."], "t": "Fossils and sedimentary rock", "u": "https://www.khanacademy.org/search?page_search_query=fossils+sedimentary+rock"}, {"w": ["Building a sandbar adds a constructive part.", "This process shapes Earth's surface.", "Erosion removes sediment (destructive) and deposition builds the sandbar (constructive).", "These are physical, not biological, processes."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["A sudden earthquake that cracks the ground is destructive.", "An earthquake that cracks the ground is not constructive.", "Earthquakes are geologic, not biological.", "Earthquakes are sudden, not slow."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["Magnetism does not involve a chemical change.", "\"Historical property\" is not a scientific category.", "Magnetism is not biological.", "Magnetism is a physical property you can test without changing the material."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["A thermometer measures temperature.", "A graduated cylinder measures liquid volume.", "A ruler measures length.", "A balance measures mass."], "t": "Measuring mass, volume, and density", "u": "https://www.khanacademy.org/search?page_search_query=measuring+mass+volume+density"}, {"w": ["Gravity attracts; it does not push magnets apart.", "Like poles repel; they do not attract.", "Like poles (N–N or S–S) push apart: repulsion.", "Static electricity is a different force."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["Sound is produced by vibrations traveling through a medium.", "A still object makes no sound.", "Color is light, not sound.", "Magnetism is unrelated to sound."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}, {"w": ["Many organisms have no backbone.", "Fungi and many other organisms do not need sunlight.", "All living things need energy and water and can reproduce.", "Plants have no legs."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["Amoebas do move.", "Amoebas live in ordinary environments like ponds.", "Even one cell can grow, respond, and reproduce.", "Amoebas live singly."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["Pollination is a plant process.", "Metamorphosis is the dramatic change from caterpillar to butterfly.", "Photosynthesis is making food.", "Germination is a seed sprouting."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Infancy is followed by childhood.", "Germination is for seeds.", "Metamorphosis is for insects and amphibians.", "Adolescence comes before adulthood."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Fewer algae-eaters means algae increase, and the larger fish lose food and decrease.", "Food web links mean both populations are affected.", "The larger fish lose food, so they do not increase.", "Algae lose their predators, so they do not decrease."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Plants do not eat each other.", "The bean plants clearly benefit.", "Better growth shows the clover helps rather than competes.", "Nitrogen-fixing bacteria enrich the soil, helping nearby plants."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Traits passed through genes are inherited.", "An environmental response is not genetic.", "Inheritance follows patterns.", "Eye color is not learned."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}, {"w": ["Migration is not a mutation.", "Teachers do not teach migration.", "Migration is largely instinctive (inherited).", "Migration is a behavior, not a body part."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}, {"w": ["Rainforests have plenty of water.", "Storing water helps a cactus survive dry deserts.", "Cacti do not live in the ocean.", "The Arctic is not a cactus habitat."], "t": "Adaptations", "u": "https://www.khanacademy.org/search?page_search_query=adaptations+survival"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

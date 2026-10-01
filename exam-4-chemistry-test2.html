@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Saturated hydrocarbons are not only rings.", "Saturated means only C–C single bonds.", "Triple bonds make it unsaturated.", "Double bonds make it unsaturated."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Nitrogen is not in hydrocarbons.", "Oxygen is not in hydrocarbons.", "Carbon is required.", "Hydrocarbons contain only C and H."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Protons are acid–base chemistry.", "Oxidation is loss of electrons.", "Protons are acid–base chemistry.", "Gaining electrons is reduction."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Positron emission releases a β⁺.", "Gamma is a photon.", "Alpha decay emits a helium nucleus.", "Beta emits an electron."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["A weak acid has less H⁺, so a higher pH, not lower.", "Partial ionization gives less H⁺, so a higher pH.", "pH 7 is neutral.", "The same pH would require full ionization."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["1,000 is three pH units.", "2 is just the difference in pH.", "Two pH units = 10² = 100 times.", "10 is one unit."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Combining is synthesis.", "An acid and base reacting is neutralization.", "Forming a precipitate is double replacement.", "Decomposition: one compound → simpler substances."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}, {"w": ["Hydrogen is a fuel, not the oxidizer.", "Nitrogen is mostly inert.", "CO₂ is a product.", "Combustion uses O₂."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}, {"w": ["pH 700 is not a valid pH.", "pH 9 is basic.", "100× more H⁺ = 2 units lower: pH 5.", "The pH changes."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Only single bonds describes alkanes.", "Alkenes have at least one C=C.", "Alkenes contain hydrogen.", "Rings are cycloalkanes."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Al:AlCl₃ is 2:2 (1:1), so 4.", "6 uses the Cl₂ coefficient.", "8 doubles the answer.", "2 halves the answer."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Organic chemistry is the chemistry of carbon compounds.", "Inorganic salts are inorganic chemistry.", "Metals are inorganic.", "Noble gases are inorganic."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Voltaic cells are not nuclear.", "Their output is electrical.", "Their output is electricity, not mechanical energy.", "Voltaic cells produce electrical energy."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Energy released is ΔH.", "Product mass is yield.", "Temperature is a condition.", "Rate is change in concentration per unit time."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Mg loses electrons, so it is not reduced.", "This is redox, not neutralization.", "Mg goes from 0 to +2.", "Mg loses 2 electrons, so it is oxidized."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Higher temperature means more frequent collisions.", "Activation energy remains.", "Particles move faster and more collisions are energetic enough.", "Higher temperature gives more collisions."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Percent yield = actual ÷ theoretical × 100.", "This inverts the ratio.", "The limiting reactant is not a yield.", "The limiting reactant is not a yield."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Solids and pure liquids have constant activity, so they are omitted.", "They are not squared.", "They are omitted, not the only terms.", "They are omitted, not included."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Comparing Q with K tells which way the reaction shifts.", "Rate is kinetics.", "Color is unrelated.", "Catalysts are unrelated."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Electrolysis drives a chemical change.", "Electrolysis is not neutralization.", "Electrolysis drives non-spontaneous reactions.", "Spontaneous redox is a voltaic cell."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Catalysts lower activation energy.", "Catalysts are not consumed.", "Catalysts do not shift equilibrium.", "Catalysts do not add reactant."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Mass conversion is nuclear.", "Forming bonds releases energy.", "Breaking bonds absorbs energy.", "Energy changes."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["More surface area means more collisions, so the rate increases.", "The reaction continues.", "Surface area has an effect.", "The rate does not decrease."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Breaking apart is decomposition.", "Synthesis: A + B → AB.", "One element replacing another is single replacement.", "Exchanging partners is double replacement."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}, {"w": ["Reactions are not limited to gases.", "Two compounds swap ions: AB + CD → AD + CB.", "Breaking apart is decomposition.", "One element replacing another is single replacement."], "t": "Types of chemical reactions", "u": "https://www.khanacademy.org/search?page_search_query=types+of+chemical+reactions"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

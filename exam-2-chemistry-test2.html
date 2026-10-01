@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["4 halves instead of doubling.", "8 assumes 1:1.", "8 × 2 = 16 mol CO₂.", "32 multiplies by 4."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["More exposed particles mean more collisions, so the rate increases.", "Surface area does not decrease the rate.", "The reaction continues.", "Surface area does matter."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Amines have –NH₂.", "Alcohols have an –OH (hydroxyl) group.", "Carbonyl C=O is found in aldehydes and ketones.", "Carboxyl –COOH is found in acids."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Acids have pH below 7.", "Strong acids do ionize.", "Partial ionization describes weak acids.", "Strong acids ionize completely."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Orientation also matters.", "Energy also matters.", "Collisions need enough energy and the right orientation.", "Successful collisions need both energy and orientation."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["A catalyst does not add reactant.", "A catalyst does not heat the system.", "A catalyst offers a lower-energy pathway.", "A catalyst is regenerated, not consumed."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Lower pH is more acidic.", "pH 4 is acidic, with 1,000 times more H⁺ than pH 7.", "pH 7 is neutral.", "pH 4 is not basic."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Polymers are chains of monomers.", "Isomers have the same formula but different structures.", "Electrons are subatomic particles.", "Isotopes are nuclear variants."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["Neither rate is always greater.", "Equilibrium is dynamic, so the rates are not zero.", "At equilibrium, forward rate = reverse rate.", "Neither rate is always greater."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Electrolytic cells use electricity to force a non-spontaneous reaction.", "They do involve redox reactions.", "They are not limited to acids.", "A spontaneous reaction that generates electricity is a voltaic cell."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Dating uses C-14's known half-life.", "Density is not used.", "Photosynthesis rate is not used.", "Bonding patterns are not used."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Some activation energy is still required.", "A catalyst lowers, not raises, activation energy.", "The barrier changes.", "Catalysts lower the activation energy."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["A buffer holds its own pH, which is not always 7.", "A buffer resists, not speeds, pH change.", "A buffer has limited capacity.", "Buffers resist pH change from small additions."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Acid–base reactions involve no electron flow.", "Precipitation reactions are not used.", "Voltaic cells run spontaneous redox reactions.", "Voltaic cells are not combustion."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["The reducing agent is oxidized and reduces the other substance.", "Reducing agents are not limited to bases.", "Being reduced describes the oxidizing agent.", "The reducing agent changes."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["Catalysts work at many temperatures.", "Lowering activation energy is how catalysts work.", "Catalysts are regenerated, not consumed.", "Catalysts do participate in the reaction."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["3 halves the answer.", "A:C is 2:2 (1:1), so 6 mol of C.", "12 doubles the answer.", "2 does not follow from the ratio."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Mole ratios relate different substances.", "Mole ratios convert between moles of one substance and another.", "They do not relate T and P.", "Grams need molar mass."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Adding reactant does not favor the reverse reaction.", "Extra reactant shifts the equilibrium forward to make products.", "The reaction does not stop.", "The system shifts."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Neutralization is acid–base chemistry.", "Losing electrons is the reducing agent.", "The oxidizing agent gains electrons, oxidizing the other substance.", "It changes."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}, {"w": ["10³ times more H⁺ means pH 7 − 3 = 4.", "3.5 does not match.", "6,997 is not a valid pH.", "pH 10 is basic."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Activation energy is not about forming a catalyst.", "Heat released is ΔH.", "Total energy change is ΔH.", "Activation energy is the minimum energy to react."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Changing temperature shifts the equilibrium.", "For an exothermic reaction, heat acts like a product, so heating shifts it toward reactants.", "The reaction does not stop.", "Heating favors the endothermic (reverse) direction."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Reactants are favored when K << 1.", "The reaction has not stopped.", "Equal amounts would be K ≈ 1.", "K >> 1 means products are favored."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Oxidation is loss of electrons (OIL).", "Protons are acid–base chemistry.", "Protons are acid–base chemistry.", "Gaining electrons is reduction."], "t": "Oxidation-reduction reactions", "u": "https://www.khanacademy.org/search?page_search_query=oxidation+reduction+reactions"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

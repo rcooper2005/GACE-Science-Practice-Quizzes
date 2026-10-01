@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Reflection bounces waves.", "Diffraction is bending around obstacles and openings.", "Polarization filters orientation.", "Refraction bends at a boundary."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["More parallel paths lower total resistance.", "An added branch has an effect.", "An added branch does not break the circuit.", "Resistance drops, not rises."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Microwaves are mm to cm.", "500 nm is green visible light (about 400–700 nm).", "Gamma rays are much shorter.", "Radio waves are much longer."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["Variables are not ignored.", "Controlled variables are kept constant.", "The changed variable is independent.", "The measured outcome is dependent."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Visible light is part of the EM spectrum.", "Light is not a mechanical wave.", "Sound is mechanical.", "There is no gravitational spectrum."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["48 multiplies.", "0.33 inverts the ratio.", "16 adds.", "C = Q/V = 12 ÷ 4 = 3 F."], "t": "Capacitors and capacitance", "u": "https://www.khanacademy.org/search?page_search_query=capacitors+capacitance"}, {"w": ["Current is charge flow.", "Resistance is opposition.", "Capacitance is charge per volt.", "Voltage is energy per charge."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Quadrupling is wrong.", "Current changes.", "I = V/R, so doubling R halves I.", "Current does not increase."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Series still has a path.", "Multiple paths is parallel.", "Series has one path.", "Resistance is finite."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Reflection bounces light.", "Bending at a boundary is refraction.", "Polarization filters light.", "Diffraction bends around edges."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Color is irrelevant.", "Frequency does not change speed.", "Warmer air means faster sound.", "Loudness does not change speed."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}, {"w": ["Charge is not in Faraday's law.", "Current is not directly in Faraday's law.", "Resistance is not in Faraday's law.", "EMF ∝ rate of change of magnetic flux."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["MRI applies electromagnetism.", "Physics has many applications.", "Physics benefits everyone.", "Technology depends on physics."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["A model simplifies to explain and predict.", "Models get revised.", "Models are evidence-based.", "Models are not equipment."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The independent variable is deliberately changed.", "The dependent variable is measured.", "A confounding variable is unwanted.", "Controlled variables are kept constant."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Oversight is required.", "Ethics apply to physics.", "Never skip protocols.", "Containment and protocols minimize exposure."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["0.5 s is wrong.", "T = 1/f = 1/4 = 0.25 s.", "16 s multiplies.", "4 s confuses frequency with period."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Neutrons do not flow.", "Electrons flow opposite to conventional current.", "The convention is the same in AC and DC.", "Conventional current is the direction positive charge would flow."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["f = v/λ, so doubling λ halves f.", "Frequency does not double.", "Frequency changes.", "Frequency does not quadruple."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Superconductors have zero resistance.", "Superconductors are not insulators.", "Superconductors expel magnetic fields (Meissner effect).", "Superconductors are the opposite of infinite resistance."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Temperature is not the index.", "The index n = c/v measures how much light slows and bends.", "Color is not the index.", "Conductivity is not the index."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Lower voltage means lower current.", "Resistance is held constant here.", "I = V/R, so more V means more I.", "No source means no current."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Like charges do not combine.", "They do interact.", "Like charges repel.", "Opposite charges attract."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["B is not inverse to current.", "B depends on current.", "B = μ₀I/(2πr), so B ∝ I.", "B decreases with distance."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["The medium is not the cause.", "Color is not the cause.", "Amplitude is not the cause.", "Relative motion causes the frequency shift."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

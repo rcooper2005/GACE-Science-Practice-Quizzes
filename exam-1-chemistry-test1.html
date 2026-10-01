@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Nuclear power plants use controlled fission to boil water and spin turbines.", "Solar panels use the photovoltaic effect.", "Wind turbines use kinetic energy from wind.", "Combustion engines rely on chemical burning."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Gas particles constantly collide.", "The theory describes gases, not liquids.", "Ideal gas particles have negligible volume and no attractions.", "KMT assumes negligible volume and no attractions."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["The terms are distinct.", "Theories can be revised.", "A hypothesis is a testable starting idea; a theory is well-supported by evidence.", "This reverses the definitions."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["A model simplifies reality to explain and predict.", "Models are revised.", "A model is not equipment.", "Models are evidence-based."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Gases at STP are fairly ideal.", "At low T and high P, attractions and particle volume matter, so real gases deviate.", "At zero pressure, gases behave ideally.", "High T and low P is the most ideal condition."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["A single photon describes gamma emission.", "Absorbing a neutron starts fission but is not the whole process.", "Fission splits a heavy nucleus and releases energy.", "Combining light nuclei is fusion."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Temperature is unrelated to mass defect.", "Proton and electron counts are not the mass defect.", "Mass defect is the missing mass, which becomes binding energy (E = mc²).", "Atomic and mass numbers are not the mass defect."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Metallic bonding is a sea of delocalized electrons.", "A shared pair is covalent.", "Complete transfer is ionic.", "Weak attractions between molecules are intermolecular forces."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["A colloid has dispersed particles that do not dissolve.", "A solution is uniformly dissolved.", "A compound is chemically bonded.", "In a suspension, particles settle."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["Without released neutrons, there is no chain.", "Fusion needs millions of degrees.", "A chain reaction is self-sustaining.", "Released neutrons trigger more fissions."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Electron capture absorbs an electron.", "Alpha decay emits a ⁴He nucleus.", "Beta decay emits an electron or positron.", "Gamma decay emits a photon."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Hydrogen bonding is not nuclear.", "It is not ionic.", "Hydrogen bonds are strong intermolecular attractions (H bonded to N, O, or F).", "It is not a covalent bond."], "t": "Intermolecular forces", "u": "https://www.khanacademy.org/search?page_search_query=intermolecular+forces+hydrogen+bonding"}, {"w": ["Particles never stop above absolute zero.", "Higher temperature means faster particles.", "Higher T means faster particles and more frequent collisions.", "Heating does not condense a gas."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["The measured outcome is the dependent variable.", "Controlled variables are known.", "The changed variable is independent.", "Controlled variables are kept constant."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["ΔH = 0 means no heat change.", "Exothermic means ΔH < 0.", "Positive ΔH is endothermic.", "ΔH is defined."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Electron capture is a decay mode.", "Splitting heavy nuclei is fission.", "Fusion combines light nuclei (e.g., hydrogen into helium).", "Combustion is chemical, not nuclear."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["P/V is not the form.", "PV = nRT.", "Adding P and V is not the form.", "nRT belongs on one side multiplied, not divided."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Billion-year-old rocks are dated with U-238 or K-40.", "C-14 dates organic remains, not metals.", "Water is dated by other methods.", "C-14 dates once-living material up to about 50,000 years old."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["The legend labels data series.", "The title names the graph.", "The x-axis is for the independent variable.", "The dependent variable goes on the y-axis."], "t": "Graphing and analyzing data", "u": "https://www.khanacademy.org/search?page_search_query=graphing+data+independent+dependent+variable"}, {"w": ["Ionization energy increases up a group and to the right across a period.", "Down and left decreases it.", "Down a group decreases it.", "Left across a period decreases it."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["There are about 118 elements.", "Carbon-12's mass is 12 g/mol.", "Avogadro's number is not about protons.", "Avogadro's number is 6.022 × 10²³ particles per mole."], "t": "The mole and Avogadro's number", "u": "https://www.khanacademy.org/search?page_search_query=mole+avogadro%27s+number"}, {"w": ["All digits in the coefficient count.", "3.00 has 3 significant figures (trailing zeros after a decimal count).", "3.00 has only 3 digits.", "Both trailing zeros count."], "t": "Significant figures", "u": "https://www.khanacademy.org/search?page_search_query=significant+figures"}, {"w": ["Entropy measures disorder or randomness.", "Total energy is internal energy.", "Reactivity is a separate property.", "Temperature is a separate property."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Natural gas is a finite fossil fuel.", "Solar is renewable.", "Wind is renewable.", "Geothermal is renewable."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Rate ∝ 1/√(molar mass), so lighter gases effuse faster.", "Effusion is defined through a tiny hole, not only in a vacuum.", "Mass matters.", "Heavier gases are slower, not lighter ones."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

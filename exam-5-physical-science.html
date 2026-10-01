@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Liquid to gas is vaporization.", "Deposition is gas directly to solid, as when frost forms.", "Solid to liquid is melting.", "Solid to gas is sublimation."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Baking soda or powder reacts to release CO₂ gas, which makes the cake rise. That is a chemical change.", "Simple mixing alone is a physical change.", "Freezing is physical.", "Melting is physical."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["A positive charge comes from losing electrons.", "Gaining electrons changes the charge.", "Gaining negative electrons gives a net negative charge (an anion).", "The charge does change."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Nonmetals are not limited to the bottom rows.", "The center holds transition metals.", "The left side holds metals.", "Nonmetals are on the upper right."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Before: 2 × 6 = 12 kg·m/s. After: 12 ÷ (2 + 4) = 2 m/s.", "1 m/s loses momentum.", "3 m/s ignores B's mass.", "6 m/s ignores the collision."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["200 J leaves out the temperature change.", "2,000 J doubles the answer.", "Q = mcΔT = 2 × 100 × 5 = 1,000 J.", "10,000 J multiplies by an extra 10."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["The forces are balanced on the book.", "The second law is F = ma; this pair shows the third law.", "The first law is inertia.", "The book and table push on each other: an equal and opposite pair."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Position is not what impulse changes.", "Mass does not change.", "Impulse (FΔt) equals the change in momentum (Δp).", "Temperature is not involved."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Energy shifts between KE (fastest at the bottom) and gravitational PE (highest at the ends of the swing).", "No chemical reaction occurs.", "No current flows.", "No nuclear change occurs."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Energy over time is power.", "This is the inverse of mechanical advantage.", "MA = output force ÷ input force.", "Mass to weight is just g."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["Astronauts and their craft fall together around Earth, so they feel weightless.", "Gravity at station altitude is still about 90% of surface gravity.", "Orbital speed is nowhere near light speed.", "Gravity acts on them constantly."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Neither scale measures mass.", "One degree is the same size on both scales.", "0 K is absolute zero, while 0 °C is water's freezing point (K = °C + 273).", "Both scales increase in the same direction."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["I = V/R: more R means less I.", "A parallel branch lowers total resistance, which increases current.", "Removing a resistor lowers resistance, which increases current.", "Less R means more I."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Wavelength is crest-to-crest distance.", "Amplitude is the height from rest to crest.", "Period is time.", "Frequency is cycles per second."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Hydrogen bonds are weak attractions between molecules involving H bonded to O, N, or F.", "They are not nuclear.", "They are not ionic.", "Strong bonds within a molecule are covalent bonds."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Ionic means transfer.", "Equal sharing (e.g., Cl₂, O₂) is nonpolar covalent.", "Polar means unequal sharing.", "Metallic involves metals."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Sugar water is uniform (homogeneous).", "Air is a uniform gas mixture.", "Salt water is uniform.", "Oil and water separate into visible layers, so it is heterogeneous."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["Electronegativity increases across a period, not decreases.", "It changes across a period.", "Electronegativity is never negative.", "Electronegativity increases left to right, peaking near fluorine."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["The bottom two rows are the lanthanides and actinides.", "Transition metals fill the middle d-block, Groups 3–12.", "The far right holds nonmetals and noble gases.", "Group 1 holds the alkali metals."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["28 multiplies by 4.", "A 1:2 ratio means 7 × 2 = 14.", "7 assumes 1:1.", "3.5 inverts the ratio."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["6 assumes 1:1.", "18 multiplies by 3 only.", "Al:Cl₂ is 2:3, so 6 × (3/2) = 9 mol.", "4 inverts the ratio."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Reactions continue at equilibrium (dynamic equilibrium).", "The forward and reverse rates are not unequal.", "Neither rate is always higher.", "At equilibrium the forward and reverse rates are equal, so concentrations stay constant."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Gaining electrons is reduction.", "Gaining a proton makes a conjugate acid.", "Losing electrons is oxidation.", "An acid becomes its conjugate base after donating H⁺ (e.g., HCl → Cl⁻)."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Vinegar is acidic.", "Baking soda (NaHCO₃) solution is mildly basic, about pH 8–9.", "Lemon juice is acidic.", "Battery acid is strongly acidic."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Titration finds an unknown acid or base concentration using a solution of known concentration.", "Temperature is measured with a thermometer.", "Color only signals the endpoint; it is not the goal.", "Density is measured with mass and volume."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

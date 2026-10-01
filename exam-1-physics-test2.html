@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["18 W adds instead of multiplying.", "2 W divides.", "144 W squares the voltage.", "P = IV = 6 × 12 = 72 W."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Less dense to more dense bends toward the normal, so there is no TIR.", "A vacuum is the least dense medium.", "TIR needs dense → less dense beyond the critical angle.", "Identical media do not bend light."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["A gravitational field comes from mass.", "\"Force field\" is not the scientific term.", "The magnetic field surrounds a magnet.", "Electric fields come from charges."], "t": "Magnets and magnetic force", "u": "https://www.khanacademy.org/search?page_search_query=magnets+magnetic+force"}, {"w": ["At F, no image forms.", "Inside the focal length, a concave mirror makes a virtual, upright, magnified image.", "Beyond C, the image is real, inverted, and reduced.", "At infinity, the image forms at F."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Bending around obstacles is diffraction.", "Mirrors use the law of reflection.", "Snell's law (n₁sinθ₁ = n₂sinθ₂) describes refraction.", "A vacuum has no boundary to refract at."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Averaging reduces random error.", "Proper instruments are still needed.", "Averaging reduces, not adds, error.", "Averaging is unbiased."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Large openings show little diffraction.", "Diffraction depends on opening size.", "Diffraction is not limited to vacuums.", "Diffraction is strongest when the opening is about one wavelength."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["0° is the normal direction.", "45° is not the definition.", "At the critical angle, the refracted ray is at 90° (along the surface).", "180° is not physical here."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["UV is shorter (higher energy) than visible light.", "UV is not the same as visible light.", "Radio waves are the longest.", "Longer than visible is infrared."], "t": "The electromagnetic spectrum", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+spectrum"}, {"w": ["Wear laser-rated eyewear.", "Never remove guards.", "Supervision is required.", "Never look into a beam."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Review and follow all safety procedures first.", "Never rush safety.", "Experience does not exempt anyone.", "PPE is required."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["A changing magnetic field induces current (Faraday).", "Static charge does not induce current.", "Gravity does not induce current.", "A constant field induces nothing."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["Grounding does not raise voltage.", "Grounding does not block normal current.", "Grounding is used in DC too.", "Grounding gives excess charge a safe path to Earth."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Series current is the same throughout.", "Current is constant everywhere in series.", "Current does not keep increasing.", "Current does flow."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Science continues.", "Electricity is still needed.", "Solar reduces fossil fuel dependence.", "Solar decreases fossil fuel use."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["A capacitor stores energy in an electric field between plates.", "A resistor dissipates energy.", "An inductor stores energy in a magnetic field.", "A transformer changes voltage."], "t": "Capacitors and capacitance", "u": "https://www.khanacademy.org/search?page_search_query=capacitors+capacitance"}, {"w": ["Their magnitudes differ.", "A 90° phase shift happens in capacitors and inductors.", "They are related by V = IR.", "In a resistor, V and I are in phase."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["At infinity, the image forms at F.", "Objects go in front of the lens.", "Beyond F, a convex lens forms a real, inverted image.", "Inside F gives a virtual, upright image."], "t": "Reflection, refraction, mirrors, and lenses", "u": "https://www.khanacademy.org/search?page_search_query=reflection+refraction+lenses+mirrors"}, {"w": ["Speed depends on the medium.", "Pitch depends on frequency.", "Wavelength relates to pitch.", "Amplitude determines loudness."], "t": "Sound and vibrations", "u": "https://www.khanacademy.org/search?page_search_query=sound+waves+vibrations"}, {"w": ["Obey posted warnings.", "Follow the guidelines and keep a safe distance.", "Never touch charged equipment.", "Supervision is required."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Transformers need input current.", "Step-down transformers lower voltage for home use.", "A rectifier converts AC to DC.", "Increasing voltage is step-up."], "t": "Electromagnetic induction", "u": "https://www.khanacademy.org/search?page_search_query=electromagnetic+induction"}, {"w": ["Current would not become infinite.", "I = V/R, so more R means less I.", "Current changes.", "It does not increase."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["F ∝ 1/r², so tripling gives 1/9.", "Farther means weaker.", "Farther means weaker.", "Inverse-square, not inverse."], "t": "Coulomb's law and electric force", "u": "https://www.khanacademy.org/search?page_search_query=coulomb%27s+law"}, {"w": ["Approaching causes blueshift.", "No motion means no shift.", "The Doppler effect applies to light too.", "Receding sources are redshifted."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["Removing the dielectric lowers C.", "C = εA/d, so more area means more capacitance.", "More separation lowers C.", "Charge does not change C."], "t": "Capacitors and capacitance", "u": "https://www.khanacademy.org/search?page_search_query=capacitors+capacitance"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

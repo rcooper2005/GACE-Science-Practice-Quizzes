@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Sublimation is solid to gas.", "Vaporization (evaporation or boiling) is liquid to gas.", "Deposition is gas to solid.", "Condensation is gas to liquid."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Burning (combustion) makes new substances, such as CO₂, water, and ash, so it is a chemical change.", "No new substances form in a phase change.", "Nuclear changes alter atomic nuclei.", "Burning is not reversible and makes new substances, so it is not a physical change."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["Atomic number = number of protons.", "Atomic mass is the weighted average mass of the isotopes.", "\"Isotope number\" is not a standard term.", "Mass number = protons + neutrons."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["\"Series\" refers to the lanthanides and actinides.", "Vertical columns are called groups (families).", "Periods are horizontal rows.", "Rows are periods, not columns."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["1.5 J comes from dividing force by distance.", "W = Fd = 15 N × 10 m = 150 J.", "25 J comes from adding force and distance.", "1,500 J is ten times too large."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["P = W/t = 400 J ÷ 8 s = 50 W.", "3,200 W multiplies instead of dividing.", "400 is the work, not the power.", "32 W is not 400 ÷ 8."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Conservation of mass is not what is shown here.", "The first law is about inertia.", "The exhaust is pushed down and the gas pushes the rocket up: an action–reaction pair.", "The second law (F = ma) is about acceleration, but the paired forces here illustrate the third law."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Momentum is conserved when the net external force is zero.", "A constant external force changes the total momentum.", "Momentum conservation does not require increasing mass.", "Internal forces cancel; the condition is no external force."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["Elastic potential energy is stored in springs.", "Kinetic energy is energy of motion.", "Thermal energy is the motion of particles.", "Gravitational potential energy (mgh) depends on height."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Mechanical advantage does not affect efficiency.", "Perfect transfer would mean 100% efficiency, which no real machine reaches.", "Friction and heat always waste some input energy.", "Excess input does not cause the energy losses."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["Magnetic repulsion is not involved in orbiting.", "An object with zero velocity would fall straight down.", "Satellites do have mass.", "Its sideways speed carries it forward as fast as it falls, so it keeps missing the planet."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Melting relates to latent heat of fusion.", "Vaporization relates to latent heat of vaporization.", "Freezing releases latent heat.", "Specific heat is the energy needed to raise 1 kg (or 1 g) of a substance by 1 °C."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["A conductor (e.g., copper) has low resistance.", "A capacitor stores charge.", "A semiconductor's conductivity falls between conductors and insulators.", "An insulator has high resistance."], "t": "Ohm's law and circuits", "u": "https://www.khanacademy.org/search?page_search_query=ohm%27s+law+circuits"}, {"w": ["Amplitude is height.", "Frequency is cycles per second (hertz).", "Wavelength is a distance.", "Period is the time per cycle."], "t": "Wave properties and sound", "u": "https://www.khanacademy.org/search?page_search_query=wave+properties+frequency+wavelength"}, {"w": ["A covalent bond does share electrons.", "Four electrons make a double bond.", "One shared electron is not a stable bond.", "A single bond is one shared pair: two electrons."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Oxygen can bond ionically with Na, but this option says covalent.", "Neon is a noble gas and inert.", "Na–Na is metallic bonding.", "Cl (a halogen) takes Na's electron, forming NaCl, an ionic compound."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Ionic compounds are not always negative.", "Their charge is defined: it is zero.", "Ionic compounds are not always positive.", "Positive and negative charges balance, so the compound is neutral."], "t": "Ionic, covalent, and metallic bonds", "u": "https://www.khanacademy.org/search?page_search_query=ionic+covalent+metallic+bonds"}, {"w": ["Protons differ from element to element.", "Neutrons do not set chemical behavior.", "The same number of valence electrons means similar reactions.", "Total electrons differ down a group."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["One valence electron describes alkali metals (very reactive).", "Noble gas nuclei are stable.", "A full valence shell (an octet) makes noble gases stable and unreactive.", "Noble gases have electrons."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["4 halves the answer.", "Mg:MgO is 2:2 (1:1), so 8 mol Mg gives 8 mol MgO.", "16 doubles the answer.", "2 does not follow from the ratio."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["63 multiplies instead of dividing.", "The ratio is 3:9 = 1:3, so 21 ÷ 3 = 7 mol.", "9 is the original product amount.", "3 is the original reactant amount."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["More reactant particles mean more collisions, so the rate increases.", "Concentration does not reverse a reaction.", "Concentration does affect the rate.", "More particles speed up, not slow, the reaction."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Neutrons are not involved in acid–base reactions.", "Donating a proton is the definition of an acid.", "A Brønsted–Lowry base accepts a proton.", "Donating electrons is the Lewis definition of a base, not Brønsted–Lowry."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["pH 7 is neutral (pure water at 25 °C).", "Strongly basic is near 14.", "pH 7 is well defined.", "Strongly acidic is near 0."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["A buffer does not always lower pH.", "A buffer prevents rapid change.", "A buffer (a weak acid with its conjugate base) resists pH changes when acid or base is added.", "A buffer does not always raise pH."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

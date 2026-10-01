@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Investigations begin by observing and asking a question.", "The conclusion comes last.", "Sharing (publishing) comes after the conclusion.", "Repeating the experiment comes after the first trial."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The hypothesis is tested, not confirmed beforehand.", "Change one variable and keep everything else the same.", "Recording data is essential.", "Changing many variables hides the cause."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The water cycle has no chemical reactions to analyze.", "The water cycle model goes beyond measuring.", "Rocks are not involved.", "A model of how parts interact in a cycle is systems thinking and modeling."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["The effect spreads through the system; it is not isolated.", "A food web is an interconnected system.", "Chemical bonding is not involved.", "The example is a food web, not the water cycle."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["Theories are built on large amounts of evidence.", "A theory is not a guess.", "A theory explains why or how; a law describes what happens.", "Theories are far more developed than hypotheses."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["Engineers rely on data.", "Engineers apply science to design solutions to real-world problems.", "Engineering complements the scientific method rather than replacing it.", "Engineering always has a practical goal."], "t": "Science, technology, and engineering design", "u": "https://www.khanacademy.org/search?page_search_query=engineering+design+process"}, {"w": ["Revolution causes the year.", "Distance does not cause day and night.", "Moon phases are about the Moon.", "Earth's rotation on its axis causes day and night."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["Air pressure is measured with a barometer.", "Wind speed is measured with an anemometer.", "A thermometer measures temperature.", "Humidity is measured with a hygrometer."], "t": "Weather instruments", "u": "https://www.khanacademy.org/search?page_search_query=weather+instruments"}, {"w": ["Sedimentary layers bury and preserve fossils.", "Lava would destroy remains.", "Igneous rock forms from melted rock, which destroys remains.", "Fossils are rare in metamorphic rock, not exclusive to it."], "t": "Fossils and sedimentary rock", "u": "https://www.khanacademy.org/search?page_search_query=fossils+sedimentary+rock"}, {"w": ["Weathering breaks rocks into smaller pieces.", "Eruptions are volcanic activity.", "Forming new rock layers is deposition or rock formation.", "Transporting pieces is erosion."], "t": "Weathering, erosion, and deposition", "u": "https://www.khanacademy.org/search?page_search_query=weathering+and+erosion"}, {"w": ["Weathering breaks rock down.", "An eruption that forms new land clearly changes the surface.", "Making new land is not destructive.", "A volcano forming new land is constructive."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["A landslide is physical movement, not a chemical change.", "A landslide moves and removes material, so it is destructive.", "It clearly changes the land.", "Nothing new is built."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["A balance does not measure gas volume.", "Color is observed, not measured with a balance.", "Temperature is measured with a thermometer.", "A balance measures mass."], "t": "Measuring mass, volume, and density", "u": "https://www.khanacademy.org/search?page_search_query=measuring+mass+volume+density"}, {"w": ["Floating and sinking is not a chemical reaction.", "Color does not decide floating.", "Objects denser than water sink and less dense objects float.", "Magnetism is not involved."], "t": "Measuring mass, volume, and density", "u": "https://www.khanacademy.org/search?page_search_query=measuring+mass+volume+density"}, {"w": ["Gravity makes both balls fall.", "The lighter ball does not fall faster.", "Without air resistance, all objects fall with the same acceleration.", "Heavier objects do not fall faster (Galileo)."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Heat moves through the metal by direct contact: conduction.", "Convection happens in moving fluids.", "Evaporation is a phase change.", "Radiation is not what warms the handle."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Rocks also take up space.", "Nonliving things also have mass.", "Nonliving things also have color.", "Living things reproduce and grow."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["Cells do grow and divide.", "Plants, fungi, and bacteria also have cells.", "Cell theory: all living things are made of one or more cells.", "Most cells need a microscope to see."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["\"Larva\" is used for insects.", "Frogs go egg, tadpole, adult frog.", "Caterpillars are butterfly larvae.", "Pupa is an insect stage."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Germination is when a seed begins to sprout and grow.", "Flowers develop later in the plant's life.", "Pollen transfer is pollination.", "Photosynthesis is making food."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Competition harms both species.", "In parasitism, one is harmed.", "In predation, one eats the other.", "In mutualism, both benefit: the bee gets food and the flower gets pollinated."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Energy in a food chain starts with the Sun, captured by producers.", "Consumers receive energy; they do not originate it.", "Soil nutrients are not an energy source.", "Decomposers get energy from dead matter."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["A learned behavior requires experience.", "Innate (inherited) behaviors are present without learning.", "Cultural behavior is learned.", "Innate behaviors follow patterns; they are not random."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}, {"w": ["Camouflage is an inherited adaptation that helps an animal survive.", "Camouflage is mostly a body trait, not a learned skill.", "Camouflage is inherited.", "Camouflage clearly helps the animal."], "t": "Adaptations", "u": "https://www.khanacademy.org/search?page_search_query=adaptations+survival"}, {"w": ["A physical adaptation is a body feature.", "The puppy was not born responding to its name.", "Training through repetition and reward produces a learned behavior.", "No DNA changed."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

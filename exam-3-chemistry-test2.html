@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Equal sides would mean no shift.", "More molecules is the side favored by lowering pressure.", "Higher pressure favors the side with fewer gas moles.", "Gas moles are what matter."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Reversible reactions are not limited to gases.", "Reversible reactions go both forward and in reverse.", "Forward-only is irreversible.", "Reversible reactions reach equilibrium."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Carbon and oxygen alone is not a hydrocarbon.", "Hydrocarbons contain only carbon and hydrogen.", "Nitrogen is not in hydrocarbons.", "Carbon is required."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["18 doubles instead of using the ratio.", "9 assumes 1:1.", "H₂:NH₃ is 3:2, so 9 × 2/3 = 6.", "3 divides by 3 only."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["A carbonyl is C=O.", "Amines have –NH₂.", "Alcohols have –OH.", "Carboxyl is –COOH."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["A battery runs a chemical change, not a physical one.", "A battery runs a spontaneous redox reaction.", "Photosynthesis is biological.", "A battery is not nuclear."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Higher concentration means more frequent collisions.", "Kinetic energy is set by temperature.", "Concentration increases, not decreases, collisions.", "Activation energy is unchanged."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Higher-energy products is endothermic.", "Absorbing energy is endothermic.", "Energy does change.", "Exothermic reactants are higher in energy, so energy is released."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Removing a product does shift the equilibrium.", "The reaction does not stop.", "Removing product does not favor the reverse.", "Removing product shifts forward to replace it."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["pH and pOH are not equal in general.", "pH + pOH = 14 at 25 °C.", "The sum is 14, not 7.", "They add, not multiply."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["8 doubles the answer.", "6 does not follow from the ratio.", "Na:NaCl is 2:2 (1:1), so 4.", "2 halves the answer."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["The output is electrical.", "The output is electricity, not mechanical energy.", "It is not nuclear.", "A spontaneous redox reaction produces electrical energy."], "t": "Electrochemistry: galvanic and electrolytic cells", "u": "https://www.khanacademy.org/search?page_search_query=electrochemistry+galvanic+cell+electrolysis"}, {"w": ["Collisions need sufficient energy and proper orientation.", "Any energy will not do.", "Energy is also required.", "Zero energy cannot react."], "t": "Reaction rates and catalysts", "u": "https://www.khanacademy.org/search?page_search_query=reaction+rates+catalysts"}, {"w": ["Neither rate is always greater.", "Neither rate is always greater.", "Forward rate = reverse rate at equilibrium.", "The rates are not zero."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Fission is not the decay of a single proton.", "Fusing light nuclei is fusion.", "Fission releases energy.", "Fission splits a heavy nucleus, releasing energy."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Decay continues for many half-lives.", "Mass does not double.", "Disappearing completely takes many half-lives.", "A half-life is when half the sample decays."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Different phases is heterogeneous.", "Homogeneous means all species are in the same phase.", "A reaction does occur.", "The system is at equilibrium."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["Removing product causes a shift.", "The system shifts forward to replace the product.", "The reaction does not stop.", "The reverse is not favored."], "t": "Chemical equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=chemical+equilibrium"}, {"w": ["3 assumes 1:1.", "9 multiplies by 3.", "4 does not follow.", "CH₄:O₂ is 1:2, so 3 × 2 = 6."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Amphoteric means it can act as an acid or a base (e.g., water).", "Amphoteric substances do have acid–base properties.", "Amphoteric substances are not always basic.", "Amphoteric substances are not always acidic."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Isotopes are nuclear variants.", "Electrons are subatomic.", "Polymers are made of repeating monomers.", "Isomers are same-formula variants."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}, {"w": ["An acid that donates H⁺ becomes its conjugate base.", "Losing electrons is oxidation.", "Gaining a proton makes a conjugate acid.", "Gaining electrons is reduction."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["Arrhenius bases increase OH⁻.", "Increasing H⁺ is what acids do.", "Oxygen atoms are not the definition.", "Sodium is a spectator ion."], "t": "Acids, bases, and pH", "u": "https://www.khanacademy.org/search?page_search_query=acids+bases+pH"}, {"w": ["H₂:H₂O is 1:1, so 6 mol.", "12 doubles the answer.", "3 halves the answer.", "2 does not follow."], "t": "Chemical reactions and stoichiometry", "u": "https://www.khanacademy.org/science/chemistry/chemical-reactions-stoichiome"}, {"w": ["Carboxylic acids have –COOH.", "A hydroxyl alone is an alcohol.", "A ketone is C=O within a chain.", "An amine is –NH₂."], "t": "Organic chemistry: hydrocarbons and functional groups", "u": "https://www.khanacademy.org/search?page_search_query=organic+chemistry+functional+groups"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

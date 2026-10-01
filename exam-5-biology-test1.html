@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["5:1 inverts the ratio.", "3:1 is for a 2 μm cube.", "2:1 is for a 3 μm cube.", "150 ÷ 125 = 1.2, so 1.2:1."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Smaller pieces with the same volume have more total surface area.", "Surface area cannot be zero.", "Splitting exposes more surface.", "Surface area changes."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["A large cube has a low ratio.", "Small and flat shapes maximize surface per volume.", "Shape and size do matter.", "A large sphere has the lowest ratio."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Cytoplasm is not a protein.", "DNA is the genetic material.", "Cytoplasm is the cytosol plus organelles, excluding the nucleus.", "The membrane is the boundary."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Membranes come from the ER.", "DNA is stored in the nucleus.", "ATP is made in mitochondria.", "Peroxisomes break down fatty acids and detoxify H₂O₂."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["CO₂ and water come later in respiration.", "Glycolysis splits glucose into 2 pyruvate (plus 2 ATP and 2 NADH).", "Oxygen is not produced.", "Pyruvate and NADH are also produced."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Pumps are active transport.", "Moving against the gradient is active.", "Passive transport moves substances down the gradient with no energy input.", "Passive transport needs no ATP."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Phospholipids are present.", "The arrangement is ordered, not random.", "Hydrophilic heads face water on both sides; the tails hide inside.", "Inward-facing heads describe the tails' position."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Eukaryotes use mitosis.", "Animal cells use mitosis.", "Plant cells use mitosis.", "Bacteria divide by binary fission."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["Chlorophyll absorbs light, mostly red and blue.", "ATP is made using light.", "Breaking down glucose is respiration.", "DNA stores genetic information."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["Shifts in temperature, pH, or water balance disrupt homeostasis.", "Normal respiration is part of homeostasis.", "Stability is homeostasis.", "Normal division does not disrupt homeostasis."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["The nucleolus makes ribosomes.", "The smooth ER (no ribosomes) makes lipids and detoxifies.", "The rough ER has ribosomes.", "The Golgi packages proteins."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["8 × 1/2 = 4 carriers.", "2 is the expected AA (or aa) count.", "6 is the number showing the dominant trait.", "8 would mean all carriers."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["1/4 are recessive.", "1/2 are Tt.", "TT + Tt = 3/4 dominant.", "tt offspring occur too."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Ff × ff gives 1/2 Ff: 30 of 60.", "45 would be 3/4.", "60 would be all.", "15 would be 1/4."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["1/2 are Aa.", "1/4 are aa.", "aa offspring do occur.", "3/4 show the dominant trait."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Autosomes are the non-sex chromosomes.", "Mitochondrial DNA is maternally inherited, not sex-linked.", "rRNA is not a chromosome.", "Sex-linked genes are on the X or Y chromosome."], "t": "Sex linkage, pedigrees, and karyotypes", "u": "https://www.khanacademy.org/search?page_search_query=sex-linked+traits+pedigree"}, {"w": ["Genes do separate.", "They are not always inherited together (unless linked).", "Genes for different traits sort into gametes independently.", "The law applies broadly."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Hardy–Weinberg requires no mutation, random mating, no gene flow, no selection, and a large population.", "Selection violates the conditions.", "Mutation and small size violate the conditions.", "Drift violates the conditions."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["Favoring the largest is directional.", "Favoring the smallest is directional.", "Favoring extremes is disruptive.", "Stabilizing selection favors the average (e.g., human birth weight)."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Fossils show change.", "Fossil patterns support evolution.", "Spontaneous generation was disproved.", "Life has changed over time."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Vestigial structures have reduced or lost function (e.g., human appendix, whale pelvis).", "Critical function is not vestigial.", "Embryo-only structures are a separate idea.", "Vestigial structures show evolutionary history."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Close relatives with shared structures are homologous.", "Convergent species are not genetically identical.", "Location does not define convergence.", "Unrelated species evolve similar traits in similar environments."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Predator–prey dynamics are natural.", "Humans choosing traits in dogs is artificial selection.", "Drift is random.", "Wild adaptation is natural selection."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["DNA is evidence.", "Anatomy is evidence.", "Individuals do not evolve; populations do.", "Fossils are evidence."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

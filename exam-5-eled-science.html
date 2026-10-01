@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Asking a question comes first.", "Observations come early.", "Investigations end with conclusions drawn from the data.", "The hypothesis comes early."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Final height is the result being measured.", "Sunlight is the variable being tested.", "The conclusion is not a variable.", "Soil and water must stay the same so only sunlight differs."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The flower diagram models a biological system: parts working together.", "It is not a chemical formula.", "It is not about weather.", "The diagram has a clear purpose."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["The effects spread, so the event is not isolated.", "This is not about a single property.", "Ocean temperature, fish, coral, and weather are all linked.", "No single reaction is involved."], "t": "Systems and system models", "u": "https://www.khanacademy.org/search?page_search_query=systems+and+system+models"}, {"w": ["Scientific ideas change with evidence.", "New ideas are often debated before they are accepted.", "Science is based on evidence, not opinion.", "Science is revised as new evidence appears."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Art history does not help design a bridge.", "Engineering requires planning.", "Bridges rely on physics (forces) and materials science.", "Engineers use data."], "t": "Science, technology, and engineering design", "u": "https://www.khanacademy.org/search?page_search_query=engineering+design+process"}, {"w": ["Revolution is Earth's yearly orbit around the Sun.", "Earth's shape does not change.", "Spinning on its axis is rotation.", "The magnetic field is a separate topic."], "t": "Earth's tilt and the seasons", "u": "https://www.khanacademy.org/search?page_search_query=seasons+earth+tilt"}, {"w": ["An anemometer measures wind speed.", "Air pressure is measured with a barometer.", "Temperature is measured with a thermometer.", "Rainfall is measured with a rain gauge."], "t": "Weather instruments", "u": "https://www.khanacademy.org/search?page_search_query=weather+instruments"}, {"w": ["Soil formation takes hundreds of years or more.", "Living things contribute to soil.", "Soil starts from weathered rock.", "Soil forms slowly from rock, organic matter, water, and air."], "t": "Weathering, erosion, and deposition", "u": "https://www.khanacademy.org/search?page_search_query=weathering+and+erosion"}, {"w": ["Fossils show past life, not today's climate.", "Fossils are evidence of organisms that lived in the past.", "Fossils cannot predict future weather.", "Fossils do not reveal exact chemical formulas."], "t": "Fossils and sedimentary rock", "u": "https://www.khanacademy.org/search?page_search_query=fossils+sedimentary+rock"}, {"w": ["The eruption is constructive, not destructive.", "One event builds land and the other wears it away; both change Earth's surface.", "Wave erosion is destructive.", "Both events clearly change the surface."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["Erosion is also occurring.", "Deposition is also occurring.", "Flood deposits build up the valley and erosion widens the channel.", "The valley is clearly changing."], "t": "Constructive and destructive processes", "u": "https://www.khanacademy.org/search?page_search_query=constructive+and+destructive+forces"}, {"w": ["Reactivity with acid is chemical.", "Rusting is chemical.", "Size and shape are physical properties.", "Flammability is chemical."], "t": "Physical and chemical changes", "u": "https://www.khanacademy.org/search?page_search_query=physical+and+chemical+changes"}, {"w": ["Melting is a change of state, which is a physical change.", "Color is not the change described.", "Melting ice is still water.", "Mass stays the same."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Magnetism is a force, not heat.", "Heat flows from the hot cocoa to cooler hands.", "Light passing through glass is light transmission.", "Rolling is motion, not heat transfer."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["A see-saw is a lever: a bar on a fulcrum.", "A screw is an inclined plane wrapped around a post.", "A pulley is a wheel with a rope.", "A wheel and axle turns together."], "t": "Simple machines and mechanical advantage", "u": "https://www.khanacademy.org/search?page_search_query=simple+machines+mechanical+advantage"}, {"w": ["Trees cannot run.", "Trees have no fur.", "Both grow and need energy, like all living things.", "Neither lives in water."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["Viruses do have DNA or RNA.", "Viruses cannot reproduce independently.", "Not all viruses are harmful.", "Viruses need a host cell to reproduce, which is why scientists debate whether they are alive."], "t": "Characteristics of living things and cells", "u": "https://www.khanacademy.org/search?page_search_query=characteristics+of+living+things"}, {"w": ["The adult comes last.", "The egg comes first.", "The egg comes first.", "A chicken goes egg, chick, adult."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["Germination is when a seed sprouts its first root and leaves.", "Metamorphosis is an animal process.", "Fertilization happens before the seed forms.", "Pollination is pollen transfer."], "t": "Life cycles of plants and animals", "u": "https://www.khanacademy.org/search?page_search_query=life+cycles+metamorphosis"}, {"w": ["The tick benefits and the dog is harmed: parasitism.", "In commensalism, the other is unaffected.", "In mutualism, both benefit.", "Competition is over shared resources."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Autotrophs make their own food.", "Consumers get energy by eating other organisms.", "Decomposers are one kind of consumer, but not the only kind.", "Producers make their own food."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Flower color is not learned.", "Flower color is not caused by the environment.", "Flower color has a genetic basis.", "Traits passed through genes are inherited."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}, {"w": ["The bird was never taught.", "Nest building without teaching is instinctive (inherited).", "Nest building is a behavior, not a body part.", "It is purposeful, not an accident."], "t": "Inherited traits and learned behaviors", "u": "https://www.khanacademy.org/search?page_search_query=inherited+traits+learned+behaviors"}, {"w": ["Traits gained during a lifetime are not passed on.", "Over generations, giraffes with longer necks survived and reproduced more: natural selection.", "Parents cannot teach neck length.", "A long neck gives a clear advantage."], "t": "Adaptations", "u": "https://www.khanacademy.org/search?page_search_query=adaptations+survival"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

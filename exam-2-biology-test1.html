@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["144 uses the wrong face area.", "6 faces × (4 × 4) = 6 × 16 = 96 μm².", "48 counts only three faces.", "64 is the volume."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["The ratios can be compared directly.", "A higher SA:V means more surface per volume, so exchange is more efficient.", "The ratios differ.", "The lower ratio is less efficient."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Volume grows faster (cubed) than surface area (squared), so SA:V decreases.", "SA:V changes with size.", "Bigger cells do not have a higher ratio.", "Ratios are never negative."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Facilitated diffusion uses channel or carrier proteins.", "It moves substances down, not against, the gradient.", "It happens in all cells.", "It is passive; no ATP is needed."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["The active site is where the substrate binds.", "Denaturation byproducts are not the substrate.", "Products are made from the substrate.", "The substrate is the molecule the enzyme acts on."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Carbohydrates are not enzymes.", "Most enzymes are proteins.", "Lipids are not enzymes.", "Nucleic acids include only a few ribozymes."], "t": "Introduction to macromolecules", "u": "https://www.khanacademy.org/science/biology/macromolecules/introduction-to-macromolecues/a/introduction-to-macromolecules"}, {"w": ["Mitochondria carry out cellular respiration and produce ATP.", "DNA replication happens mainly in the nucleus.", "Ribosomes make proteins.", "Chloroplasts carry out photosynthesis."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Meiosis is a separate division.", "Organelles are kept.", "In interphase (G1, S, G2), the cell grows and replicates its DNA.", "Splitting happens later, in the M phase."], "t": "The cell cycle and mitosis", "u": "https://www.khanacademy.org/search?page_search_query=cell+cycle+mitosis"}, {"w": ["Both plant and animal cells have mitochondria.", "Both have a nucleus.", "Only plant cells have a cell wall and chloroplasts.", "Both have ribosomes."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["Protein synthesis happens at ribosomes.", "Releasing materials via vesicles is exocytosis.", "Dividing is cytokinesis.", "In endocytosis, the membrane folds inward to engulf material."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Unlimited growth is not homeostasis.", "Asexual reproduction is not homeostasis.", "Homeostasis is a stable internal environment.", "Rapid evolution is not homeostasis."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Chaperones fold proteins.", "Cell walls are built by other enzymes.", "ATP synthase uses the H⁺ gradient to make ATP.", "DNA polymerase copies DNA."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["50% is the carrier fraction.", "aa children are possible.", "25% are affected.", "Unaffected (AA + Aa) = 3/4 = 75%."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["1/4 are BB or bb.", "Not all offspring are Bb.", "3/4 show the dominant trait.", "Bb × Bb gives 1/2 Bb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["9:3:3:1 comes from AaBb × AaBb.", "1:2:1 is monohybrid.", "3:1 is monohybrid.", "The four gamete types from AaBb, each with ab, give 1:1:1:1."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["A substitution is a point mutation; it does not shift the frame.", "Changing chromosome number is aneuploidy.", "Inserting or deleting bases (not a multiple of 3) shifts the reading frame.", "Crossing over is normal recombination."], "t": "Mutations", "u": "https://www.khanacademy.org/search?page_search_query=mutations+frameshift+point+mutation"}, {"w": ["1:2:1 is monohybrid.", "1:1:1:1 is a testcross ratio.", "3:1 is monohybrid.", "AaBb × AaBb gives 9:3:3:1."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Nondisjunction can cause disorders.", "It causes aneuploidy, not healthy diversity.", "Failed separation gives gametes with extra or missing chromosomes (e.g., trisomy 21).", "Chromosome numbers become abnormal."], "t": "Meiosis, crossing over, and independent assortment", "u": "https://www.khanacademy.org/search?page_search_query=meiosis+crossing+over"}, {"w": ["Males have one X, so a single recessive allele is expressed.", "Females need two copies.", "The pattern is unequal between the sexes.", "These traits do get expressed."], "t": "Sex linkage, pedigrees, and karyotypes", "u": "https://www.khanacademy.org/search?page_search_query=sex-linked+traits+pedigree"}, {"w": ["Watson co-discovered DNA's structure.", "Mendel's pea experiments founded genetics.", "Darwin proposed natural selection.", "Franklin's X-ray images revealed DNA's structure."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Selection acts on heritable phenotypes that affect fitness.", "Selection acts through phenotype.", "Acquired traits are not inherited.", "Recessive alleles are selected too."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Drift is weak in large populations.", "Chance has the biggest effect in small populations.", "Drift is random, not tied to selection.", "Without variation there is nothing to drift."], "t": "Genetic drift, bottleneck, and founder effect", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics/v/genetic-drift-bottleneck-effect-and-founder-effect"}, {"w": ["Homologous structures reveal common ancestry.", "Analogous structures are convergent.", "Homologous structures are not limited to vestigial traits.", "Convergence produces analogous, not homologous, structures."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Isolated gene pools diverge into new species.", "Isolation does not make populations uniform.", "Isolation reduces gene flow.", "Isolation does not usually cause extinction."], "t": "Speciation and reproductive isolation", "u": "https://www.khanacademy.org/search?page_search_query=speciation+reproductive+isolation"}, {"w": ["Geology is not part of the synthesis.", "The modern synthesis unites Darwin's theory with Mendelian and population genetics.", "The nature of inquiry is not part of the synthesis.", "Cell theory is a separate idea."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

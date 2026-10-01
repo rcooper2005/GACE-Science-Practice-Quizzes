@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["48 doubles the area.", "8 μm² is the volume value with area units.", "16 μm² counts only four faces.", "A cube has 6 faces of 2 × 2 = 4 μm² each, so 6 × 4 = 24 μm²."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["12 does not come from s³.", "6 is the number of faces.", "V = s³ = 2³ = 8 μm³.", "4 μm³ is s², not s³."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["24 ÷ 8 = 3, so SA:V = 3:1.", "2:1 is the ratio for a 3 μm cube.", "1:1 is the ratio for a 6 μm cube.", "4:1 does not match these numbers."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["ATP does not make sunlight.", "Photosynthesis stores light energy in glucose, and respiration transfers it to ATP.", "Glucose does not make sunlight.", "This sequence is reversed."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["Prokaryotes do have DNA.", "Prokaryotes do have ribosomes (70S).", "The defining difference is that prokaryotes have no membrane-bound nucleus.", "All cells have a cell membrane."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["Lysosomes digest materials.", "Ribosomes translate mRNA into protein.", "Peroxisomes break down fatty acids and H₂O₂.", "The Golgi packages proteins."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["In prophase, chromosomes condense.", "In telophase, nuclei re-form.", "In anaphase, sister chromatids separate to opposite poles.", "In metaphase, chromosomes line up."], "t": "The cell cycle and mitosis", "u": "https://www.khanacademy.org/search?page_search_query=cell+cycle+mitosis"}, {"w": ["The nucleus stores the genetic material.", "Mitochondria make most of the cell's ATP (Krebs cycle, electron transport chain).", "Ribosomes make proteins.", "The Golgi packages materials."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Cellulose walls are found only in plants and are fully permeable.", "The membrane is not a protein shell.", "Carbohydrates are attached to the membrane, not the main layer.", "The hydrophobic bilayer core plus protein channels makes the membrane selectively permeable."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Rapid evolution is not homeostasis.", "Asexual reproduction is not homeostasis.", "Unlimited growth is not homeostasis.", "Homeostasis is keeping internal conditions stable."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Active transport uses ATP to move substances against their gradient.", "Osmosis is passive.", "Facilitated diffusion is passive.", "Simple diffusion is passive."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Cell walls prevent bursting.", "In a hypotonic solution, water moves in and the cell swells.", "Water does move.", "Shrinking happens in hypertonic solutions."], "t": "Diffusion and osmosis", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport/diffusion-and-osmosis"}, {"w": ["50% is the Gg fraction.", "Gg × Gg gives 1/4 gg, so 25% are recessive.", "75% are dominant.", "gg offspring do occur."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["9/16 are both dominant.", "1/4 is recessive for one trait.", "1/8 does not occur in this cross.", "1/4 × 1/4 = 1/16 aabb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Rr × rr gives 1 Rr : 1 rr, so 50% are recessive.", "25% would come from Rr × Rr.", "Half of the offspring are Rr.", "rr offspring do occur."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["A codon is a three-nucleotide sequence in mRNA that codes for one amino acid.", "An allele is a gene variant.", "A gene is a longer DNA segment.", "A locus is a gene's position on a chromosome."], "t": "Transcription and translation", "u": "https://www.khanacademy.org/search?page_search_query=transcription+and+translation"}, {"w": ["Meiosis does separate chromosomes.", "Meiosis happens in animals too.", "Meiosis produces four genetically varied haploid gametes.", "Two identical diploid cells is mitosis."], "t": "Meiosis, crossing over, and independent assortment", "u": "https://www.khanacademy.org/search?page_search_query=meiosis+crossing+over"}, {"w": ["aa offspring do occur.", "1/2 are Aa.", "1/4 are aa, showing the recessive trait.", "3/4 are dominant."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Crossing over swaps DNA between homologous chromosomes, creating new allele combinations.", "Chromosome number is not doubled.", "Recessive alleles are not removed.", "Crossing over adds to, rather than prevents, independent assortment's variation."], "t": "Meiosis, crossing over, and independent assortment", "u": "https://www.khanacademy.org/search?page_search_query=meiosis+crossing+over"}, {"w": ["A blended heterozygote is incomplete dominance (e.g., pink snapdragons).", "Polygenic traits involve many genes.", "In codominance, both traits show fully (e.g., AB blood).", "With complete dominance, heterozygotes look dominant."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["Selection acts on heritable phenotypes that affect survival and reproduction.", "Recessive traits are selected too.", "Selection \"sees\" phenotypes, not genotypes directly.", "Acquired traits are not inherited."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["DNA varies across species.", "Transitional fossils (e.g., Tiktaalik) document gradual change.", "Many extinct species are known.", "Rock layers vary."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Isolation does not usually cause extinction.", "Isolation reduces gene flow.", "Isolated populations diverge rather than become uniform.", "Isolated gene pools diverge into new species."], "t": "Speciation and reproductive isolation", "u": "https://www.khanacademy.org/search?page_search_query=speciation+reproductive+isolation"}, {"w": ["Water was essential.", "Early Earth had little free oxygen.", "Early Earth was hot, not near absolute zero.", "Miller–Urey: reducing gases plus energy (lightning, UV) produced organic molecules."], "t": "Origin of life on early Earth", "u": "https://www.khanacademy.org/search?page_search_query=origin+of+life+early+earth"}, {"w": ["Gene flow is migration.", "Sexual selection is not random.", "Genetic drift is random and strongest in small populations.", "Natural selection is not random."], "t": "Genetic drift, bottleneck, and founder effect", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics/v/genetic-drift-bottleneck-effect-and-founder-effect"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

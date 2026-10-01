@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Vacuoles store water, nutrients, and wastes.", "Ribosomes build proteins but do not house the genetic material.", "Mitochondria produce ATP; they contain a little DNA but do not control the cell.", "The nucleus holds the cell's DNA and directs its activities through gene expression."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Facilitated diffusion uses channel or carrier proteins but still moves substances down their gradient.", "Needing ATP describes active transport, not facilitated diffusion.", "Facilitated diffusion occurs in all cells, including eukaryotes.", "Moving against the gradient is active transport."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["The order is Prophase, Metaphase, Anaphase, Telophase (PMAT).", "This order starts with anaphase; chromosomes must condense and align first.", "This is the sequence reversed.", "Metaphase cannot come before prophase, because chromosomes must condense before they line up."], "t": "The cell cycle and mitosis", "u": "https://www.khanacademy.org/search?page_search_query=cell+cycle+mitosis"}, {"w": ["Nucleic acids (DNA and RNA) are one of the four major classes.", "Proteins are one of the four major classes.", "Vitamins are small organic molecules, not one of the four macromolecule classes (carbohydrates, lipids, proteins, nucleic acids).", "Carbohydrates are one of the four major classes."], "t": "Introduction to macromolecules", "u": "https://www.khanacademy.org/science/biology/macromolecules/introduction-to-macromolecues/a/introduction-to-macromolecules"}, {"w": ["Sunlight is the input to photosynthesis; respiration does not produce it.", "Respiration transfers glucose's energy into ATP, the cell's usable energy currency.", "Water is a byproduct, but it does not hold the captured energy.", "CO2 is a waste product; the captured energy goes into ATP."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["With incomplete dominance, Rr × Rr gives 1 RR (red) : 2 Rr (pink) : 1 rr (white).", "3:1 would require complete dominance, but here heterozygotes look different (pink).", "1:1 comes from Rr × rr.", "Rr × Rr also produces RR and rr offspring, so not all are pink."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["AaBb × AaBb gives 9 both-dominant : 3 : 3 : 1 both-recessive.", "3:1 is a monohybrid ratio.", "1:2:1 is a monohybrid genotype ratio.", "1:1:1:1 comes from the dihybrid testcross AaBb × aabb."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["50% would require one parent to be aa.", "Two carriers can have an affected child.", "Aa × Aa: each parent passes a with probability 1/2, and 1/2 × 1/2 = 25%.", "100% would require both parents to be aa."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["Body size can be similar by coincidence or convergence.", "Unrelated species often share habitats.", "Location alone does not show common ancestry.", "DNA similarity is direct molecular evidence of shared ancestry: more similar DNA means a more recent common ancestor."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Becoming more similar genetically works against speciation.", "Reproductive isolation lets the gene pools diverge until they become separate species.", "Identical environments give populations little reason to diverge.", "Population size alone does not cause speciation."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Dog breeds come from artificial selection within one species.", "Unrelated animals evolving similar features for similar environments is convergent evolution.", "Human arm and bat wing are homologous (shared ancestry), not convergent.", "A vestigial structure is evidence of ancestry, not convergence."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Fungi are eukaryotic heterotrophs that release digestive enzymes and absorb the nutrients.", "Protists are mostly single-celled and very diverse; mushrooms are not protists.", "Animals ingest their food rather than absorbing it.", "Plants make their own food by photosynthesis."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Lower ranks are more specific, so same-genus organisms share a more recent ancestor than same-family organisms.", "Different species often cannot interbreed or produce fertile offspring.", "Sharing a genus means they are closely related.", "Organisms in the same genus also share the same kingdom."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Photosynthesis happens mainly in leaves.", "Water storage happens in vacuoles, stems, and roots.", "Gas exchange happens through stomata on leaves.", "Flowers are the reproductive organs of angiosperms: pollination, fertilization, then seeds and fruit."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Roots anchor the plant.", "Roots, through root hairs, absorb water from the soil.", "Sugars are stored in roots, stems, and fruits.", "Stomata let CO2 in and O2 and water vapor out."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Producing gametes is the role of the reproductive system.", "Transporting oxygen is the role of blood and the circulatory system.", "The immune system defends the body against pathogens and foreign substances.", "Filtering blood is the role of the kidneys."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["The large intestine mainly absorbs water and salts.", "The small intestine's villi and microvilli give it a huge surface area for absorbing nutrients.", "The stomach mostly breaks down food; it absorbs very little.", "The esophagus only moves food to the stomach."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["A backbone and lungs describe vertebrates, not echinoderms.", "Echinoderms have radial symmetry as adults and a water vascular system that powers tube feet.", "Bilateral symmetry and an exoskeleton describe arthropods.", "Segmented bodies with jointed legs describe arthropods."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Platelets, not red blood cells, help blood clot.", "White blood cells fight infection.", "Red blood cells carry oxygen (bound to hemoglobin) and some CO2.", "Antibodies are made by B cells, a type of white blood cell."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["A higher birth rate increases growth.", "Less emigration means fewer individuals leave, so the population grows.", "More immigration adds individuals.", "More deaths reduce the growth rate."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Equal mortality at every stage describes Type II.", "Type I: most individuals survive to old age, then mortality rises sharply.", "Fairly constant mortality also describes Type II.", "High early mortality describes Type III."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["In parasitism one partner is harmed; in lichen both benefit.", "Predation means one organism eats another.", "Lichen is mutualism: the fungus provides shelter and water, and the alga provides food from photosynthesis.", "In commensalism one partner is unaffected; in lichen both benefit."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Showing only one path describes a food chain.", "Food webs can and do include decomposers.", "Food webs include consumers as well as producers.", "A food web links many food chains to show the complex feeding relationships in an ecosystem."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Going back three levels multiplies by 10 three times: 1 × 10 × 10 × 10 = 1,000 kcal.", "10 kcal is only one level below.", "100 kcal is only two levels below.", "10,000 kcal would be four levels below."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["4,000 kcal is what primary consumers receive (one transfer).", "Producers keep their 40,000 kcal; consumers receive much less.", "Two transfers: 40,000 → 4,000 → 400 kcal.", "40 kcal would be three transfers."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

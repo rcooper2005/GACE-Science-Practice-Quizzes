@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["Repetition takes longer.", "Repetition reduces bias.", "Budget is not the goal.", "Replication improves reliability and reduces chance effects."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Bioinformatics merges biology with computer science.", "Biology connects with other sciences.", "Biology has many links to other fields.", "Physics and computing matter too."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Seating is not on an SDS.", "Costs are not on an SDS.", "An SDS describes hazards and safe handling.", "Grades are not on an SDS."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}, {"w": ["Humidity is controlled.", "Test tube type is controlled.", "Enzyme activity is the dependent variable.", "Temperature is the independent variable."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["The impact is current, not only historical.", "Pest-resistant crops affect food production.", "The impact is broad.", "The impact extends beyond labs."], "t": "Biotechnology and its impacts", "u": "https://www.khanacademy.org/search?page_search_query=biotechnology+genetic+engineering"}, {"w": ["Domain is above kingdom.", "Species is the most specific rank.", "A community is ecological, not a rank.", "A population is ecological, not a rank."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Protists are mostly unicellular eukaryotes that don't fit other kingdoms.", "Many protists are free-living.", "Protists are eukaryotic.", "Many protists are unicellular."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Stomata regulate gas exchange and water loss.", "Chlorophyll absorbs light.", "Roots anchor the plant.", "Phloem transports sugars."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Photosynthesis makes food.", "Animals disperse seeds by eating fruit or carrying burrs.", "Respiration releases energy.", "Osmosis is water movement."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["Echinoderms have radial symmetry and a water vascular system.", "Segmented bodies describe annelids and arthropods.", "A backbone describes vertebrates.", "Jointed legs describe arthropods."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Gas exchange is respiratory.", "Filtering blood is the kidneys' job.", "The digestive system breaks down food.", "Antibodies come from the immune system."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Gills and fins describe fish.", "Birds have feathers and are endothermic, and most fly.", "Exoskeletons describe arthropods.", "Cold-blooded with scales describes reptiles."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Fungi reproduce with spores.", "Pollen comes from seed plants.", "Seeds come from seed plants.", "Live young are animals."], "t": "Taxonomy and phylogenetic trees", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/phylogeny"}, {"w": ["Hormones are endocrine.", "Filtering plasma is the kidneys' job.", "The respiratory system exchanges O₂ and CO₂.", "Digestion is a separate system."], "t": "Human body systems", "u": "https://www.khanacademy.org/science/biology/human-biology"}, {"w": ["Chordates have a notochord and dorsal nerve cord.", "A radula is a mollusk structure.", "Cell walls belong to plants, fungi, and bacteria.", "Exoskeletons belong to arthropods."], "t": "Animal phyla and body plans", "u": "https://www.khanacademy.org/search?page_search_query=animal+phyla+body+plans"}, {"w": ["Vascular plants have more than roots.", "All plants have chlorophyll.", "All plants photosynthesize.", "Xylem and phloem define vascular plants."], "t": "Plant structure, transport, and reproduction", "u": "https://www.khanacademy.org/search?page_search_query=plant+structure+xylem+phloem"}, {"w": ["8 is the total growth.", "4 would give 6,400.", "2³ = 8, so the factor is 2 per generation.", "3 would give 2,700."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Growth is not exponential at K.", "At K, births ≈ deaths, so growth is about zero.", "The population is not declining.", "Growth is defined (zero)."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["(45 − 15) ÷ 300 = 10%.", "30 is the count, not the percentage.", "5% is half the rate.", "15% uses births only."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["Predator and prey is predation.", "Different species competing for the same resource is interspecific competition.", "Same species is intraspecific.", "Symbiotic partners cooperate."], "t": "Species interactions and food webs", "u": "https://www.khanacademy.org/search?page_search_query=community+ecology+species+interactions"}, {"w": ["Energy does not increase upward.", "Energy is tied to trophic level.", "Energy is not constant.", "Energy decreases about 90% per level."], "t": "Energy flow and trophic levels", "u": "https://www.khanacademy.org/search?page_search_query=energy+flow+trophic+levels"}, {"w": ["Limiting factors are not genetic.", "Limiting factors do affect population size.", "A limiting factor restricts growth (food, space, water).", "Limiting factors apply to all populations."], "t": "Population ecology: growth and survivorship", "u": "https://www.khanacademy.org/science/ap-biology/ecology-ap/population-ecology-ap"}, {"w": ["The water cycle involves more than the atmosphere.", "The water cycle involves more than oceans.", "The water cycle involves more than organisms.", "Water cycles through the atmosphere, organisms, and Earth's surface."], "t": "The water cycle and groundwater", "u": "https://www.khanacademy.org/search?page_search_query=water+cycle"}, {"w": ["Invasives often outcompete natives.", "Invasives do reproduce.", "Without natural enemies, invasive populations explode.", "Many predators would limit them."], "t": "Human impact on ecosystems", "u": "https://www.khanacademy.org/search?page_search_query=human+impact+on+ecosystems"}, {"w": ["Conservation biology protects endangered species.", "Conservation biology studies human impact.", "It aims for sustainable use, not maximum extraction.", "Conservation biology protects biodiversity and ecosystems."], "t": "Biodiversity and ecosystem stability", "u": "https://www.khanacademy.org/search?page_search_query=biodiversity+ecosystem"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

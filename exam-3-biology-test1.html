@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["The ratio falls; it does not quadruple.", "SA ×4 ÷ V ×8 = ×1/2, so the ratio is cut in half.", "The ratio changes.", "The ratio falls; it does not double."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["36 counts four faces.", "81 is not 6s².", "6 × 3² = 6 × 9 = 54 μm².", "27 is the volume."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["3:1 is for a 2 μm cube.", "1:1 is for a 6 μm cube.", "54 ÷ 27 = 2, so 2:1.", "4:1 does not match."], "t": "Cell size and surface-area-to-volume ratio", "u": "https://www.khanacademy.org/search?page_search_query=surface+area+to+volume+ratio+cell+size"}, {"w": ["Moving against the gradient requires energy.", "Moving down the gradient is passive.", "Active transport moves substances in both directions.", "Active transport is directed, not random."], "t": "Membranes and transport", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport"}, {"w": ["Ribosomes make proteins.", "DNA holds genetic information.", "The cytoskeleton gives shape, support, and movement.", "Mitochondria make energy."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["Nucleic acids store information.", "Carbohydrates (glucose) provide quick energy.", "Proteins are used for energy last.", "Lipids provide long-term energy storage."], "t": "Introduction to macromolecules", "u": "https://www.khanacademy.org/science/biology/macromolecules/introduction-to-macromolecues/a/introduction-to-macromolecules"}, {"w": ["The Krebs cycle and electron transport chain are in mitochondria.", "The Golgi packages proteins.", "The nucleus stores DNA.", "Glycolysis happens in the cytoplasm."], "t": "Introduction to cellular respiration", "u": "https://www.khanacademy.org/science/hs-bio/x230b3ff252126bb6:energy-and-matter-in-biological-systems/x230b3ff252126bb6:cellular-respiration/a/cellular-respiration-overview"}, {"w": ["Swelling happens in hypotonic solutions.", "Water leaves the cell, so it shrinks.", "Water does move.", "Tonicity does not trigger division."], "t": "Diffusion and osmosis", "u": "https://www.khanacademy.org/science/biology/membranes-and-transport/diffusion-and-osmosis"}, {"w": ["Lysosomes and vacuoles handle waste.", "Chloroplasts carry out photosynthesis.", "Ribosomes make proteins.", "Mitochondria carry out respiration."], "t": "Photosynthesis review", "u": "https://www.khanacademy.org/science/biology/photosynthesis-in-plants/introduction-to-stages-of-photosynthesis/a/hs-photosynthesis-review"}, {"w": ["The nuclear envelope encloses DNA, separating it from the cytoplasm.", "Vacuoles store waste.", "The smooth ER makes lipids.", "Mitochondria make ATP."], "t": "Structure of a cell", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell"}, {"w": ["No new enzyme is formed.", "Binding is normal function.", "Rates do not increase indefinitely.", "Heat or extreme pH unfolds the enzyme, ruining its active site."], "t": "Cellular energetics: enzymes and ATP", "u": "https://www.khanacademy.org/science/ap-biology/cellular-energetics"}, {"w": ["Prokaryotes have no membrane-bound nucleus.", "Prokaryotes reproduce by binary fission.", "Prokaryotes do have ribosomes.", "A membrane-bound nucleus describes eukaryotes."], "t": "Prokaryotic and eukaryotic cells", "u": "https://www.khanacademy.org/science/biology/structure-of-a-cell/prokaryotic-and-eukaryotic-cells"}, {"w": ["3:1 requires complete dominance.", "1:1 is a testcross ratio.", "9:3:3:1 is dihybrid.", "With incomplete dominance, Rr × Rr gives 1:2:1 phenotypes."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["O children (ii) are also possible.", "The parents have no Iᴮ allele, so type B is impossible.", "Iᴬi children (type A) are possible too.", "ii × Iᴬi gives Iᴬi (type A) or ii (type O)."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["25% counts only one homozygote.", "Some offspring are Ee.", "EE (1/4) + ee (1/4) = 50%.", "75% includes heterozygotes."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["rRNA forms the ribosome.", "tRNA brings amino acids, matching codons with its anticodon.", "mRNA carries the code.", "DNA stays in the nucleus."], "t": "Transcription and translation", "u": "https://www.khanacademy.org/search?page_search_query=transcription+and+translation"}, {"w": ["In incomplete dominance, the heterozygote is intermediate.", "The phenotype relates to both parents.", "Showing both phenotypes at once is codominance.", "Dominant-only is complete dominance."], "t": "Incomplete dominance, codominance, and blood types", "u": "https://www.khanacademy.org/search?page_search_query=incomplete+dominance+codominance"}, {"w": ["Chromosome number is not doubled.", "Mutations are not removed.", "Crossing over recombines alleles, increasing variation.", "Chromosomes become different, not identical."], "t": "Meiosis, crossing over, and independent assortment", "u": "https://www.khanacademy.org/search?page_search_query=meiosis+crossing+over"}, {"w": ["A pedigree traces a trait through generations of a family.", "Sequencing is done by genomics.", "Enzyme assays measure enzyme activity.", "Microbiology identifies bacteria."], "t": "Sex linkage, pedigrees, and karyotypes", "u": "https://www.khanacademy.org/search?page_search_query=sex-linked+traits+pedigree"}, {"w": ["Varied finch beaks suited to different foods show natural selection and adaptive radiation.", "Codominance is a genetics pattern.", "Drift is not the main lesson of the finches.", "Segregation is Mendel's law."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["Dominant alleles show with one copy.", "Codominant alleles both show.", "\"Incomplete\" is not an allele type.", "Recessive alleles show only when two copies are present (aa)."], "t": "Mendelian genetics and Punnett squares", "u": "https://www.khanacademy.org/science/ap-biology/heredity/mendelian-genetics-ap"}, {"w": ["A bottleneck lowers variation.", "Asexual reproduction copies genotypes.", "Mutation creates alleles and sex shuffles them.", "Isolation without mutation adds nothing."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["Selection breaks equilibrium.", "Hardy–Weinberg describes no evolution.", "A bottleneck breaks equilibrium.", "Hardy–Weinberg means allele frequencies stay constant: genetic equilibrium."], "t": "Population genetics", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection/population-genetics"}, {"w": ["Their genetic codes differ.", "Similar function from different ancestry is convergent evolution.", "Shared inheritance would make them homologous.", "Common ancestry would make them homologous."], "t": "Natural selection and evidence for evolution", "u": "https://www.khanacademy.org/science/ap-biology/natural-selection"}, {"w": ["A reducing atmosphere plus energy sources is the Miller–Urey model.", "Early Earth was hot.", "Early Earth had little oxygen.", "Energy was needed."], "t": "Origin of life on early Earth", "u": "https://www.khanacademy.org/search?page_search_query=origin+of+life+early+earth"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

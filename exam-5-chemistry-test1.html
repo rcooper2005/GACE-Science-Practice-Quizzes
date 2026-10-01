@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["A hypothesis is still needed.", "Replication confirms that results are reliable, not chance.", "Replication is valuable.", "Replication should be repeated."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["V ∝ T at constant pressure.", "Volume changes.", "Heating does not shrink the gas.", "Volume is never negative."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Theories and laws differ.", "Theories are well supported.", "Theories never become laws.", "Theories explain why; laws describe what."], "t": "Scientific theories and laws", "u": "https://www.khanacademy.org/search?page_search_query=scientific+theory+and+law"}, {"w": ["STP is 0 °C (273 K) and 1 atm.", "100 °C is boiling.", "STP is 1 atm, not 2.", "25 °C is used for standard state conditions, not STP."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["54 adds instead of subtracting.", "37 is the mass number.", "17 is the proton count.", "37 − 17 = 20."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Melting is fusion.", "Freezing releases heat.", "Raising temperature uses heat capacity.", "ΔH_vap vaporizes one mole at the boiling point."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["18 is the mass number.", "18 − 8 = 10.", "8 is the proton count.", "9 is off by one."], "t": "Atomic number, mass number, and isotopes", "u": "https://www.khanacademy.org/search?page_search_query=atomic+number+mass+number+isotopes"}, {"w": ["Helium nuclei are alpha.", "Charged particles are alpha or beta.", "Gamma rays are high-energy photons.", "Neutrons are neutron radiation."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Sublimation is solid → gas.", "Liquid to gas is vaporization.", "Solid to liquid is melting.", "Gas to solid is deposition."], "t": "States of matter and phase changes", "u": "https://www.khanacademy.org/search?page_search_query=states+of+matter+phase+changes"}, {"w": ["Data analysis is essential.", "A hypothesis is needed.", "Control the other variables to isolate one.", "One variable should change at a time."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Science is open to revision.", "Science is based on evidence, not authority.", "Questioning is central.", "Scientific knowledge is tentative and revisable."], "t": "The scientific method and fair tests", "u": "https://www.khanacademy.org/search?page_search_query=scientific+method+controlled+experiment"}, {"w": ["Down and left lowers electron affinity.", "The trend is not limited to transition metals.", "There is a clear pattern.", "Electron affinity grows more negative up and to the right."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["More protons pull electrons closer, so radius decreases.", "The trend is not random.", "Radius decreases across a period.", "Radius changes."], "t": "The periodic table and periodic trends", "u": "https://www.khanacademy.org/search?page_search_query=periodic+table+trends"}, {"w": ["Solubility is the maximum dissolved amount at a given temperature.", "Color is unrelated.", "Temperature is a condition, not solubility.", "Solvent mass alone is not solubility."], "t": "Mixtures and solutions", "u": "https://www.khanacademy.org/search?page_search_query=mixtures+and+solutions"}, {"w": ["Different gases have different masses.", "Equal V, T, and P mean equal numbers of molecules.", "The law applies to compounds too.", "Densities differ."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Beta decay emits an electron (β⁻) or positron (β⁺).", "A helium nucleus is alpha.", "A photon is gamma.", "A neutron is not beta."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Pressure is defined.", "Pressure changes.", "P ∝ T at constant V.", "Pressure rises with T."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Light does not affect decay.", "A short half-life means rapid decay.", "Slow decay means a long half-life.", "Rates differ."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Mass and energy are linked.", "E = mc² applies to all energy, not just chemical reactions.", "Mass and energy convert; tiny mass equals huge energy.", "E = mc² applies at all temperatures."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Mass conversion is nuclear.", "Forming bonds releases energy.", "Energy changes.", "Breaking bonds absorbs energy."], "t": "Exothermic and endothermic reactions", "u": "https://www.khanacademy.org/search?page_search_query=exothermic+endothermic+reactions"}, {"w": ["Coal emits pollutants.", "Coal has economic costs.", "Burning coal releases CO₂, SO₂, and particulates.", "Coal is nonrenewable."], "t": "Science, technology, and society", "u": "https://www.khanacademy.org/search?page_search_query=renewable+energy+technology+society"}, {"w": ["Fewer molecules lower pressure.", "Higher T raises P in a rigid container.", "Lower T lowers pressure.", "More volume lowers pressure."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["V ∝ T, so volume increases.", "Volume would not become zero.", "Volume does not decrease.", "Volume changes."], "t": "Gas laws and kinetic molecular theory", "u": "https://www.khanacademy.org/search?page_search_query=ideal+gas+law+kinetic+molecular+theory"}, {"w": ["Spontaneous processes obey thermodynamics.", "They occur at all temperatures.", "Spontaneous means it proceeds on its own, not necessarily fast.", "Continuous energy input means non-spontaneous."], "t": "Thermodynamics: enthalpy, entropy, free energy", "u": "https://www.khanacademy.org/search?page_search_query=enthalpy+entropy+gibbs+free+energy"}, {"w": ["Grades are not on an SDS.", "An SDS lists hazards and safe handling.", "Seating is not on an SDS.", "Prices are not on an SDS."], "t": "Laboratory safety", "u": "https://www.khanacademy.org/search?page_search_query=lab+safety"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>

@@ -217,6 +217,21 @@
   @media (prefers-reduced-motion: reduce){
     * {scroll-behavior:auto !important;}
   }
+
+  /* ---------- Answer explanations (added) ---------- */
+  .q-why{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;}
+  .q-why-head{font-size:14px;font-weight:600;margin:0 0 8px;}
+  .q-why-head.ok{color:var(--correct);}
+  .q-why-head.no{color:var(--incorrect);}
+  .q-why ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .q-why li{display:grid;grid-template-columns:1.6em 1fr;gap:6px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding:4px 8px;border-left:3px solid transparent;}
+  .q-why li b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);}
+  .q-why li.is-correct{border-left-color:var(--correct);color:var(--ink);background:var(--correct-bg);}
+  .q-why li.is-picked{border-left-color:var(--incorrect);color:var(--ink);background:var(--incorrect-bg);}
+  .q-why li .tagline{font-weight:600;margin-right:4px;}
+  .q-review{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:500;color:var(--rust);text-underline-offset:3px;}
+  .q-review:focus-visible{outline:2px solid var(--rust);outline-offset:2px;}
+  /* ---------- end answer explanations ---------- */
 </style>
 </head>
 <body>
@@ -349,6 +364,54 @@ document.getElementById('retakeBtn').addEventListener('click', () => {
 });
 
 </script>
+<!-- answer-explanations:start -->
+<script>
+const FEEDBACK = [{"w": ["The third law is not the main idea.", "Momentum is not the main idea.", "Equal torques balance: rotational equilibrium.", "The system is balanced."], "t": "Torque and rotational equilibrium", "u": "https://www.khanacademy.org/search?page_search_query=torque+rotational+equilibrium"}, {"w": ["An equilibrant does not double the net force.", "An equilibrant cancels the net force, making it zero.", "It exists anywhere.", "It removes, not adds, acceleration."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Dropping to a lower level releases a photon.", "Absorbing energy moves the electron up.", "Leaving the atom is ionization.", "Staying put emits nothing."], "t": "Photons, the photoelectric effect, and the Bohr model", "u": "https://www.khanacademy.org/search?page_search_query=photoelectric+effect+bohr+model"}, {"w": ["12.5% = 1/8 = 3 half-lives: 3 × 8 = 24 days.", "32 days is four half-lives.", "16 days is two half-lives.", "8 days is one half-life."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Inverse-square, not inverse.", "Force weakens with distance.", "Force weakens with distance.", "F ∝ 1/d², so tripling gives 1/9."], "t": "Newton's law of universal gravitation", "u": "https://www.khanacademy.org/search?page_search_query=newton%27s+law+of+gravitation"}, {"w": ["Mass change is not power.", "Power is work per unit time.", "Distance per time is speed.", "Force alone is not power."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Gravitation is a separate law, not one of the three laws of motion.", "Action-reaction is the third law.", "F = ma is the second law.", "Inertia is the first law."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Slope gives acceleration.", "Force is not from this graph.", "Momentum is not from this graph.", "Area under v–t gives displacement."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["An electron is beta.", "A neutron is not emitted in alpha decay.", "A photon is gamma.", "Alpha is a ⁴He nucleus."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["The first law is energy conservation.", "The second law says entropy increases.", "The third law is about absolute zero.", "The zeroth law is about thermal equilibrium."], "t": "Laws of thermodynamics", "u": "https://www.khanacademy.org/search?page_search_query=laws+of+thermodynamics"}, {"w": ["6.25 divides instead of multiplying.", "29 adds the numbers.", "400 is too large.", "W = Fd = 25 × 4 = 100 J."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Pressure alone does not set internal energy.", "Volume alone does not set internal energy.", "Color is unrelated.", "An ideal gas's internal energy depends on temperature."], "t": "Laws of thermodynamics", "u": "https://www.khanacademy.org/search?page_search_query=laws+of+thermodynamics"}, {"w": ["Nuclear energy is not roughly equal to chemical energy.", "Nuclear energy is millions of times larger.", "They can be compared.", "Nuclear energy is larger, not smaller."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Air resistance is a minor factor.", "Inertia resists change; it does not decelerate the ball.", "Gravity slows the ball on the way up.", "Mass does not change."], "t": "Motion: velocity, acceleration, free fall, projectiles", "u": "https://www.khanacademy.org/search?page_search_query=kinematics+velocity+acceleration"}, {"w": ["8 is far too many.", "4 would leave 6.25 g.", "100 → 50 → 25 = 2 half-lives.", "1 would leave 50 g."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Third-law pairs act on different objects.", "Gravity and friction are not a pair.", "Pair forces act on different objects, so they do not cancel.", "Weight and the normal force act on the same object, so they are not a pair."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Nothing with mass reaches c.", "Escape velocity can be exceeded.", "The sound barrier can be broken.", "Terminal velocity can change."], "t": "Special relativity", "u": "https://www.khanacademy.org/search?page_search_query=special+relativity"}, {"w": ["Symmetric uniform objects have the center of mass at the geometric center.", "It is not always outside the object.", "It is not at the heaviest point.", "It is defined."], "t": "Forces and Newton's laws of motion", "u": "https://www.khanacademy.org/science/physics/forces-newtons-laws"}, {"w": ["Mass is always conserved; that is not the point.", "Elastic collisions conserve kinetic energy.", "Potential energy is not what is conserved.", "Kinetic energy is also conserved."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["K = °C + 273 = 298 K.", "25 K is not 25 °C.", "525 K adds incorrectly.", "248 K subtracts instead of adding."], "t": "Heat, temperature, and heat transfer", "u": "https://www.khanacademy.org/search?page_search_query=heat+transfer+specific+heat"}, {"w": ["Absorbing a neutron alone releases no energy.", "A heavy nucleus splitting is fission.", "Fusion combines light nuclei.", "Removing electrons is ionization."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Three half-lives leaves 12.5%.", "One half-life leaves 50%.", "100 → 50 → 25% = 2 half-lives.", "Four half-lives leaves 6.25%."], "t": "Radioactive decay and half-life", "u": "https://www.khanacademy.org/search?page_search_query=half-life+radioactive+decay"}, {"w": ["Potential energy is not always zero.", "Kinetic energy is bounded.", "Energy is not destroyed.", "KE + PE stays constant without friction."], "t": "Work and energy", "u": "https://www.khanacademy.org/science/physics/work-and-energy"}, {"w": ["Impulse changes momentum.", "Impulse = Δp, so a bigger impulse means a bigger Δp.", "Mass does not change.", "A larger impulse gives a larger Δp, not smaller."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}, {"w": ["8 m/s doubles the answer.", "4 m/s ignores the mass difference.", "50 × 4 = 200; 200 ÷ 40 = 5 m/s.", "3.2 m/s inverts the ratio."], "t": "Momentum, impulse, and collisions", "u": "https://www.khanacademy.org/search?page_search_query=momentum+impulse+collisions"}];
+
+(function(){
+  const L = ['A','B','C','D'];
+  const btn = document.getElementById('submitBtn');
+  if (!btn || typeof FEEDBACK === 'undefined') return;
+  btn.addEventListener('click', () => {
+    const quiz = document.getElementById('quiz');
+    QUESTIONS.forEach((q, i) => {
+      const fb = FEEDBACK[i];
+      const card = quiz.children[i];
+      if (!fb || !card || card.querySelector('.q-why')) return;
+      const chosenEl = card.querySelector(`input[name="q${i}"]:checked`);
+      const chosen = chosenEl ? parseInt(chosenEl.value, 10) : null;
+      const box = document.createElement('div');
+      box.className = 'q-why';
+      const head = document.createElement('p');
+      if (chosen === q.correct) { head.className = 'q-why-head ok'; head.textContent = 'Correct. Here is why each choice is right or wrong:'; }
+      else if (chosen === null) { head.className = 'q-why-head no'; head.textContent = `Not answered. The correct answer is ${L[q.correct]}. Here is why:`; }
+      else { head.className = 'q-why-head no'; head.textContent = `You chose ${L[chosen]}; the correct answer is ${L[q.correct]}. Here is why:`; }
+      box.appendChild(head);
+      const ul = document.createElement('ul');
+      fb.w.forEach((reason, j) => {
+        const li = document.createElement('li');
+        if (j === q.correct) li.classList.add('is-correct');
+        else if (j === chosen) li.classList.add('is-picked');
+        const b = document.createElement('b'); b.textContent = L[j];
+        const span = document.createElement('span');
+        const t = document.createElement('span'); t.className = 'tagline';
+        t.textContent = j === q.correct ? 'Correct.' : (j === chosen ? 'Your answer.' : 'Incorrect.');
+        span.appendChild(t); span.appendChild(document.createTextNode(reason));
+        li.appendChild(b); li.appendChild(span); ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      if (fb.u) {
+        const a = document.createElement('a');
+        a.className = 'q-review'; a.href = fb.u; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = `Review on Khan Academy: ${fb.t}`;
+        box.appendChild(a);
+      }
+      card.appendChild(box);
+    });
+  });
+})();
+</script>
+<!-- answer-explanations:end -->
 <script src="license-footer.js"></script>
 </body>
 </html>
